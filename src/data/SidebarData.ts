@@ -21,71 +21,71 @@ export const data = {
       icon: House,
       isActive: true,
       items: [
+        // {
+        //   title: "AI",
+        //   url: "/dashboard",
+        //   circleColor: "bg-primary",
+        // },
         {
-          title: "AI",
-          url: "/dashboard",
-          circleColor: "bg-primary",
-        },
-        {
-          title: "CRM",
+          title: "Logistics Dashboard",
           url: "/crm",
           circleColor: "bg-yellow-500",
         },
-        {
-          title: "eCommerce",
-          url: "/ecommerce",
-          circleColor: "bg-cyan-500",
-        },
-        {
-          title: "Cryptocurrency",
-          url: "/cryptocurrency",
-          circleColor: "bg-red-500",
-        },
-        {
-          title: "Investment",
-          url: "/investment",
-          circleColor: "bg-green-600",
-        },
-        {
-          title: "LMS / Learning System",
-          url: "/lms",
-          circleColor: "bg-violet-600",
-        },
-        {
-          title: "NFT & Gaming",
-          url: "/nft",
-          circleColor: "bg-primary",
-        },
-        {
-          title: "Medical",
-          url: "/medical",
-          circleColor: "bg-red-600",
-        },
-        {
-          title: "Analytics",
-          url: "/analytics",
-          circleColor: "bg-violet-600",
-        },
-        {
-          title: "POS & Inventory",
-          url: "/inventory",
-          circleColor: "bg-yellow-500",
-        },
-        {
-          title: "Finance & Banking",
-          url: "/finance",
-          circleColor: "bg-green-500",
-        },
-        {
-          title: "Booking System",
-          url: "/booking",
-          circleColor: "bg-red-500",
-        },
-        {
-          title: "Help Desk",
-          url: "/help",
-          circleColor: "bg-blue-500",
-        },
+        // {
+        //   title: "eCommerce",
+        //   url: "/ecommerce",
+        //   circleColor: "bg-cyan-500",
+        // },
+        // {
+        //   title: "Cryptocurrency",
+        //   url: "/cryptocurrency",
+        //   circleColor: "bg-red-500",
+        // },
+        // {
+        //   title: "Investment",
+        //   url: "/investment",
+        //   circleColor: "bg-green-600",
+        // },
+        // {
+        //   title: "LMS / Learning System",
+        //   url: "/lms",
+        //   circleColor: "bg-violet-600",
+        // },
+        // {
+        //   title: "NFT & Gaming",
+        //   url: "/nft",
+        //   circleColor: "bg-primary",
+        // },
+        // {
+        //   title: "Medical",
+        //   url: "/medical",
+        //   circleColor: "bg-red-600",
+        // },
+        // {
+        //   title: "Analytics",
+        //   url: "/analytics",
+        //   circleColor: "bg-violet-600",
+        // },
+        // {
+        //   title: "POS & Inventory",
+        //   url: "/inventory",
+        //   circleColor: "bg-yellow-500",
+        // },
+        // {
+        //   title: "Finance & Banking",
+        //   url: "/finance",
+        //   circleColor: "bg-green-500",
+        // },
+        // {
+        //   title: "Booking System",
+        //   url: "/booking",
+        //   circleColor: "bg-red-500",
+        // },
+        // {
+        //   title: "Help Desk",
+        //   url: "/help",
+        //   circleColor: "bg-blue-500",
+        // },
       ],
     },
     {
