@@ -9,7 +9,7 @@ import { Eye, EyeOff, Loader2, Lock, Mail } from 'lucide-react';
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
-import SocialLogin from "../components/SocialLogin";
+// import SocialLogin from "../components/SocialLogin";
 
 import {
     Field,
@@ -176,10 +176,10 @@ const Login = () => {
                             {isLoading ? "Signing in..." : "Sign In"}
                         </Button>
 
-                        <div className="mt-8 center-border-horizontal text-center relative before:absolute before:w-full before:h-[1px] before:top-1/2 before:-translate-y-1/2 before:bg-neutral-300 before:start-0">
+                        {/* <div className="mt-8 center-border-horizontal text-center relative before:absolute before:w-full before:h-[1px] before:top-1/2 before:-translate-y-1/2 before:bg-neutral-300 before:start-0">
                             <span className="bg-white dark:bg-slate-900 z-[2] relative px-4">Or sign in with</span>
-                        </div>
-                        <SocialLogin />
+                        </div> */}
+                        {/* <SocialLogin /> */}
 
                         <Button
                             className="font-semibold text-neutral-600 hover:text-neutral-600 dark:text-neutral-200 py-6 px-2 w-1/2 border border-neutral-600/50 rounded-xl text-sm flex items-center justify-center gap-3 line-height-1 hover:border-blue-400 hover:bg-primary/10 disabled:opacity-60 mt-4 w-full"

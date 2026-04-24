@@ -91,11 +91,11 @@ export const router = createBrowserRouter([
             element: <Navigate to="/dashboard" replace />,
           },
           {
-            path: "/dashboard", element: <AiDashboard />
+            path: "/dashboard", element: <Crm />
           },
-          {
-            path: "crm", element: <Crm />
-          },
+          // {
+          //   path: "crm", element: <AiDashboard />
+          // },
           {
             path: "ecommerce", element: <Ecommerce />
           },

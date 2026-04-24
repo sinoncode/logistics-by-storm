@@ -11,7 +11,8 @@ function ThemeLogo() {
       <img
         src={theme === "dark" ? LogoWhite : LogoDark}
         alt="Logo"
-        width={168}
+        // width={168}
+        width={250}
         height={40}
       />
   );

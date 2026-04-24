@@ -13,11 +13,13 @@ import ThemeLogo from "./shared/ThemeLogo"
 export function AppSidebar() {
     return (
         <Sidebar>
-            <SidebarHeader className="p-0">
+            <SidebarHeader className="p-0 mt-11 mb-10">
                 <Link to="/dashboard" className="sidebar-logo h-[72px] py-3.5 flex items-center justify-center border-b border-neutral-100 dark:border-slate-700 px-4">
                     <ThemeLogo />
                 </Link>
             </SidebarHeader>
+
+            <div> <hr /> </div>
             
             <SidebarContent className={cn(`scrollbar-thin`)}>
                 <NavMain items={data.navMain} />
