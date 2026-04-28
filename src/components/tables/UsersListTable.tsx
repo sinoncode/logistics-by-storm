@@ -23,7 +23,7 @@ interface User {
     id: string;
     name: string;
     email: string;
-    department: string;
+    phone: number;
     designation: string;
     status: "Active" | "Inactive";
     joinDate: string;
@@ -35,7 +35,7 @@ const users: User[] = [
         id: "1",
         name: "Kathryn Murphy",
         email: "osgoodwy@gmail.com",
-        department: "HR",
+        phone: 8700042600,
         designation: "Manager",
         status: "Active",
         joinDate: "25 Jan 2024",
@@ -45,7 +45,7 @@ const users: User[] = [
         id: "2",
         name: "Annette Black",
         email: "redaniel@gmail.com",
-        department: "Design",
+        phone: 8368029100,
         designation: "UI UX Designer",
         status: "Inactive",
         joinDate: "25 Jan 2024",
@@ -55,7 +55,7 @@ const users: User[] = [
         id: "3",
         name: "Darlene Robertson",
         email: "darlene.robertson@example.com",
-        department: "Engineering",
+        phone: 8130586000,
         designation: "Frontend Developer",
         status: "Active",
         joinDate: "12 Mar 2023",
@@ -65,7 +65,7 @@ const users: User[] = [
         id: "4",
         name: "Cameron Williamson",
         email: "cameron.williamson@example.com",
-        department: "Engineering",
+        phone: 8447861700,
         designation: "Backend Developer",
         status: "Inactive",
         joinDate: "08 Aug 2022",
@@ -75,7 +75,7 @@ const users: User[] = [
         id: "5",
         name: "Leslie Alexander",
         email: "leslie.alexander@example.com",
-        department: "Finance",
+        phone: 9931750600,
         designation: "Accountant",
         status: "Active",
         joinDate: "15 Oct 2023",
@@ -85,7 +85,7 @@ const users: User[] = [
         id: "6",
         name: "Courtney Henry",
         email: "courtney.henry@example.com",
-        department: "Marketing",
+        phone: 8595020300,
         designation: "Marketing Specialist",
         status: "Active",
         joinDate: "01 Jun 2023",
@@ -95,7 +95,7 @@ const users: User[] = [
         id: "7",
         name: "Brooklyn Simmons",
         email: "brooklyn.simmons@example.com",
-        department: "Operations",
+        phone: 9824751300,
         designation: "Operations Manager",
         status: "Inactive",
         joinDate: "20 Feb 2022",
@@ -105,7 +105,7 @@ const users: User[] = [
         id: "8",
         name: "Jerome Bell",
         email: "jerome.bell@example.com",
-        department: "Sales",
+        phone: 9955882200,
         designation: "Sales Executive",
         status: "Active",
         joinDate: "30 Nov 2023",
@@ -115,7 +115,7 @@ const users: User[] = [
         id: "9",
         name: "Floyd Miles",
         email: "floyd.miles@example.com",
-        department: "Customer Support",
+        phone: 7895782400,
         designation: "Support Specialist",
         status: "Active",
         joinDate: "10 Sep 2023",
@@ -125,7 +125,7 @@ const users: User[] = [
         id: "10",
         name: "Savannah Nguyen",
         email: "savannah.nguyen@example.com",
-        department: "Legal",
+        phone: 8281020300,
         designation: "Legal Advisor",
         status: "Inactive",
         joinDate: "18 Dec 2022",
@@ -135,7 +135,7 @@ const users: User[] = [
         id: "11",
         name: "Arlene McCoy",
         email: "arlene.mccoy@example.com",
-        department: "Admin",
+        phone: 9811579900,
         designation: "Office Administrator",
         status: "Active",
         joinDate: "05 May 2024",
@@ -145,7 +145,7 @@ const users: User[] = [
         id: "12",
         name: "Devon Lane",
         email: "devon.lane@example.com",
-        department: "IT",
+        phone: 9876543200,
         designation: "System Analyst",
         status: "Inactive",
         joinDate: "22 Jul 2021",
@@ -158,12 +158,12 @@ export default function UsersListTable() {
         <Table>
             <TableHeader>
                 <TableRow>
-                    <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 rounded-tl-lg w-[80px]">S.L</TableHead>
-                    <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 ">Join Date</TableHead>
+                    <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 rounded-tl-lg w-[80px]">S.no</TableHead>
+                    {/* <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 ">Join Date</TableHead> */}
                     <TableHead className="px-4 h-12 text-start bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 ">Name</TableHead>
                     <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 ">Email</TableHead>
-                    <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 ">Department</TableHead>
-                    <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 ">Designation</TableHead>
+                    <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 ">Phone</TableHead>
+                    <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 ">Role</TableHead>
                     <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 text-center">Status</TableHead>
                     <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 text-center rounded-tr-lg">Action</TableHead>
                 </TableRow>
@@ -177,10 +177,10 @@ export default function UsersListTable() {
                                 className={`py-4 px-4 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600 ${isLast ? "rounded-bl-lg" : ""
                                     }`}
                             >{String(index + 1).padStart(2, "0")}</TableCell>
-                            <TableCell
+                            {/* <TableCell
                                 className={`py-4 px-4 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600 ${isLast ? "rounded-bl-lg" : ""
                                     }`}
-                            >{user.joinDate}</TableCell>
+                            >{user.joinDate}</TableCell> */}
                             <TableCell
                                 className={`py-4 px-4 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600 ${isLast ? "rounded-bl-lg" : ""
                                     }`}
@@ -201,7 +201,7 @@ export default function UsersListTable() {
                             <TableCell
                                 className={`py-4 px-4 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600 ${isLast ? "rounded-bl-lg" : ""
                                     }`}
-                            >{user.department}</TableCell>
+                            >+91 {user.phone}</TableCell>
                             <TableCell
                                 className={`py-4 px-4 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600 ${isLast ? "rounded-bl-lg" : ""
                                     }`}
@@ -227,9 +227,9 @@ export default function UsersListTable() {
                                     <Button size="icon" variant="ghost" className="rounded-[50%] text-blue-500 bg-primary/10">
                                         <Eye className="w-5 h-5" />
                                     </Button>
-                                    <Button size="icon" variant="ghost" className="rounded-[50%] text-green-600 bg-green-600/10">
+                                    {/* <Button size="icon" variant="ghost" className="rounded-[50%] text-green-600 bg-green-600/10">
                                         <Edit className="w-5 h-5" />
-                                    </Button>
+                                    </Button> */}
                                     <Button size="icon" variant="ghost" className="rounded-[50%] text-red-500 bg-red-500/10">
                                         <Trash2 className="w-5 h-5" />
                                     </Button>

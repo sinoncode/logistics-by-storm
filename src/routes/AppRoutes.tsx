@@ -57,6 +57,9 @@ const Nft = lazy(() => import("@/pages/dashboards/nft/Nft"));
 const Crm = lazy(() => import("../pages/dashboards/crm/Crm"));
 const Ecommerce = lazy(() => import("../pages/dashboards/ecommerce/Ecommerce"));
 const AiDashboard = lazy(() => import("../pages/dashboards/dashboard/AiDashboard"));
+// const AddUser = lazy(() => import("../pages/users/add-user/AddUser"));
+const AddMember = lazy(() => import("../pages/teams/add-member/AddMember"));
+const Teams = lazy(() => import("../pages/teams/Teams"));
 
 export const router = createBrowserRouter([
   {
@@ -93,8 +96,14 @@ export const router = createBrowserRouter([
           {
             path: "/dashboard", element: <Crm />
           },
+          {
+            path: "add-team-member", element: <AddMember />
+          },
+          {
+            path: "teams-list", element: <Teams />
+          },
           // {
-          //   path: "crm", element: <AiDashboard />
+          //   path: "ai", element: <AiDashboard />
           // },
           {
             path: "ecommerce", element: <Ecommerce />
