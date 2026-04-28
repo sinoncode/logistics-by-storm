@@ -114,6 +114,32 @@ export const data = {
         // },
       ],
     },
+    {
+      label: "Teams",
+    },
+    {
+      title: "Teams",
+      url: "/teams-list",
+      icon: UsersRound,
+      isActive: true,
+      items: [
+        {
+          title: "Team",
+          url: "/teams-list",
+          circleColor: "bg-primary",
+        },
+        {
+          title: "Permissions",
+          url: "/teams-permissions",
+          circleColor: "bg-yellow-500",
+        },
+        // {
+        //   title: "View Profile",
+        //   url: "/view-profile",
+        //   circleColor: "bg-red-600",
+        // },
+      ],
+    },
     // {
     //   title: "Email",
     //   url: "/email",

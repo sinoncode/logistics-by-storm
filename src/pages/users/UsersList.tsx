@@ -29,12 +29,12 @@ const UsersList = () => {
                                 options={["Status", "Active", "Inactive"]}
                             />
                         </div>
-                        <Button className={cn(`w-auto h-11`)} asChild>
-                            <Link to="#">
+                        {/* <Button className={cn(`w-auto h-11`)} asChild>
+                            <Link to="/add-user">
                                 <Plus className="w-5 h-5" />
                                 Add New User
                             </Link>
-                        </Button>
+                        </Button> */}
                     </CardHeader>
 
                     <CardContent className="card-body p-6">
