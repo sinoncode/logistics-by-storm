@@ -15,7 +15,7 @@ const TodoListRecentCard = lazy(() => import("./components/TodoListRecentCard"))
 const Crm = () => {
     return (
         <>
-            <Breadcrumb title="CRM" text="CRM" />
+            <Breadcrumb title="Dashboard" text="Logistics By Storm" />
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
 
