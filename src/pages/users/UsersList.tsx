@@ -2,12 +2,8 @@ import LazyWrapper from "@/components/LazyWrapper";
 import CustomSelect from '@/components/shared/CustomSelect';
 import SearchBox from '@/components/shared/SearchBox';
 import UsersListTable from '@/components/tables/UsersListTable';
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Breadcrumb from "@/layouts/Breadcrumb";
-import { cn } from "@/lib/utils";
-import { Plus } from "lucide-react";
-import { Link } from 'react-router-dom';
 
 const UsersList = () => {
     return (

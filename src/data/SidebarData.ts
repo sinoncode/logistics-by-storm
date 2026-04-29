@@ -1,15 +1,6 @@
 import {
-  Boxes,
-  CalendarDays,
-  ChartPie,
-  Component,
   House,
-  Mail,
-  MessageCircleMore,
-  Server,
   Settings,
-  ShieldCheck,
-  StickyNote,
   UsersRound,
 } from "lucide-react";
 

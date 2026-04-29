@@ -7,7 +7,7 @@ import {
 import { auth, getUserProfile } from "@/firebase";
 import { cn } from "@/lib/utils";
 import { signOut } from "firebase/auth";
-import { Loader2, LogOutIcon, Mail, Settings, User } from "lucide-react";
+import { Loader2, LogOutIcon, Settings, User } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from "react-router-dom";
@@ -109,14 +109,14 @@ const ProfileDropdown = () => {
                 <User className="w-5 h-5" /> My Profile
               </Link>
             </li>
-            <li className="flex">
+            {/* <li className="flex">
               <Link
                 to="/email"
                 className="text-black dark:text-white hover:text-primary dark:hover:text-primary flex items-center gap-3 w-full"
               >
                 <Mail className="w-5 h-5" /> Inbox
               </Link>
-            </li>
+            </li> */}
             <li className="flex">
               <Link
                 to="/company"

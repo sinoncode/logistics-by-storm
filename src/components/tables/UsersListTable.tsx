@@ -17,7 +17,7 @@ import {
     TableHeader,
     TableRow
 } from "@/components/ui/table";
-import { Edit, Eye, Trash2 } from "lucide-react";
+import { Eye, Trash2 } from "lucide-react";
 
 interface User {
     id: string;

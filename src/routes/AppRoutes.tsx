@@ -3,6 +3,7 @@ import Login from "@/pages/auth/login/Login";
 import Register from "@/pages/auth/register/Register";
 import BasicTable from "@/pages/basic-table/BasicTable";
 import Calendar from "@/pages/calendar/Calendar";
+import TeamsPermissions from "@/pages/TeamsPermissions";
 import ColumnChartPage from "@/pages/chart/column-chart/ColumnChartPage";
 import LineChartPage from "@/pages/chart/line-chart/LineChartPage";
 import PieChartPage from "@/pages/chart/PieChartPage";
@@ -56,7 +57,6 @@ const Medical = lazy(() => import("@/pages/dashboards/medical/Medical"));
 const Nft = lazy(() => import("@/pages/dashboards/nft/Nft"));
 const Crm = lazy(() => import("../pages/dashboards/crm/Crm"));
 const Ecommerce = lazy(() => import("../pages/dashboards/ecommerce/Ecommerce"));
-const AiDashboard = lazy(() => import("../pages/dashboards/dashboard/AiDashboard"));
 // const AddUser = lazy(() => import("../pages/users/add-user/AddUser"));
 const AddMember = lazy(() => import("../pages/teams/add-member/AddMember"));
 const Teams = lazy(() => import("../pages/teams/Teams"));
@@ -248,6 +248,9 @@ export const router = createBrowserRouter([
           },
           {
             path: "notification-alert", element: <NotificationAlert />
+          },
+          {
+            path: "teams-permissions", element: <TeamsPermissions />
           },
         ],
       },
