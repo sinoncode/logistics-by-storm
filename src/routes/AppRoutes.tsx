@@ -60,6 +60,7 @@ const Ecommerce = lazy(() => import("../pages/dashboards/ecommerce/Ecommerce"));
 // const AddUser = lazy(() => import("../pages/users/add-user/AddUser"));
 const AddMember = lazy(() => import("../pages/teams/add-member/AddMember"));
 const Teams = lazy(() => import("../pages/teams/Teams"));
+const TeamMemberView = lazy(() => import("../pages/teams/TeamMemberView"));
 
 export const router = createBrowserRouter([
   {
@@ -237,6 +238,10 @@ export const router = createBrowserRouter([
           {
             path: "users-grid", element: <UsersGrid />
           },
+          {
+  path: "teams-list/:id",
+  element: <TeamMemberView />
+},
           {
             path: "view-profile", element: <ViewProfile />
           },

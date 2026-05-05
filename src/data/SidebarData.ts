@@ -80,10 +80,10 @@ export const data = {
       ],
     },
     {
-      label: "Users",
+      label: "Customer",
     },
     {
-      title: "Users",
+      title: "Customers",
       url: "/users-list",
       icon: UsersRound,
       isActive: true,
