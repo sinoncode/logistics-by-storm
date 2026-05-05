@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { useIsSubmitting } from "@/context/isSubmittingContext";
-import { auth, registerWithEmailAndPassword } from "@/firebase";
 import { Eye, EyeOff, Loader2, Lock, Mail } from 'lucide-react';
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import SocialLogin from "../components/SocialLogin";
+import axios from "axios";
 
 import {
     Field,
@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/field";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signOut } from "firebase/auth";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -53,26 +52,46 @@ const Register = () => {
         },
     });
 
-    const handleRegister = async (data: z.infer<typeof formSchema>) => {
-        setIsSubmitting(true);
-        setIsLoading(true);
+const handleRegister = async (data: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
+    setIsLoading(true);
 
-        try {
-            const user = await registerWithEmailAndPassword(data.email, data.password, data.username);
-
-            if (user) {
-                await signOut(auth);
-                navigate("/auth/login", { replace: true });
-                toast.success("User registered successfully");
+    try {
+        const res = await axios.post(
+            "http://82.29.162.169/api/v1/auth/register",
+            {
+                name: data.username,
+                email: data.email,
+                password: data.password,
+                date_of_birth: "2000-01-01",
+                gender: "Male",
+                country_id: 1,
+                location_id: 1,
+                address_line_1: "Delhi",
+                address_line_2: "India",
+                postal_code: "110001",
+                phone: "9876543210"
             }
-        } catch (error) {
-            toast.error(`${error}`);
-        } finally {
-            setIsSubmitting(false);
-            setIsLoading(false);
-            form.reset();
-        }
+        );
+
+        console.log("SUCCESS:", res.data);
+
+        toast.success("User registered successfully");
+        navigate("/auth/login", { replace: true });
+
+    } catch (error: any) {
+        console.log("ERROR:", error.response?.data);
+
+        toast.error(
+            error.response?.data?.message ||
+            "Registration failed"
+        );
+    } finally {
+        setIsSubmitting(false);
+        setIsLoading(false);
+        form.reset();
     }
+};
 
     return (
         <section className="bg-white dark:bg-slate-900 lg:flex flex-wrap min-h-[100vh]">

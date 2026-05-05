@@ -5,6 +5,7 @@ import { LoadingProvider } from "./context/LoadingContext";
 import { IsSubmittingContextProvider } from "./context/isSubmittingContext";
 import { router } from "./routes/AppRoutes";
 
+
 function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">

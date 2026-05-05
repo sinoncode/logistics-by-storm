@@ -99,6 +99,14 @@ const DEFAULT_MEMBERS: TeamMember[] = [
   },
 ];
 
+
+const roles = [
+  { id: "1", name: "Manager" },
+  { id: "2", name: "Frontend Developer" },
+  { id: "3", name: "Backend Developer" },
+  { id: "4", name: "Accountant" },
+];
+
 const TeamsPage = () => {
   const { members, addMember, setMembers } = useLocalStorage();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -133,7 +141,17 @@ const TeamsPage = () => {
     });
     setDisplayMembers((prev) => [...prev, newMember]);
   };
+const handleDeleteMember = (id: string) => {
+  const updatedMembers = members.filter((member) => member.id !== id);
 
+  setMembers(updatedMembers);       // update localStorage
+  setDisplayMembers(updatedMembers); // update UI
+
+  toast.success("Member deleted successfully!", {
+    position: "bottom-right",
+    autoClose: 3000,
+  });
+};
   return (
     <>
       <Breadcrumb title="Teams" text="Manage your team members" />
@@ -163,16 +181,20 @@ const TeamsPage = () => {
           </CardHeader>
 
           <CardContent className="card-body p-6">
-            <TeamsTable members={displayMembers} />
+            <TeamsTable
+  members={displayMembers}
+  onDelete={handleDeleteMember}
+/>
           </CardContent>
         </Card>
       </LazyWrapper>
 
       <AddMemberModal
-        open={isModalOpen}
-        onOpenChange={setIsModalOpen}
-        onAddMember={handleAddMember}
-      />
+  open={isModalOpen}
+  onOpenChange={setIsModalOpen}
+  onAddMember={handleAddMember}
+  roles={roles}
+/>
     </>
   );
 };

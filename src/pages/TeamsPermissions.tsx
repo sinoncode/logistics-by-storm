@@ -103,13 +103,13 @@ const TeamsPermissions = () => {
   };
 
   // Handle save role (create or update)
-  const handleSaveRole = (data: { name: string; id?: string }) => {
+  const handleSaveRole = (data: { name: string; permissions: any; id?: string }) => {
     setIsLoading(true);
     try {
       if (data.id) {
         // Update existing role
         const updatedRoles = roles.map((role) =>
-          role.id === data.id ? { ...role, name: data.name } : role
+          role.id === data.id ? { ...role, name: data.name, permissions: data.permissions } : role
         );
         setRoles(updatedRoles);
         const updatedRole = updatedRoles.find((r) => r.id === data.id);
@@ -123,17 +123,11 @@ const TeamsPermissions = () => {
         const newRole: Role = {
           id: `role-${Date.now()}`,
           name: data.name,
-          permissions: {
-            users: { view: false, create: false, edit: false, delete: false },
-            shipmentControl: { view: false, create: false, edit: false, delete: false },
-            changeRequest: { view: false, create: false, edit: false, delete: false },
-            checkPayments: { view: false, create: false, edit: false, delete: false },
-          },
+          permissions: data.permissions,
         };
         const newRoles = [...roles, newRole];
         setRoles(newRoles);
         setSelectedRole(newRole);
-        toast.success("Role created successfully");
         saveRolesToStorage(newRoles);
       }
       setIsModalOpen(false);
@@ -283,6 +277,7 @@ const TeamsPermissions = () => {
       <RoleModal
         open={isModalOpen}
         role={null}
+        existingRoles={roles}
         onClose={() => setIsModalOpen(false)}
         onSave={handleSaveRole}
         isLoading={isLoading}

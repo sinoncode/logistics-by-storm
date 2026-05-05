@@ -1,48 +1,43 @@
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { MemberForm } from './MemberForm';
-import type { TeamMember } from '@/hooks/useLocalStorage';
-import { useState } from 'react';
+} from "@/components/ui/dialog";
 
-interface AddMemberModalProps {
+import AddMemberForm from "/home/sumit-pal/Desktop/logistics-by-storm/src/pages/teams/add-member/AddMember";
+
+type Role = {
+  id: string;
+  name: string;
+};
+
+type Props = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onAddMember: (member: Omit<TeamMember, 'id' | 'avatar' | 'joinDate'>) => void;
-}
+  onAddMember: (data: any) => void;
+  roles: Role[];
+};
 
-export const AddMemberModal = ({ open, onOpenChange, onAddMember }: AddMemberModalProps) => {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleSubmit = async (member: Omit<TeamMember, 'id' | 'avatar' | 'joinDate'>) => {
-    setIsLoading(true);
-    // Simulate network delay
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    onAddMember(member);
-    setIsLoading(false);
-    onOpenChange(false);
+export const AddMemberModal = ({
+  open,
+  onOpenChange,
+  onAddMember,
+  roles,
+}: Props) => {
+  const handleSubmit = (data: any) => {
+    onAddMember(data);
+    onOpenChange(false); // close modal after submit
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px]">
+     <DialogContent className="!max-w-4xl w-full">
         <DialogHeader>
-          <DialogTitle className="text-2xl">Add New Team Member</DialogTitle>
-          <DialogDescription>
-            Fill in the form below to add a new member to your team.
-          </DialogDescription>
+          <DialogTitle>Add Team Member</DialogTitle>
         </DialogHeader>
-        <div className="max-h-[calc(100vh-200px)] overflow-y-auto pr-4">
-          <MemberForm
-            onSubmit={handleSubmit}
-            isLoading={isLoading}
-            onCancel={() => onOpenChange(false)}
-          />
-        </div>
+
+        <AddMemberForm onSubmit={handleSubmit} roles={roles} />
       </DialogContent>
     </Dialog>
   );
