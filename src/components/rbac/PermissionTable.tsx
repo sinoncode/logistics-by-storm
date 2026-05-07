@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { ToggleSwitch } from "./ToggleSwitch";
+import { Checkbox } from "@/components/ui/checkbox";
 import type { Role, PermissionModule } from "@/types/rbac";
 import { AlertCircle } from "lucide-react";
 
@@ -87,12 +88,13 @@ export const PermissionTable = ({
                     {ACTIONS.map((action) => (
                       <TableCell key={action} className="text-center py-4">
                         <div className="flex justify-center">
-                          <ToggleSwitch
-                            checked={modulePerms[action] === true}
-                            onCheckedChange={(checked) =>
-                              onPermissionChange(module, action, checked)
-                            }
-                          />
+                          <Checkbox
+    checked={modulePerms[action] === true}
+    onCheckedChange={(checked) =>
+      onPermissionChange(module, action, checked === true)
+    }
+    className="h-5 w-5"
+  />
                         </div>
                       </TableCell>
                     ))}

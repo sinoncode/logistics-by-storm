@@ -12,6 +12,10 @@ import { AddMemberModal } from '@/components/teams/AddMemberModal';
 import TeamsTable from '@/components/teams/TeamsTable';
 
 // Default team members
+const DEFAULT_PERMISSIONS = [
+  { module: "Dashboard", create: false, update: false, delete: false, view: true },
+  { module: "Category", create: true, update: true, delete: true, view: true },
+];
 const DEFAULT_MEMBERS: TeamMember[] = [
   {
     id: '1',
@@ -24,6 +28,7 @@ const DEFAULT_MEMBERS: TeamMember[] = [
     status: 'Active',
     avatar: `https://ui-avatars.com/api/?name=Kathryn+Murphy&background=3B82F6&color=fff`,
     joinDate: '25 Jan 2024',
+    permissions: DEFAULT_PERMISSIONS,
   },
   {
     id: '2',
@@ -36,6 +41,7 @@ const DEFAULT_MEMBERS: TeamMember[] = [
     status: 'Inactive',
     avatar: `https://ui-avatars.com/api/?name=Annette+Black&background=A855F7&color=fff`,
     joinDate: '25 Jan 2024',
+    permissions: DEFAULT_PERMISSIONS,
   },
 ];
 

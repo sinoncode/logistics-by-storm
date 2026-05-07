@@ -11,6 +11,14 @@ export interface TeamMember {
   status: 'Active' | 'Inactive';
   avatar: string;
   joinDate: string;
+
+  permissions: {
+  module: string;
+  create: boolean;
+  update: boolean;
+  delete: boolean;
+  view: boolean;
+}[];
 }
 
 const STORAGE_KEY = 'team_members';
