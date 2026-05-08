@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { useIsSubmitting } from "@/context/isSubmittingContext";
-import { loginWithEmailAndPassword } from "@/firebase";
 import { Eye, EyeOff, Loader2, Lock, Mail } from 'lucide-react';
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { loginUser } from "@/services/auth.service";
 // import SocialLogin from "../components/SocialLogin";
 
 import {
@@ -23,11 +23,12 @@ import * as z from "zod";
 
 
 const formSchema = z.object({
-    email: z.string().email("Enter a valid email address."),
-    password: z
-        .string()
-        .min(6, "Password must be at least 6 characters.")
-        .max(20, "Password must be at most 10 characters."),
+  email: z.string().email("Enter a valid email address."),
+
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters.")
+    .max(20, "Password must be at most 20 characters."),
 });
 
 
@@ -45,26 +46,63 @@ const Login = () => {
         },
     });
 
-    const handleLogin = async (data: z.infer<typeof formSchema>) => {
-        setIsSubmitting(true);
-        setIsLoading(true);
+  const handleLogin = async (
+  data: z.infer<typeof formSchema>
+) => {
+  setIsSubmitting(true);
+  setIsLoading(true);
 
-        try {
-            const user = await loginWithEmailAndPassword(data.email, data.password);
+  try {
 
-            if (!user) return;
-            toast.success(`Login in successful.`);
-            if (user) {
-                navigate("/dashboard");
-            };
-        } catch (error) {
-            toast.error(`${error}`);
-        } finally {
-            setIsSubmitting(false);
-            setIsLoading(false);
-            form.reset();
-        }
+    const response = await loginUser({
+      email: data.email,
+      password: data.password,
+    });
+
+    console.log("LOGIN RESPONSE:", response);
+
+    // Extract API data
+    const accessToken = response?.data?.access_token;
+
+    const user = response?.data?.user;
+
+    if (!accessToken) {
+      toast.error("Access token not found");
+      return;
     }
+
+    // Save token
+    localStorage.setItem(
+      "access_token",
+      accessToken
+    );
+
+    // Save user
+    localStorage.setItem(
+      "user",
+      JSON.stringify(user)
+    );
+
+    toast.success(response.message || "Login successful");
+
+    navigate("/dashboard");
+
+  } catch (error: any) {
+
+    console.error("LOGIN ERROR:", error);
+
+    toast.error(
+      error?.response?.data?.message ||
+      "Login failed"
+    );
+
+  } finally {
+
+    setIsSubmitting(false);
+    setIsLoading(false);
+
+  }
+};
 
     return (
         <section className="bg-white dark:bg-slate-900 lg:flex flex-wrap min-h-[100vh]">

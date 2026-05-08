@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { Eye, EyeOff, Save } from "lucide-react";
+import { Save } from "lucide-react";
 import { toast } from "react-toastify";
 
 import { useLocalStorage } from "@/hooks/useLocalStorage";
@@ -8,10 +8,10 @@ import Breadcrumb from "@/layouts/Breadcrumb";
 
 const rolesList = [
   "Manager",
-  "Frontend Developer",
-  "Backend Developer",
-  "Accountant",
-  "UI UX Designer",
+  "Admin",
+  "Shipment Care",
+  "Delivery Agents",
+  "Super Admin",
 ];
 
 const TeamMemberView = () => {
@@ -19,9 +19,10 @@ const TeamMemberView = () => {
   const { members, setMembers } = useLocalStorage();
 
   const member = members.find((m) => m.id === id);
-
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+const [formData, setFormData] = useState({
+  role: member?.role || "",
+  status: member?.status || "",
+});
 
   if (!member) {
     return (
@@ -31,14 +32,7 @@ const TeamMemberView = () => {
     );
   }
 
-  // Editable state
-  const [formData, setFormData] = useState({
-    role: member.role || "",
-    status: member.status || "Active",
-    password: member.password || "",
-    confirmPassword: member.confirmPassword || "",
-  });
-
+ 
   // Handle input changes
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -51,20 +45,14 @@ const TeamMemberView = () => {
 
   // Save updated data
   const handleSave = () => {
-    if (formData.password !== formData.confirmPassword) {
-      toast.error("Passwords do not match");
-      return;
-    }
 
     const updatedMembers = members.map((m) =>
       m.id === id
-        ? {
-            ...m,
-            role: formData.role,
-            status: formData.status,
-            password: formData.password,
-            confirmPassword: formData.confirmPassword,
-          }
+      ? {
+    ...m,
+    role: formData.role,
+    status: formData.status,
+  }
         : m
     );
 
@@ -128,7 +116,7 @@ const TeamMemberView = () => {
           {/* BODY */}
           <div className="p-8">
 
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-8">
+            <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-8">
               Personal Information
             </h3>
 
@@ -140,7 +128,7 @@ const TeamMemberView = () => {
                   Email Address
                 </p>
 
-                <h4 className="text-xl font-semibold text-gray-800 dark:text-white break-all">
+                <h4 className="text-xl pt-3 font-semibold text-gray-800 dark:text-white break-all">
                   {member.email}
                 </h4>
               </div>
@@ -151,7 +139,7 @@ const TeamMemberView = () => {
                   Phone Number
                 </p>
 
-                <h4 className="text-xl font-semibold text-gray-800 dark:text-white">
+                <h4 className="text-xl pt-3 font-semibold text-gray-800 dark:text-white">
                   {member.phone}
                 </h4>
               </div>
@@ -177,7 +165,7 @@ const TeamMemberView = () => {
                   name="role"
                   value={formData.role}
                   onChange={handleChange}
-                  className="w-full h-12 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 text-sm outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full h-12 mt-3 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 text-sm outline-none focus:ring-2 focus:ring-primary"
                 >
                   {rolesList.map((role) => (
                     <option key={role} value={role}>
@@ -197,7 +185,7 @@ const TeamMemberView = () => {
                   name="status"
                   value={formData.status}
                   onChange={handleChange}
-                  className="w-full h-12 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 text-sm outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full h-12 mt-3 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 text-sm outline-none focus:ring-2 focus:ring-primary"
                 >
                   <option value="Active">Active</option>
                   <option value="Inactive">Inactive</option>

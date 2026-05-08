@@ -4,6 +4,7 @@ import SearchBox from '@/components/shared/SearchBox';
 import UsersListTable from '@/components/tables/UsersListTable';
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Breadcrumb from "@/layouts/Breadcrumb";
+import { useNavigate } from "react-router-dom";
 
 const UsersList = () => {
     return (

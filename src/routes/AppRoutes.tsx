@@ -32,9 +32,9 @@ import InputLayout from "@/pages/forms/input-layout/InputLayout";
 import Company from "@/pages/setting/company/Company";
 import NotificationAlert from "@/pages/setting/notification-alert/NotificationAlert";
 import SettingsNotification from "@/pages/setting/settings-notification/SettingsNotification";
-import UsersGrid from "@/pages/users/users-grid/UsersGrid";
-import UsersList from "@/pages/users/UsersList";
-import ViewProfile from "@/pages/users/view-profile/ViewProfile";
+import CustomersGrid from "../pages/customer/customer-grid/CustomersGrid";
+import CustomersList from "@/pages/customer/CustomersList";
+import ViewProfile from "@/pages/customer/view-profile/ViewProfile";
 import Widgets from "@/pages/widgets/Widgets";
 import { lazy } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
@@ -44,6 +44,8 @@ import MainLayout from "../layouts/MainLayout";
 import Typography from './../pages/components-pages/typography/Typography';
 import GuestRoutes from "./GuestRoutes";
 import ProtectedRoutes from "./ProtectedRoutes";
+import CustomerDetails from "../pages/customer/CustomerDetails";
+
 const Podcast = lazy(() => import("@/pages/dashboards/podcast/Podcast"));
 const Help = lazy(() => import("@/pages/dashboards/help/Help"));
 const Booking = lazy(() => import("@/pages/dashboards/booking/Booking"));
@@ -233,14 +235,20 @@ export const router = createBrowserRouter([
             path: "basic-table", element: <BasicTable />
           },
           {
-            path: "users-list", element: <UsersList />
-          },
-          {
-            path: "users-grid", element: <UsersGrid />
-          },
+  path: "customers-list",
+  element: <CustomersList />
+},
+{
+  path: "customers-grid",
+  element: <CustomersGrid />
+},
           {
   path: "teams-list/:id",
   element: <TeamMemberView />
+},
+{
+  path: "customer-details/:id",
+  element: <CustomerDetails />,
 },
           {
             path: "view-profile", element: <ViewProfile />

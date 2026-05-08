@@ -9,6 +9,7 @@ import UserList7 from "@/assets/images/user-list/user-list7.png";
 import UserList8 from "@/assets/images/user-list/user-list8.png";
 import UserList9 from "@/assets/images/user-list/user-list9.png";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import {
     Table,
     TableBody,
@@ -29,6 +30,8 @@ interface User {
     joinDate: string;
     avatar: string;
 };
+
+
 
 const users: User[] = [
     {
@@ -154,6 +157,8 @@ const users: User[] = [
 ];
 
 export default function UsersListTable() {
+
+    const navigate = useNavigate();
     return (
         <Table>
             <TableHeader>
@@ -224,7 +229,7 @@ export default function UsersListTable() {
                                     }`}
                             >
                                 <div className="flex justify-center gap-2">
-                                    <Button size="icon" variant="ghost" className="rounded-[50%] text-blue-500 bg-primary/10">
+                                    <Button size="icon" variant="ghost" className="rounded-[50%] text-blue-500 bg-primary/10"  onClick={() => navigate(`/customer-details/${user.id}`)}>
                                         <Eye className="w-5 h-5" />
                                     </Button>
                                     {/* <Button size="icon" variant="ghost" className="rounded-[50%] text-green-600 bg-green-600/10">

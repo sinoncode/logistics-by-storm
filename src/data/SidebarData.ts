@@ -84,7 +84,7 @@ export const data = {
     },
     {
       title: "Customers",
-      url: "/users-list",
+      url: "/customers-list",
       icon: UsersRound,
       isActive: true,
       items: [
