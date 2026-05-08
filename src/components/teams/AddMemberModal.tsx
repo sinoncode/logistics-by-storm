@@ -5,7 +5,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import AddMemberForm from "/home/sumit-pal/Desktop/logistics-by-storm/src/pages/teams/add-member/AddMember";
+// import AddMemberForm from "/home/Rohan Kamat/Desktop/logistics-by-storm/src/pages/teams/add-member/AddMember";
+import AddMemberForm from "@/pages/teams/add-member/AddMember";
 
 type Role = {
   id: string;
