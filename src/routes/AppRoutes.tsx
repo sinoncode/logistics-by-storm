@@ -44,11 +44,8 @@ import MainLayout from "../layouts/MainLayout";
 import Typography from './../pages/components-pages/typography/Typography';
 import GuestRoutes from "./GuestRoutes";
 import ProtectedRoutes from "./ProtectedRoutes";
-<<<<<<< HEAD
 import CustomerDetails from "../pages/customer/CustomerDetails";
-=======
 // import ShipmentRequestList from "../pages/shipments-request/ShipmentRequestList"
->>>>>>> origin/rohan
 
 const Podcast = lazy(() => import("@/pages/dashboards/podcast/Podcast"));
 const Help = lazy(() => import("@/pages/dashboards/help/Help"));
@@ -64,7 +61,7 @@ const Nft = lazy(() => import("@/pages/dashboards/nft/Nft"));
 const Crm = lazy(() => import("../pages/dashboards/crm/Crm"));
 const Ecommerce = lazy(() => import("../pages/dashboards/ecommerce/Ecommerce"));
 // const AddUser = lazy(() => import("../pages/users/add-user/AddUser"));
-const AddMember = lazy(() => import("../pages/teams/add-member/AddMember"));
+const AddMember = lazy(() => import("@/pages/teams/add-member/AddMember"));
 const Teams = lazy(() => import("../pages/teams/Teams"));
 const TeamMemberView = lazy(() => import("../pages/teams/TeamMemberView"));
 const ShipmentRequestList = lazy(() => import("../pages/shipments-request/ShipmentRequestList"));
@@ -103,7 +100,7 @@ export const router = createBrowserRouter([
             element: <Navigate to="/dashboard" replace />,
           },
           {
-            path: "/dashboard", element: <Crm />
+            path: "dashboard", element: <Crm />
           },
           {
             path: "add-team-member", element: <AddMember />
@@ -188,9 +185,6 @@ export const router = createBrowserRouter([
           },
           {
             path: "tab-accordion", element: <TabAccordion />
-          },
-          {
-            path: "pagination", element: <Pagination />
           },
           {
             path: "pagination", element: <Pagination />

@@ -133,7 +133,9 @@ logistics-by-storm/
     │   ├── dashboards/
     │   ├── emails/
     │   ├── forms/
+    │   ├── roles/
     │   ├── setting/
+    │   ├── shipments-request/
     │   ├── teams/
     │   └── widgets/
     ├── routes/
@@ -141,7 +143,11 @@ logistics-by-storm/
     │   ├── GuestRoutes.tsx
     │   └── ProtectedRoutes.tsx
     ├── services/
-    │   └── auth.service.ts
+    │   ├── auth.service.ts
+    │   ├── permission.service.ts
+    │   └── role.service.ts
+    ├── store/
+    │   └── authStore.ts
     ├── types/
     │   └── rbac.ts
 ```

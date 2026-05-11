@@ -109,13 +109,11 @@ const CustomerDetails = () => {
         title="Customer Details"
         text="View customer complete information"
       />
-
-      <div className="p-6 space-y-6">
+     <div className="p-6 pt-5 space-y-6 relative z-0">
 
         {/* TOP PROFILE SECTION */}
-        <Card className="">
-
-          <div className="bg-gradient-to-r from-[#02374C] via-[#03506F] to-[#046C94] p-10 relative overflow-hidden rounded-[32px] shadow-2xl ">
+       <Card className="overflow-hidden bg-gradient-to-r from-[#02374C] via-[#03506F] to-[#046C94] p-10 relative overflow-hidden rounded-[32px] shadow-[0px_50px_100px_-20px_rgba(50,50,93,0.25),0px_30px_60px_-30px_rgba(0,0,0,0.3)] mb-15">
+         <div className=" z-0">
 
             <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-0 w-60 h-60 bg-white/10 rounded-full blur-3xl"></div>
@@ -144,7 +142,7 @@ const CustomerDetails = () => {
               </div>
 
               {/* DETAILS */}
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 flex-1 w-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 flex-1 w-full text-white">
 
                 <InfoCard
                   icon={<User size={20} />}
@@ -343,18 +341,20 @@ const InfoCard = ({
     <div className="backdrop-blur-xl bg-white/10 border border-white/10 rounded-3xl p-5 text-white hover:bg-white/20 transition-all duration-300">
 
       <div className="flex items-center gap-3 mb-3">
-        <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+
+        <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white">
           {icon}
         </div>
 
-        <p className="text-sm text-blue-100">
+        <p className="text-sm text-white/70">
           {label}
         </p>
+
       </div>
 
-      <h3 className="text-xl font-semibold break-words">
+      <p className="text-xl font-semibold break-words text-white">
         {value}
-      </h3>
+      </p>
 
     </div>
   );

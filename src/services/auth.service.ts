@@ -1,16 +1,17 @@
-import axiosInstance from "@/lib/axios";
+import axios from "axios";
 
-export interface LoginPayload {
+const API = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+});
+
+export const loginUser = async (data: {
   email: string;
   password: string;
-}
+}) => {
 
-export const loginUser = async (
-  payload: LoginPayload
-) => {
-  const response = await axiosInstance.post(
+  const response = await API.post(
     "/auth/login",
-    payload
+    data
   );
 
   return response.data;
