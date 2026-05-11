@@ -44,7 +44,11 @@ import MainLayout from "../layouts/MainLayout";
 import Typography from './../pages/components-pages/typography/Typography';
 import GuestRoutes from "./GuestRoutes";
 import ProtectedRoutes from "./ProtectedRoutes";
+<<<<<<< HEAD
 import CustomerDetails from "../pages/customer/CustomerDetails";
+=======
+// import ShipmentRequestList from "../pages/shipments-request/ShipmentRequestList"
+>>>>>>> origin/rohan
 
 const Podcast = lazy(() => import("@/pages/dashboards/podcast/Podcast"));
 const Help = lazy(() => import("@/pages/dashboards/help/Help"));
@@ -63,6 +67,8 @@ const Ecommerce = lazy(() => import("../pages/dashboards/ecommerce/Ecommerce"));
 const AddMember = lazy(() => import("../pages/teams/add-member/AddMember"));
 const Teams = lazy(() => import("../pages/teams/Teams"));
 const TeamMemberView = lazy(() => import("../pages/teams/TeamMemberView"));
+const ShipmentRequestList = lazy(() => import("../pages/shipments-request/ShipmentRequestList"));
+const ShipmentListView = lazy(() => import("../pages/shipments-request/ShipmentListView"));
 
 export const router = createBrowserRouter([
   {
@@ -264,6 +270,12 @@ export const router = createBrowserRouter([
           },
           {
             path: "teams-permissions", element: <TeamsPermissions />
+          },
+          {
+            path: "shipment-request", element: <ShipmentRequestList />
+          },
+          {
+            path: "shipment-list-view", element: <ShipmentListView />
           },
         ],
       },
