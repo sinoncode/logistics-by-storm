@@ -2,475 +2,237 @@
 
 ## Project Overview
 
-**Project Name:** Logistics By Storm (Repository: wowdash-react-typescript-shadcn)  
-**Type:** Full-stack React dashboard application with TypeScript  
-**Purpose:** Multi-feature logistics and business management dashboard with various specialized dashboards and modules  
-**Deployment:** Vercel (configured via vercel.json)  
-**MVP Status:** This is the Minimum Viable Product (MVP) featuring a comprehensive logistics dashboard with RBAC controls for team member access management.
+**Project Name:** Logistics By Storm
+**Repository Name:** wowdash-react-typescript-shadcn
+**Type:** Frontend SaaS-style dashboard application built with React + TypeScript
+**Purpose:** A multi-module logistics and business operations dashboard with analytics, team management, reporting, and authentication.
+**Deployment:** Vercel-ready configuration via `vercel.json`
+**Current Progress:** Core app shell, routing, authentication scaffolding, dashboard navigation, charting, forms, layouts, and reusable UI components are implemented.
 
-## Complete Folder Structure
+## Updated Folder Structure
 
 ```
 logistics-by-storm/
-├── src/
-│   ├── components/
-│   │   ├── AppSidebar.tsx                 # Main sidebar navigation
-│   │   ├── LazyWrapper.tsx                # Lazy loading wrapper
-│   │   ├── ModeToggle.tsx                 # Dark/light mode toggle
-│   │   ├── NavMain.tsx                    # Navigation component
-│   │   ├── theme-provider.tsx             # Theme context provider
-│   │   ├── charts/                        # 38 chart components (ApexCharts-based)
-│   │   │   ├── AreaChartBigChart.tsx, AreaChartWave.tsx, AreaSharpChart.tsx
-│   │   │   ├── BarChartYear.tsx, DoubleBarChart.tsx, ThreeBarChart.tsx
-│   │   │   ├── LineChart.tsx, LineChartAnimation.tsx
-│   │   │   ├── PieChart.tsx, RadarChart.tsx, RadialBarChart.tsx
-│   │   │   ├── CandlestickChart.tsx, ZoomableChart.tsx
-│   │   │   └── ... (37 chart variations)
-│   │   ├── rbac/                          # Role-based access control components
-│   │   ├── shared/                        # Shared components (ThemeLogo, etc.)
-│   │   ├── slider/                        # Slider/carousel components
-│   │   ├── tables/                        # Table components
-│   │   ├── teams/                         # Teams management components
-│   │   └── ui/                            # 32 shadcn UI components
-│   │       ├── alert-dialog.tsx, badge.tsx, button.tsx
-│   │       ├── card.tsx, carousel.tsx, checkbox.tsx
-│   │       ├── dialog.tsx, dropdown-menu.tsx, form.tsx
-│   │       ├── input.tsx, sidebar.tsx, tabs.tsx
-│   │       ├── table.tsx, tooltip.tsx, etc.
-│   │       └── ... (32 total UI primitives)
-│   │
-│   ├── context/
-│   │   ├── EmailSidebarContext.tsx        # Email sidebar state
-│   │   ├── isSubmittingContext.tsx        # Form submission state
-│   │   └── LoadingContext.tsx             # Global loading state
-│   │
-│   ├── hooks/
-│   │   ├── use-mobile.ts                  # Mobile breakpoint detection
-│   │   ├── useLocalStorage.ts             # Local storage management
-│   │   └── useUsers.ts                    # User data management
-│   │
-│   ├── lib/
-│   │   ├── utils.ts                       # Utility functions (cn helper)
-│   │   ├── formValidation.ts              # Form validation logic
-│   │   └── zod.ts                         # Zod schema definitions for forms
-│   │
-│   ├── layouts/
-│   │   ├── MainLayout.tsx                 # Main app layout wrapper
-│   │   ├── Header.tsx                     # Header navigation
-│   │   ├── Footer.tsx                     # Footer component
-│   │   ├── SidebarLayout.tsx              # Sidebar layout wrapper
-│   │   └── Breadcrumb.tsx                 # Breadcrumb navigation
-│   │
-│   ├── pages/
-│   │   ├── TeamsPermissions.tsx           # Teams permissions settings
-│   │   ├── auth/
-│   │   │   ├── login/
-│   │   │   ├── register/
-│   │   │   ├── forgot-password/
-│   │   │   └── components/
-│   │   ├── dashboards/                    # 14 specialized dashboards
-│   │   │   ├── crm/                       # Main CRM dashboard (default)
-│   │   │   ├── analytics/
-│   │   │   ├── booking/
-│   │   │   ├── cryptocurrency/
-│   │   │   ├── ecommerce/
-│   │   │   ├── finance/
-│   │   │   ├── help/
-│   │   │   ├── inventory/
-│   │   │   ├── investment/
-│   │   │   ├── lms/                       # Learning Management System
-│   │   │   ├── medical/
-│   │   │   ├── nft/
-│   │   │   ├── podcast/
-│   │   │   └── dashboard/
-│   │   ├── components-pages/              # Component showcase pages
-│   │   │   ├── alert/
-│   │   │   ├── avatar/
-│   │   │   ├── badges/
-│   │   │   ├── buttons/
-│   │   │   ├── card/
-│   │   │   ├── colors/
-│   │   │   ├── dropdown/
-│   │   │   ├── list/
-│   │   │   ├── pagination/
-│   │   │   ├── progress-bar/
-│   │   │   ├── radio/
-│   │   │   ├── star-ratings/
-│   │   │   ├── switch/
-│   │   │   ├── tab-accordion/
-│   │   │   ├── tags/
-│   │   │   ├── tooltip-popover/
-│   │   │   └── typography/
-│   │   ├── users/
-│   │   │   ├── UsersList.tsx
-│   │   │   ├── users-grid/
-│   │   │   └── view-profile/
-│   │   ├── teams/
-│   │   │   ├── Teams.tsx
-│   │   │   └── add-member/
-│   │   ├── emails/
-│   │   │   ├── email/
-│   │   │   └── email-details/
-│   │   ├── forms/
-│   │   │   ├── form-validation/
-│   │   │   ├── input-forms/
-│   │   │   └── input-layout/
-│   │   ├── basic-table/
-│   │   ├── calendar/
-│   │   ├── chat/
-│   │   ├── chart/
-│   │   │   ├── column-chart/
-│   │   │   ├── line-chart/
-│   │   │   └── PieChartPage.tsx
-│   │   ├── setting/
-│   │   │   ├── company/
-│   │   │   ├── notification-alert/
-│   │   │   └── settings-notification/
-│   │   └── widgets/
-│   │
-│   ├── routes/
-│   │   ├── AppRoutes.tsx                  # Main route configuration
-│   │   ├── ProtectedRoutes.tsx            # Auth-protected routes
-│   │   └── GuestRoutes.tsx                # Guest-only routes
-│   │
-│   ├── error/
-│   │   ├── 404.tsx                        # 404 page
-│   │   ├── ComponentErrorBoundary.tsx     # Component error boundary
-│   │   └── RouteErrorBoundary.tsx         # Route error boundary
-│   │
-│   ├── types/
-│   │   └── rbac.ts                        # Role-based access types
-│   │
-│   ├── data/
-│   │   └── SidebarData.ts                 # Sidebar navigation data
-│   │
-│   ├── loading/
-│   │   ├── LoadingSkeleton.tsx
-│   │   └── PageLoader.tsx
-│   │
-│   ├── assets/
-│   │   ├── images/                        # Asset images (20+ categories)
-│   │   │   ├── asset/, auth/, avatar/, blog/, card/
-│   │   │   ├── carousel/, chat/, chatgpt/, coming-soon/
-│   │   │   ├── crypto/, currency/, error/, flags/
-│   │   │   ├── gallery/, gif/, home-*, icons/
-│   │   │   ├── kanban/, lists/, nft/, notice/
-│   │   │   ├── notification/, payment/, pricing/
-│   │   │   ├── product/, tabs/, user-*, users/, videos/
-│   │   │   └── ...
-│   │   └── world-map/                     # World map assets
-│   │
-│   ├── App.tsx                            # Root app component
-│   ├── main.tsx                           # React entry point
-│   ├── firebase.ts                        # Firebase configuration & auth
-│   └── index.css                          # Global styles
-│
-├── public/                                # Static assets
-├── index.html                             # HTML entry point
-├── package.json                           # Dependencies & scripts
-├── tsconfig.json                          # TypeScript config
-├── tsconfig.app.json                      # App-specific TS config
-├── tsconfig.node.json                     # Node-specific TS config
-├── vite.config.ts                         # Vite build config
-├── eslint.config.js                       # ESLint configuration
-├── vercel.json                            # Vercel deployment config
-├── components.json                        # Component configuration
-├── README.md                              # Project documentation
-└── bash.exe.stackdump                     # Windows bash dump file
+├── .env
+├── .env.development
+├── .env.production
+├── .gitignore
+├── README.md
+├── bash.exe.stackdump
+├── components.json
+├── dist/                                  # Vite production build output
+├── eslint.config.js
+├── index.html
+├── node_modules/
+├── package-lock.json
+├── package.json
+├── public/                                # Static public assets
+├── project-overview.txt                   # This overview file
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── vercel.json
+├── vite.config.ts
+└── src/
+    ├── App.tsx                            # Root application component
+    ├── firebase.ts                        # Firebase authentication and config
+    ├── index.css                          # Global styles
+    ├── main.tsx                           # React entrypoint
+    ├── assets/
+    │   ├── images/                        # Structured image assets by category
+    │   │   ├── asset/
+    │   │   ├── auth/
+    │   │   ├── avatar/
+    │   │   ├── blog/
+    │   │   ├── card/
+    │   │   ├── carousel/
+    │   │   ├── chat/
+    │   │   ├── chatgpt/
+    │   │   ├── coming-soon/
+    │   │   ├── crypto/
+    │   │   ├── currency/
+    │   │   ├── error/
+    │   │   ├── flags/
+    │   │   ├── gallery/
+    │   │   ├── gif/
+    │   │   ├── home-eight/
+    │   │   ├── home-eleven/
+    │   │   ├── home-fourteen/
+    │   │   ├── home-nine/
+    │   │   ├── home-six/
+    │   │   ├── home-sixteen/
+    │   │   ├── home-twelve/
+    │   │   ├── homeThirteen/
+    │   │   ├── icons/
+    │   │   ├── kanban/
+    │   │   ├── lists/
+    │   │   ├── nft/
+    │   │   ├── notice/
+    │   │   ├── notification/
+    │   │   ├── payment/
+    │   │   ├── pricing/
+    │   │   ├── product/
+    │   │   ├── tabs/
+    │   │   ├── user-grid/
+    │   │   ├── user-list/
+    │   │   ├── users/
+    │   │   ├── videos/
+    │   │   └── world-map/
+    ├── components/
+    │   ├── AppSidebar.tsx
+    │   ├── LazyWrapper.tsx
+    │   ├── ModeToggle.tsx
+    │   ├── NavMain.tsx
+    │   ├── theme-provider.tsx
+    │   ├── charts/                        # Reusable chart renderers and wrappers
+    │   ├── rbac/                          # Role-based access and permission UI
+    │   ├── shared/                        # Shared UI pieces and helpers
+    │   ├── slider/                        # Carousel and slider components
+    │   ├── tables/                        # Table components and helpers
+    │   ├── teams/                         # Team management UI
+    │   ├── ui/                            # shadcn-style UI primitives
+    │   └── users/                         # User-related reusable components
+    ├── config/
+    │   └── env.ts                         # Environment-specific configuration
+    ├── context/
+    │   ├── EmailSidebarContext.tsx
+    │   ├── isSubmittingContext.tsx
+    │   └── LoadingContext.tsx
+    ├── data/
+    │   └── SidebarData.ts                 # Sidebar navigation data
+    ├── error/
+    │   ├── 404.tsx
+    │   ├── ComponentErrorBoundary.tsx
+    │   └── RouteErrorBoundary.tsx
+    ├── hooks/
+    │   ├── use-mobile.ts
+    │   ├── useLocalStorage.ts
+    │   └── useUsers.ts
+    ├── layouts/
+    │   ├── Breadcrumb.tsx
+    │   ├── Footer.tsx
+    │   ├── Header.tsx
+    │   ├── MainLayout.tsx
+    │   └── SidebarLayout.tsx
+    ├── lib/
+    │   ├── formValidation.ts
+    │   ├── utils.ts
+    │   └── zod.ts
+    ├── loading/
+    │   ├── LoadingSkeleton.tsx
+    │   └── PageLoader.tsx
+    ├── pages/
+    │   ├── TeamsPermissions.tsx
+    │   ├── auth/
+    │   ├── basic-table/
+    │   ├── calendar/
+    │   ├── chart/
+    │   ├── chat/
+    │   ├── components-pages/
+    │   ├── customer/
+    │   ├── dashboards/
+    │   ├── emails/
+    │   ├── forms/
+    │   ├── setting/
+    │   ├── teams/
+    │   └── widgets/
+    ├── routes/
+    │   ├── AppRoutes.tsx
+    │   ├── GuestRoutes.tsx
+    │   └── ProtectedRoutes.tsx
+    ├── services/
+    │   └── auth.service.ts
+    ├── types/
+    │   └── rbac.ts
 ```
 
 ## Technology Stack
 
-### Core Framework
-- **React**: ^19.2.0 - Latest React with JSX
-- **TypeScript**: ~5.9.3 - Type safety
-- **React DOM**: ^19.2.0 - DOM rendering
+### Core Frameworks
+- React 19
+- TypeScript 5.9
+- Vite 7
 
-### Build & Development
-- **Vite**: ^7.2.4 - Ultra-fast build tool
-- **@vitejs/plugin-react**: ^5.1.1 - React Fast Refresh for Vite
-- **@tailwindcss/vite**: ^4.1.17 - Tailwind CSS Vite plugin
+### Styling and UI
+- Tailwind CSS 4
+- shadcn/ui-based primitives
+- Radix UI packages for accessible components
+- lucide-react icons
+- cmdk command palette
+- tailwind-merge, class-variance-authority, clsx
 
-### UI Component Libraries
-- **shadcn/ui** - Radix UI + Tailwind CSS components (32 UI primitives)
-- **@radix-ui/** - Headless UI components:
-  - react-checkbox, react-collapsible, react-dialog
-  - react-dropdown-menu, react-label, react-popover
-  - react-radio-group, react-select, react-separator
-  - react-slot, react-switch, react-tabs, react-tooltip
-- **lucide-react**: ^0.554.0 - Beautiful icon library
-- **cmdk**: ^1.1.1 - Command menu component
+### Charts and Interaction
+- ApexCharts + react-apexcharts
+- FullCalendar React with daygrid/timegrid/interaction
+- keen-slider and embla-carousel-react
+- react-day-picker
 
-### Styling
-- **Tailwind CSS**: ^4.1.17 - Utility-first CSS framework
-- **tailwind-merge**: ^3.4.0 - Merge Tailwind classes
-- **class-variance-authority**: ^0.7.1 - CSS class variant management
-- **clsx**: ^2.1.1 - Conditional className utility
-- **tw-animate-css**: ^1.4.0 - Animation utilities
+### State, Forms, and Validation
+- react-hook-form
+- Zod schemas
+- @hookform/resolvers
+- date-fns
+- uuid
 
-### Charts & Data Visualization
-- **ApexCharts**: ^5.3.6 - Modern charting library
-- **react-apexcharts**: ^1.9.0 - React wrapper for ApexCharts
-- **keen-slider**: ^6.8.6 - Lightweight carousel library
-- **embla-carousel-react**: ^8.6.0 - Headless carousel
+### Backend and Auth
+- Firebase SDK
+- react-firebase-hooks
+- email/password auth scaffold plus OAuth-ready patterns
+- Firestore-based profile/data potential
 
-### Form Management & Validation
-- **react-hook-form**: ^7.69.0 - Performant form management
-- **@hookform/resolvers**: ^5.2.2 - Validation resolvers
-- **Zod**: ^4.2.1 - TypeScript-first schema validation
-
-### Database & Authentication
-- **Firebase**: ^12.7.0 - Backend services (Firestore, Auth)
-- **react-firebase-hooks**: ^5.1.1 - Firebase React hooks
-  - Email/password authentication
-  - Google OAuth integration
-  - GitHub OAuth integration
-  - Firestore user profile storage
-
-### Routing & Navigation
-- **react-router-dom**: ^7.9.6 - Client-side routing
-  - Protected routes with auth guards
-  - Lazy-loaded pages for performance
-  - Error boundaries for route errors
-
-### UI Enhancements
-- **react-toastify**: ^11.0.5 - Toast notifications
-- **sonner**: ^2.0.7 - Alternative toast library
-- **react-tooltip**: ^5.30.0 - Tooltip component
-- **react-day-picker**: ^9.13.0 - Date picker
-- **next-themes**: ^0.4.6 - Theme management (dark/light mode)
-
-### Calendar
-- **@fullcalendar/react**: ^6.1.19 - Calendar component
-- **@fullcalendar/daygrid**: ^6.1.19 - Day grid view
-- **@fullcalendar/timegrid**: ^6.1.19 - Time grid view
-- **@fullcalendar/interaction**: ^6.1.19 - Calendar interactions
-
-### API & HTTP
-- **axios**: ^1.15.2 - HTTP client
-
-### Utilities
-- **date-fns**: ^4.1.0 - Date manipulation library
-- **uuid**: ^13.0.0 - UUID generation
-- **@vercel/speed-insights**: ^2.0.0 - Performance monitoring
+### Routing and UX
+- react-router-dom v7
+- Protected and guest route handling
+- toast notifications via react-toastify and sonner
+- tooltips via react-tooltip
+- theme toggling via next-themes
 
 ### Development Tools
-- **ESLint**: ^9.39.1 - Code quality & linting
-- **typescript-eslint**: ^8.46.4 - TypeScript ESLint rules
-- **eslint-plugin-react-hooks**: ^7.0.1 - React Hooks linting
-- **eslint-plugin-react-refresh**: ^0.4.24 - Fast Refresh linting
-- **@types/react**: ^19.2.5 - React type definitions
-- **@types/react-dom**: ^19.2.3 - React DOM types
-- **@types/node**: ^24.10.1 - Node types
-- **globals**: ^16.5.0 - Global variable types
+- ESLint and TypeScript linting
+- tsconfig app/node/workspace separation
+- Vercel deployment config
 
-## Key Features & Modules (MVP Components)
+## Current Project Progress
 
-### Authentication System (src/firebase.ts)
-- Email/password registration and login
-- Password reset functionality
-- Google OAuth login
-- GitHub OAuth login
-- User profile management with Firestore
-- Protected routes with loading states
-- Session persistence
+### Completed
+- Fully wired application shell with responsive layout and routing.
+- Sidebar navigation, header, breadcrumb, and footer consistently applied.
+- Authentication scaffolding through `src/firebase.ts` and `src/services/auth.service.ts`.
+- Protected route management in `src/routes/ProtectedRoutes.tsx`.
+- Multi-page dashboard architecture formed under `src/pages/dashboards/`.
+- Shared UI and component catalog in `src/components/ui/` and `src/pages/components-pages/`.
+- Centralized context providers for loading, submission state, and sidebar behavior.
+- Form validation structure in `src/lib/formValidation.ts` and `src/lib/zod.ts`.
+- Base charting components and dashboard analytics setup completed.
+- Error fallback pages and boundaries implemented.
 
-### Multi-Dashboard System
-1. **CRM Dashboard** (Default) - Customer relationship management
-2. **eCommerce Dashboard** - Product sales tracking
-3. **Cryptocurrency Dashboard** - Crypto market data
-4. **Investment Dashboard** - Portfolio management
-5. **LMS Dashboard** - Learning management system
-6. **NFT & Gaming Dashboard** - NFT marketplace
-7. **Medical Dashboard** - Healthcare analytics
-8. **Analytics Dashboard** - Data analytics
-9. **Inventory/POS Dashboard** - Stock management
-10. **Finance & Banking Dashboard** - Financial metrics
-11. **Booking System Dashboard** - Reservation management
-12. **Help Desk Dashboard** - Support ticket management
-13. **Podcast Dashboard** - Podcast management
-14. **Additional Dashboards** - Custom modules
+### Remaining / Next Steps
+- Complete logistics-specific data wiring for inventory, shipment, order, and performance dashboards.
+- Expand RBAC functionality beyond the current permissions page into actual feature gating.
+- Add backend API integration for live logistics metrics and transactional data.
+- Improve mobile responsiveness and accessibility across the entire app.
+- Add additional user management and team collaboration workflows.
+- Finalize production-ready deployment variables and environment secret handling.
 
-### Components & UI Elements Showcase
-- Alerts, Avatars, Badges
-- Buttons, Cards, Carousels
-- Checkboxes, Dropdowns, Dialogs
-- Progress bars, Radio buttons, Switches
-- Tabs, Accordions, Tooltips, Popovers
-- Tables, Pagination, Tags
-- Colors, Typography
-- Star ratings, Progress indicators
+## Key Project Aspects
 
-### Forms & Validation
-- Input forms with validation
-- Form layout examples
-- Form validation page with Zod schemas
-- Custom validation rules
-- Error handling and display
+### Architecture
+- `src/App.tsx` is the app root housing global providers and route mounting.
+- `src/main.tsx` initializes Vite and renders the React application.
+- `src/routes/` contains routing guards and route organization.
+- `src/layouts/` separates layout concerns from page content.
+- `src/components/` stores reusable UI building blocks grouped by purpose.
+- `src/pages/` holds feature-specific page modules and dashboards.
+- `src/services/` centralizes auth-related helper functions.
+- `src/config/env.ts` supports environment-driven configuration.
+- `src/types/rbac.ts` defines permission models.
 
-### Data Management
-- Users Management (list and grid views)
-- User profiles with detailed information
-- Teams management
-- Team member addition
-- Permissions management for roles
+### Project Focus
+- Dashboard-first experience with analytics, forms, tables, and charts.
+- Reusable shadcn/Tailwind-based UI components.
+- Firebase authentication and secure route handling.
+- Clean modular folder structure for fast iteration.
+- Vercel-ready deployment with a modern frontend toolchain.
 
-### Communication Modules
-- Email management with detailed view
-- Chat functionality
-- Calendar integration
-- Notification system
-
-### Chart & Visualization Library (38+ chart types)
-- Area charts (multiple variations)
-- Bar charts (single, double, triple, stacked)
-- Line charts (with animations and labels)
-- Pie & Donut charts (2-6 series)
-- Candlestick charts
-- Radar & Radial charts
-- Stepline charts
-- Zoomable charts
-- Gradient charts
-
-### Data Tables
-- Basic table implementation
-- Complex data management
-- Sorting and filtering
-- Responsive design
-
-### State Management
-- Context API for global state:
-  - `LoadingContext` - Global loading states
-  - `EmailSidebarContext` - Email sidebar toggle
-  - `IsSubmittingContext` - Form submission state
-- Firebase hooks for authentication
-- React Router for navigation state
-
-### Role-Based Access Control (RBAC) - MVP Core Feature
-- Defined roles: Admin, Manager, Employee, Viewer
-- Permission modules:
-  - Users (view, create, edit, delete)
-  - Shipment Control (view, create, edit, delete)
-  - Change Requests (view, create, edit, delete)
-  - Payment Checks (view, create, edit, delete)
-- Protected routes based on user roles
-- Team member access control for logistics operations
-
-## Architecture & Design Patterns
-
-### Component Structure
-- **Layout Components**: MainLayout, SidebarLayout, Header, Footer, Breadcrumb
-- **Page Components**: Organized by feature (dashboards, pages, auth)
-- **UI Components**: Reusable shadcn/ui primitives
-- **Feature Components**: Dashboard-specific cards and widgets
-- **Shared Components**: Logos, theme toggle, navigation
-
-### State Management
-- Context API for app-level state (loading, email sidebar, form submission)
-- Firebase hooks for auth state
-- Local component state for UI interactions
-- URL-based routing state (React Router)
-
-### Routing Strategy
-- Nested routes with MainLayout wrapper
-- Protected routes requiring authentication
-- Guest routes redirecting if authenticated
-- Error boundaries at route level
-- Lazy-loaded page components for code splitting
-- 404 fallback route
-
-### Authentication Flow
-1. Guest sees login/register/forgot-password pages
-2. User registers or logs in via email or OAuth
-3. Firebase stores user profile in Firestore
-4. Protected routes redirect unauthenticated users to login
-5. Session persists via Firebase auth state
-6. User can reset password via email
-
-### Styling Architecture
-- Tailwind CSS for utility-based styling
-- CSS-in-JS via shadcn components
-- Dark mode support with next-themes
-- Responsive design with Tailwind breakpoints
-- Component variants via CVA (class-variance-authority)
-
-### Form Validation
-- Zod schemas for type-safe validation
-- Custom validation functions for complex rules
-- Error state management in context
-- React Hook Form for performant form handling
-- Email, password, phone, and custom field validators
-
-## Configuration Files
-
-### vite.config.ts - Build Configuration
-- React plugin with Fast Refresh
-- Tailwind CSS Vite plugin
-- Path alias for `@/` → `src/`
-- Base path: `/`
-
-### tsconfig.json - TypeScript Configuration
-- References to app and node configs
-- Base URL and path aliases
-- ESM module type
-
-### eslint.config.js - Code Quality
-- Recommended ESLint and TypeScript rules
-- React Hooks linting
-- Fast Refresh validation
-- Browser globals configuration
-
-### vercel.json - Deployment Configuration
-- SPA routing: all requests redirect to index.html
-
-## Deployment & Performance
-
-- **Deployment Platform**: Vercel
-- **Performance Monitoring**: @vercel/speed-insights
-- **Code Splitting**: Lazy-loaded dashboard pages
-- **Route Optimization**: Protected route guards
-- **Asset Optimization**: Multiple image categories organized by feature
-
-## Development Scripts
-
-- `npm run dev` - Start Vite development server with HMR
-- `npm run build` - TypeScript compilation + Vite production build
-- `npm run lint` - ESLint code quality checks
-- `npm run preview` - Preview production build locally
-
-## Notable Implementation Details
-
-1. **Lazy Loading**: Dashboard pages are lazy-loaded using React.lazy() for better performance
-2. **LazyWrapper Component**: Suspense wrapper with fallback loading states
-3. **Custom Hooks**: useUsers, useLocalStorage, useIsMobile for common functionality
-4. **Theme Management**: next-themes with localStorage persistence
-5. **Responsive Design**: Mobile detection at 992px breakpoint
-6. **Avatar Generation**: Dynamic avatars using ui-avatars.com API
-7. **Form Validation**: Comprehensive Zod schemas with typed errors
-8. **Error Boundaries**: Catches React errors at component and route level
-9. **Toast Notifications**: Multiple toast library options (react-toastify, sonner)
-10. **Firebase Integration**: Full authentication pipeline with email, Google, and GitHub OAuth
-
-## Security Features
-
-- Protected routes requiring authentication
-- Firebase security rules for Firestore
-- Password validation with special character requirements
-- Email verification support via Firebase
-- RBAC implementation for feature access control
-- XSS protection via React's built-in escaping
-
-## MVP Summary
-
-This Minimum Viable Product (MVP) delivers a comprehensive logistics dashboard with:
-- Complete planning and project structure
-- RBAC controls for multiple team member access levels
-- 14 specialized dashboards for various logistics and business needs
-- Full authentication system with Firebase
-- Extensive UI component library
-- Data visualization with 38+ chart types
-- Form management and validation
-- Responsive design and dark mode support
-- Production-ready deployment on Vercel
-
-The MVP focuses on core logistics operations while providing a scalable foundation for future enhancements.
+## Summary
+This overview now reflects the actual workspace structure and current progress of Logistics By Storm. The application has a stable frontend foundation, and the next phase is to enrich dashboard data, complete RBAC gating, and connect the UI to real logistics backend flows.
