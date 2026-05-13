@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Breadcrumb from "@/layouts/Breadcrumb";
 import { useNavigate } from "react-router-dom";
 
-const UsersList = () => {
+const CustomerList = () => {
     return (
         <>
             <Breadcrumb title="Users List" text="Users List" />
@@ -44,4 +44,4 @@ const UsersList = () => {
     );
 };
 
-export default UsersList;
+export default CustomerList;

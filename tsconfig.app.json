@@ -27,9 +27,7 @@
     /* ShadCN UI Install code */
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
 
   },

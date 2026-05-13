@@ -198,6 +198,129 @@ logistics-by-storm/
 - tsconfig app/node/workspace separation
 - Vercel deployment config
 
+## API Authentication and Admin Account Management
+
+### Overview
+The application integrates with an Admin API that provides user authentication and authorization through role-based access control (RBAC). Upon successful login, the API returns comprehensive admin user data including permissions and bearer token authentication.
+
+### Admin API Response Structure
+
+The login/authentication endpoint returns the following response:
+
+```json
+{
+  "data": {
+    "user": {
+      "id": "019e023a-f7be-71c0-92e0-f20a0651737a",
+      "name": "Priyanshu Tripathi",
+      "email": "priyanshu.tripathi@networsys.com",
+      "phone": "7705978888",
+      "role": ["admin"],
+      "permissions": [
+        "countries.create",
+        "countries.delete",
+        "countries.update",
+        "countries.view",
+        // ... additional permissions
+      ]
+    },
+    "access_token": "49|UiD5Rvc1vRc5Zevhldz8cvseEH0rWZTmAMX8ktDa7c298b4d",
+    "token_type": "Bearer"
+  }
+}
+```
+
+### User Data Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string (UUID) | Unique identifier for the admin user |
+| `name` | string | Full name of the admin user |
+| `email` | string | Email address for communications and login |
+| `phone` | string | Contact phone number |
+| `role` | array[string] | User roles (e.g., "admin"). Controls overall access level |
+| `permissions` | array[string] | Fine-grained permission strings for feature access |
+
+### Authentication Token
+
+- **access_token**: Bearer token used for all subsequent API requests. Include this in the Authorization header: `Authorization: Bearer <access_token>`
+- **token_type**: Always "Bearer" for this API
+- Store securely in localStorage or state management (e.g., `src/store/authStore.ts`)
+
+### Permission Structure
+
+Permissions follow a pattern: `<resource>.<action>`
+
+#### Resources Managed by Admin:
+- **countries**: Geographic regions
+- **coupons**: Discount/promotional codes
+- **customs_declarations**: Import/export documentation
+- **dashboard**: Analytics and overview view
+- **facilities**: Warehouses and distribution centers
+- **invoices**: Billing documents
+- **locations**: Delivery and pickup locations
+- **payments**: Transaction management
+- **permissions**: System permission management
+- **rate_cards**: Shipping rate definitions
+- **reports**: Business analytics and reports
+- **roles**: User role definitions and management
+- **service_types**: Shipping service categories (Express, Standard, etc.)
+- **shipment_charges**: Calculated shipping fees
+- **shipment_packages**: Package/parcel definitions
+- **shipment_requests**: Customer shipment orders
+- **shipments**: Actual shipment tracking
+- **tracking_logs**: Shipment event history
+- **users**: User account management
+
+#### Actions:
+- **view**: Read-only access to resource
+- **create**: Add new resource instances
+- **update**: Modify existing resources
+- **delete**: Remove resources
+- **calculate_charge**: Compute shipping rates
+- **cancel**: Void/cancel shipments or requests
+- **review**: Approve/review pending items
+- **issue**: Generate invoices
+- **void**: Cancel invoices
+- **initiate**: Start payment processes
+- **refund**: Process refunds
+- **verify**: Validate payments
+- **update_status**: Change shipment status
+
+### Integration Points
+
+1. **Auth Service** (`src/services/auth.service.ts`):
+   - Handle login API call
+   - Extract user data and token
+   - Store token for API authentication
+
+2. **Auth Store** (`src/store/authStore.ts`):
+   - Store admin user profile (name, email, phone)
+   - Maintain role and permissions in state
+   - Provide context to components
+
+3. **Permission Service** (`src/services/permission.service.ts`):
+   - Validate user permissions against required actions
+   - Gate UI elements and features
+   - Used with RBAC system in `src/components/rbac/`
+
+4. **Protected Routes** (`src/routes/ProtectedRoutes.tsx`):
+   - Verify token before allowing route access
+   - Redirect to login if token is invalid or expired
+
+5. **API Requests** (`src/services/api.ts`):
+   - Automatically include bearer token in Authorization header
+   - Handle token expiration and refresh logic
+
+### Admin Account Management Best Practices
+
+1. **Token Storage**: Store access_token securely; consider httpOnly cookies or secure localStorage
+2. **Token Expiration**: Implement token refresh logic in API service
+3. **Permission Caching**: Cache permissions in state to avoid repeated API calls
+4. **Feature Gating**: Use `checkPermission()` utility before rendering admin-only features
+5. **Logging Out**: Clear token, user data, and permissions from storage on logout
+6. **Error Handling**: Handle 401 Unauthorized responses by redirecting to login
+
 ## Current Project Progress
 
 ### Completed
@@ -211,8 +334,12 @@ logistics-by-storm/
 - Form validation structure in `src/lib/formValidation.ts` and `src/lib/zod.ts`.
 - Base charting components and dashboard analytics setup completed.
 - Error fallback pages and boundaries implemented.
+- Admin API authentication structure documented and ready for integration.
 
 ### Remaining / Next Steps
+- Integrate Admin API authentication endpoint with current auth service
+- Update `authStore.ts` to persist admin user data and permissions from API response
+- Implement permission checking in feature gates using `permission.service.ts`
 - Complete logistics-specific data wiring for inventory, shipment, order, and performance dashboards.
 - Expand RBAC functionality beyond the current permissions page into actual feature gating.
 - Add backend API integration for live logistics metrics and transactional data.

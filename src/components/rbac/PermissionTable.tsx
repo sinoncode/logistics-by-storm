@@ -23,6 +23,8 @@ import type { Role } from "@/types/rbac";
 
 import { AlertCircle } from "lucide-react";
 
+import { groupPermissionsByModule } from "@/lib/permissions";
+
 interface PermissionTableProps {
   role: Role | null;
   availablePermissions: string[];
@@ -55,29 +57,6 @@ const formatModuleLabel = (module: string) => {
         part.charAt(0).toUpperCase() + part.slice(1)
     )
     .join(" ");
-};
-
-const groupPermissionsByModule = (
-  permissions: string[]
-) => {
-  return permissions.reduce(
-    (acc, permission) => {
-      const [module] = permission.split(".");
-
-      if (!module) return acc;
-
-      if (!acc[module]) {
-        acc[module] = [];
-      }
-
-      if (!acc[module].includes(permission)) {
-        acc[module].push(permission);
-      }
-
-      return acc;
-    },
-    {} as Record<string, string[]>
-  );
 };
 
 export const PermissionTable = ({
@@ -156,102 +135,149 @@ export const PermissionTable = ({
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
-              <TableRow className="bg-muted/50 hover:bg-muted/50">
-                <TableHead className="w-[220px] font-semibold">
-                  Module
-                </TableHead>
-                <TableHead className="font-semibold">
-                  Permission
-                </TableHead>
-                <TableHead className="text-center font-semibold">
-                  Allow
-                </TableHead>
-                <TableHead className="text-center font-semibold">
-                  Actions
-                </TableHead>
-              </TableRow>
-            </TableHeader>
+  <TableRow className="bg-muted/50 hover:bg-muted/50">
 
-            <TableBody>
-              {moduleEntries.map(([module, permissions]) => {
-                const allSelected = permissions.every(
-                  hasPermission
-                );
+    <TableHead className="w-[240px] font-semibold">
+      Module
+    </TableHead>
 
-                return permissions.map(
-                  (permission, index) => {
-                    const action = permission.split(".").pop() || permission;
+    <TableHead className="text-center font-semibold">
+      View
+    </TableHead>
 
-                    return (
-                      <TableRow
-                        key={permission}
-                        className="hover:bg-muted/40 transition-colors"
-                      >
-                        {index === 0 ? (
-                          <TableCell
-                            rowSpan={permissions.length}
-                            className="font-medium text-sm"
-                          >
-                            {formatModuleLabel(module)}
-                          </TableCell>
-                        ) : null}
+    <TableHead className="text-center font-semibold">
+      Create
+    </TableHead>
 
-                        <TableCell className="py-4">
-                          {formatLabel(action)}
-                        </TableCell>
+    <TableHead className="text-center font-semibold">
+      Update
+    </TableHead>
 
-                        <TableCell className="text-center py-4">
-                          <div className="flex justify-center">
-                            <Checkbox
-                              checked={hasPermission(permission)}
-                              disabled={!canEdit}
-                              onCheckedChange={(checked) =>
-                                onPermissionChange(
-                                  permission,
-                                  checked === true
-                                )
-                              }
-                              title={
-                                !canEdit
-                                  ? "You need roles.update permission to edit this role."
-                                  : undefined
-                              }
-                              className="h-5 w-5"
-                            />
-                          </div>
-                        </TableCell>
+    <TableHead className="text-center font-semibold">
+      Delete
+    </TableHead>
 
-                        {index === 0 ? (
-                          <TableCell
-                            rowSpan={permissions.length}
-                            className="text-center py-4"
-                          >
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() =>
-                                handleSelectAll(permissions)
-                              }
-                              disabled={!canEdit}
-                              className="disabled:cursor-not-allowed disabled:opacity-50"
-                              title={
-                                !canEdit
-                                  ? "You need roles.update permission to toggle all permissions for this module."
-                                  : undefined
-                              }
-                            >
-                              {allSelected
-                                ? "All Selected"
-                                : "Select All"}
-                            </Button>
-                          </TableCell>
-                        ) : null}
-                      </TableRow>
-                    );
-                  }
-                );
-              })}
-            </TableBody>
+  </TableRow>
+</TableHeader>
+
+           <TableBody>
+
+  {moduleEntries.map(([module, permissions]) => {
+
+    const permissionMap = {
+      view: permissions.find((p) =>
+        p.endsWith(".view")
+      ),
+
+      create: permissions.find((p) =>
+        p.endsWith(".create")
+      ),
+
+      update: permissions.find((p) =>
+        p.endsWith(".update")
+      ),
+
+      delete: permissions.find((p) =>
+        p.endsWith(".delete")
+      ),
+    };
+
+    return (
+      <TableRow
+        key={module}
+        className="hover:bg-muted/30 transition-colors"
+      >
+
+        {/* MODULE */}
+        <TableCell className="font-medium py-5">
+          {formatModuleLabel(module)}
+        </TableCell>
+
+        {/* VIEW */}
+        <TableCell className="text-center">
+          {permissionMap.view ? (
+            <Checkbox
+              checked={hasPermission(
+                permissionMap.view
+              )}
+              disabled={!canEdit}
+              onCheckedChange={(checked) =>
+                onPermissionChange(
+                  permissionMap.view!,
+                  checked === true
+                )
+              }
+            />
+          ) : (
+            "-"
+          )}
+        </TableCell>
+
+        {/* CREATE */}
+        <TableCell className="text-center">
+          {permissionMap.create ? (
+            <Checkbox
+              checked={hasPermission(
+                permissionMap.create
+              )}
+              disabled={!canEdit}
+              onCheckedChange={(checked) =>
+                onPermissionChange(
+                  permissionMap.create!,
+                  checked === true
+                )
+              }
+            />
+          ) : (
+            "-"
+          )}
+        </TableCell>
+
+        {/* UPDATE */}
+        <TableCell className="text-center">
+          {permissionMap.update ? (
+            <Checkbox
+              checked={hasPermission(
+                permissionMap.update
+              )}
+              disabled={!canEdit}
+              onCheckedChange={(checked) =>
+                onPermissionChange(
+                  permissionMap.update!,
+                  checked === true
+                )
+              }
+            />
+          ) : (
+            "-"
+          )}
+        </TableCell>
+
+        {/* DELETE */}
+        <TableCell className="text-center">
+          {permissionMap.delete ? (
+            <Checkbox
+              checked={hasPermission(
+                permissionMap.delete
+              )}
+              disabled={!canEdit}
+              onCheckedChange={(checked) =>
+                onPermissionChange(
+                  permissionMap.delete!,
+                  checked === true
+                )
+              }
+            />
+          ) : (
+            "-"
+          )}
+        </TableCell>
+
+      </TableRow>
+    );
+  })}
+
+</TableBody>
           </Table>
         </div>
 
