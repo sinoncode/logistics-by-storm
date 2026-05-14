@@ -146,7 +146,7 @@ const CustomerDetails = () => {
 
                 <InfoCard
                   icon={<User size={20} />}
-                  label="Full Name"
+                  label="First Name"
                   value={customer.name}
                 />
 
@@ -168,11 +168,11 @@ const CustomerDetails = () => {
                   value={`+91 ${customer.phone}`}
                 />
 
-                <InfoCard
+                {/* <InfoCard
                   icon={<ShieldCheck size={20} />}
                   label="Customer ID"
                   value={`#${customer.id}`}
-                />
+                /> */}
 
                 <InfoCard
                   icon={<MapPin size={20} />}
@@ -226,9 +226,9 @@ const CustomerDetails = () => {
                   Completed Orders
                 </TabsTrigger>
 
-                <TabsTrigger value="cancelled" className="rounded-xl px-5 py-3">
+                {/* <TabsTrigger value="cancelled" className="rounded-xl px-5 py-3">
                   Cancelled Orders
-                </TabsTrigger>
+                </TabsTrigger> */}
 
                 <TabsTrigger value="requested" className="rounded-xl px-5 py-3">
                   Requested Shipments
@@ -298,13 +298,13 @@ const CustomerDetails = () => {
               </TabsContent>
 
               {/* CANCELLED */}
-              <TabsContent value="cancelled" className="mt-8">
+              {/* <TabsContent value="cancelled" className="mt-8">
                 <DynamicList
                   icon={<PackageX />}
                   title="Cancelled Orders"
                   data={cancelledOrders}
                 />
-              </TabsContent>
+              </TabsContent> */}
 
               {/* REQUESTED */}
               <TabsContent value="requested" className="mt-8">
