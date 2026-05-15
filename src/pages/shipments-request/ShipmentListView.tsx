@@ -965,19 +965,19 @@ const [calculationResult, setCalculationResult] =
   <DialogContent className="w-[800px] max-w-[800px] h-[90vh] overflow-hidden rounded-[32px] border-0 bg-white p-0 shadow-[0_20px_80px_rgba(0,0,0,0.12)] dark:bg-slate-950">
 
     {/* HEADER */}
-    <div className="border-b border-slate-200/70 bg-gradient-to-r from-primary/5 via-white to-white px-6 py-5 dark:border-slate-800 dark:from-primary/10 dark:via-slate-950 dark:to-slate-950">
+    <div className="border-b border-slate-200/70 bg-gradient-to-r from-green-600 to-emerald-700 px-6 py-5 dark:border-slate-800 dark:from-primary/10 dark:via-slate-950 dark:to-slate-950 ">
       <DialogHeader>
         <div className="flex items-start gap-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-sm">
-            <Calculator className="h-7 w-7" />
+          <div className="flex h-14 w-25 items-center justify-center rounded-2xl bg-primary/50 text-white shadow-sm">
+            <Calculator className="h-7 w-7 " />
           </div>
 
           <div className="space-y-1">
-            <DialogTitle className="text-2xl font-bold tracking-tight">
+            <DialogTitle className="text-2xl text-white font-bold tracking-tight">
               Shipment Calculator
             </DialogTitle>
 
-            <DialogDescription className="text-sm leading-6 text-muted-foreground">
+            <DialogDescription className="text-sm text-white leading-6">
               Calculate shipment charges dynamically using
               dimensions, weight, delivery preference and
               additional shipment charges.
@@ -988,7 +988,7 @@ const [calculationResult, setCalculationResult] =
     </div>
 
     {/* BODY */}
-    <div className="h-[calc(90vh-110px)] overflow-y-auto px-6 py-10">
+    <div className="h-[calc(90vh-110px)] overflow-y-auto px-6 pb-25">
 
       <Tabs
         defaultValue="basic"
@@ -1038,7 +1038,7 @@ const [calculationResult, setCalculationResult] =
                 </Label>
 
                 <div className="relative">
-                  <Weight className="absolute left-3 top-3.5 h-4 w-4 text-muted-foreground" />
+                  <Weight className="absolute left-33 top-[-1.5rem] h-4 w-4 text-muted-foreground" />
 
                   <Input
                     type="number"
@@ -1060,7 +1060,7 @@ const [calculationResult, setCalculationResult] =
                 </Label>
 
                 <div className="relative">
-                  <Ruler className="absolute left-3 top-3.5 h-4 w-4 text-muted-foreground" />
+                  <Ruler className="absolute left-23 top-[-1.5rem] h-4 w-4 text-muted-foreground" />
 
                   <Input
                     type="number"
@@ -1291,11 +1291,11 @@ const [calculationResult, setCalculationResult] =
       </Tabs>
 
       {/* SUMMARY */}
-      <Card className="mt-6 rounded-3xl border-0 bg-gradient-to-br from-primary to-primary/80 text-white shadow-xl">
+      <Card className="mt-6 rounded-3xl border-0 bg-gradient-to-r from-green-600 to-emerald-700 text-white shadow-xl">
         <CardContent className="p-6 space-y-5">
 
           <div className="flex items-center justify-between">
-            <span className="text-white/80">
+            <span className="text-white font-bold">
               Shipping Cost
             </span>
 
@@ -1305,7 +1305,7 @@ const [calculationResult, setCalculationResult] =
           </div>
 
           <div className="flex items-center justify-between">
-            <span className="text-white/80">
+            <span className="text-white font-bold">
               Tax Amount
             </span>
 
@@ -1317,7 +1317,7 @@ const [calculationResult, setCalculationResult] =
           <div className="border-t border-white/20 pt-5">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-white/70">
+                <p className="text-lg font-bold text-white">
                   Final Shipment Price
                 </p>
 
@@ -1334,9 +1334,9 @@ const [calculationResult, setCalculationResult] =
 
           <Button
             onClick={handleCalculateShipment}
-            className="h-12 w-full rounded-2xl bg-white text-primary hover:bg-white/90"
+            className="h-12 w-full text-lg rounded-2xl bg-white text-primary hover:bg-white/90"
           >
-            <CheckCircle2 className="mr-2 h-5 w-5" />
+            <CheckCircle2 className="mr-1 h-5 w-5" />
             Save Calculation
           </Button>
 
@@ -1360,7 +1360,7 @@ const [calculationResult, setCalculationResult] =
 
       <div className="relative flex items-start gap-4">
 
-        <div className="h-14 w-14 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-lg">
+        <div className="h-12 w-25 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-lg">
           <AlertTriangle className="w-7 h-7" />
         </div>
 

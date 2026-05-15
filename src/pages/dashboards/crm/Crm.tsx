@@ -28,9 +28,9 @@ const Crm = () => {
                 </div>
 
                 <div className="lg:col-span-12 2xl:col-span-4">
-                    <LazyWrapper>
-                        <RevenueGrowthCard />
-                    </LazyWrapper>
+                   <LazyWrapper>
+                                <CustomerOverviewCard />
+                            </LazyWrapper>
                 </div>
 
                 <div className="lg:col-span-12 2xl:col-span-8">
@@ -39,7 +39,7 @@ const Crm = () => {
                     </LazyWrapper>
                 </div>
 
-                <div className="lg:col-span-12 2xl:col-span-4">
+                {/* <div className="lg:col-span-12 2xl:col-span-4">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                         <div className="lg:col-span-6 2xl:col-span-12 col-xxl-12 col-sm-6">
                             <LazyWrapper>
@@ -52,7 +52,7 @@ const Crm = () => {
                             </LazyWrapper>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="lg:col-span-6 2xl:col-span-4">
                     <LazyWrapper>
@@ -60,7 +60,7 @@ const Crm = () => {
                     </LazyWrapper>
                 </div>
 
-                <div className="lg:col-span-6 2xl:col-span-4">
+                {/* <div className="lg:col-span-6 2xl:col-span-4">
                     <LazyWrapper>
                         <CountriesStatusCard />
                     </LazyWrapper>
@@ -70,7 +70,7 @@ const Crm = () => {
                     <LazyWrapper>
                         <TopPerformerCard listClasses="space-y-6 max-h-[458px] overflow-y-auto scrollbar-thin scrollbar-invisible hover:scrollbar-visible" />
                     </LazyWrapper>
-                </div>
+                </div> */}
 
                 <div className="lg:col-span-12 2xl:col-span-6">
                     <LazyWrapper>

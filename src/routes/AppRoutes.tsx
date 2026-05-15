@@ -102,9 +102,9 @@ export const router = createBrowserRouter([
           {
             path: "dashboard", element: <Crm />
           },
-          {
-            path: "add-team-member", element: <AddMember />
-          },
+          // {
+          //   path: "add-team-member", element: <AddMember />
+          // },
           {
             path: "teams-list", element: <Teams />
           },
