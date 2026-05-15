@@ -9,9 +9,11 @@
     }
   ],
   "compilerOptions": {
+    "noEmitOnError": false,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
     }
+    
   }
 }
