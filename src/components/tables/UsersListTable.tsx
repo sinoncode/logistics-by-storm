@@ -142,7 +142,7 @@ const users: User[] = [
         designation: "Office Administrator",
         status: "Active",
         joinDate: "05 May 2024",
-        avatar: UserList4,
+        avatar: UserList4, 
     },
     {
         id: "12",
