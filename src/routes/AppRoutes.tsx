@@ -66,6 +66,8 @@ const Teams = lazy(() => import("../pages/teams/Teams"));
 const TeamMemberView = lazy(() => import("../pages/teams/TeamMemberView"));
 const ShipmentRequestList = lazy(() => import("../pages/shipments-request/ShipmentRequestList"));
 const ShipmentListView = lazy(() => import("../pages/shipments-request/ShipmentListView"));
+const Shipments = lazy(() => import("../pages/shipments/Shipments"));
+const ShipmentDetail = lazy(() => import("../pages/shipments/ShipmentDetail"));
 
 export const router = createBrowserRouter([
   {
@@ -270,6 +272,12 @@ export const router = createBrowserRouter([
           },
           {
             path: "shipment-list-view", element: <ShipmentListView />
+          },
+          {
+            path: "shipment-list", element: <Shipments /> 
+          },
+          {
+            path: "shipment-detail", element: <ShipmentDetail />
           },
         ],
       },

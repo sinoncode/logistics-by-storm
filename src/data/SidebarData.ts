@@ -135,8 +135,31 @@ export const data = {
       label: "Shipments",
     },
     {
-      title: "Shipments",
+      title: "Shipment Requests",
       url: "/shipment-request",
+      icon: UsersRound,
+      isActive: true,
+      items: [
+        // {
+        //   title: "Shipments Request",
+        //   url: "/shipment-request",
+        //   circleColor: "bg-primary",
+        // },
+        // {
+        //   title: "Shipments",
+        //   url: "#",
+        //   circleColor: "bg-yellow-500",
+        // },
+        // {
+        //   title: "View Profile",
+        //   url: "/view-profile",
+        //   circleColor: "bg-red-600",
+        // },
+      ],
+    },
+    {
+      title: "Shipments",
+      url: "/shipment-list",
       icon: UsersRound,
       isActive: true,
       items: [
