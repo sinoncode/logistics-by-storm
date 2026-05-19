@@ -132,7 +132,7 @@ export default function CustomerOrdersTable() {
                     size="icon"
                     variant="ghost"
                     className="rounded-full text-blue-500 bg-blue-500/10"
-                    onClick={() => navigate('/shipment-detail')}
+                    onClick={() => navigate('/shipments-detail')}
                   >
                     <Eye className="w-5 h-5" />
                   </Button>

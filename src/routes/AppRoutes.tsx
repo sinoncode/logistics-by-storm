@@ -271,13 +271,13 @@ export const router = createBrowserRouter([
             path: "shipment-request", element: <ShipmentRequestList />
           },
           {
-            path: "shipment-list-view", element: <ShipmentListView />
+            path: "/shipment-request-detail/:id", element: <ShipmentListView />
           },
           {
-            path: "shipment-list", element: <Shipments /> 
+            path: "shipments", element: <Shipments /> 
           },
           {
-            path: "shipment-detail", element: <ShipmentDetail />
+            path: "shipments-detail", element: <ShipmentDetail />
           },
         ],
       },

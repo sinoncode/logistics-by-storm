@@ -159,7 +159,7 @@ export const data = {
     },
     {
       title: "Shipments",
-      url: "/shipment-list",
+      url: "/shipments",
       icon: UsersRound,
       isActive: true,
       items: [
