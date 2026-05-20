@@ -16,7 +16,7 @@ import { PermissionTable } from "@/components/rbac/PermissionTable";
 import { RoleModal } from "@/components/rbac/RoleModal";
 import { DeleteRoleDialog } from "@/components/rbac/DeleteRoleDialog";
 
-import { ShieldCheck, Save, Loader2, RefreshCw } from "lucide-react";
+import { ShieldCheck, Save, Loader2, RefreshCw, TriangleAlert } from "lucide-react";
 
 import type { Role } from "@/types/rbac";
 
@@ -372,8 +372,8 @@ const TeamsPermissions = () => {
                 {canViewRoles && selectedRole ? (
                   <>
   {isAdminRole && (
-    <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-      This is a protected system role.
+    <div className="rounded-2xl flex align-center border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+      <TriangleAlert className="h-6 w-6 text-yellow" /> This is a protected system role.
       Permissions can be viewed but
       cannot be modified.
     </div>
