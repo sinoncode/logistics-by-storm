@@ -64,9 +64,13 @@ const TeamsPermissions = () => {
   const canUpdateRoles = can("roles.update");
   const canDeleteRoles = can("roles.delete");
 
+  const isAdminRole =
+  selectedRole?.slug === "admin" ||
+  selectedRole?.name?.toLowerCase() === "admin";
   // ============================================
   // EFFECTS
   // ============================================
+  
 
   // Fetch data on mount
   useEffect(() => {
@@ -114,46 +118,96 @@ const TeamsPermissions = () => {
     }
   };
 
-  const handlePermissionChange = (permission: string, value: boolean) => {
-    if (!selectedRole || !canUpdateRoles) return;
+  const handlePermissionChange = (
+  permission: string,
+  value: boolean
+) => {
+  if (
+    !selectedRole ||
+    !canUpdateRoles ||
+    isAdminRole
+  )
+    return;
 
-    setPendingPermissions((prev) => {
-      const current = prev ?? selectedRole.permissions ?? [];
-      const updated = value
-        ? [...current, permission].filter((p, i, arr) => arr.indexOf(p) === i)
-        : current.filter((p) => p !== permission);
-      return updated;
-    });
+  setPendingPermissions((prev) => {
+    const current =
+      prev ?? selectedRole.permissions ?? [];
 
-    setIsDirty(true);
-  };
+    const updated = value
+      ? [...current, permission].filter(
+          (p, i, arr) =>
+            arr.indexOf(p) === i
+        )
+      : current.filter(
+          (p) => p !== permission
+        );
+
+    return updated;
+  });
+
+  setIsDirty(true);
+};
 
   const handleSavePermissions = async () => {
-    if (!selectedRole || !canUpdateRoles) return;
+  if (
+    !selectedRole ||
+    !canUpdateRoles ||
+    isAdminRole
+  )
+    return;
 
-    const updated = await updateRole(selectedRole.id, {
+  const updated = await updateRole(
+    selectedRole.id,
+    {
       name: selectedRole.name,
-      permissions: pendingPermissions ?? selectedRole.permissions ?? [],
-    });
-
-    if (updated) {
-      setPendingPermissions([...(updated.permissions || [])]);
-      setIsDirty(false);
+      permissions:
+        pendingPermissions ??
+        selectedRole.permissions ??
+        [],
     }
-  };
+  );
 
-  const handleDeleteRole = (roleId: string) => {
-    if (!canDeleteRoles) {
-      toast.error("You do not have permission to delete roles.");
-      return;
-    }
+  if (updated) {
+    setPendingPermissions([
+      ...(updated.permissions || []),
+    ]);
 
-    const role = roles.find((r) => r.id === roleId);
-    if (role) {
-      setRoleToDelete(role);
-      setIsDeleteDialogOpen(true);
-    }
-  };
+    setIsDirty(false);
+  }
+};
+
+  const handleDeleteRole = (
+  roleId: string
+) => {
+  if (!canDeleteRoles) {
+    toast.error(
+      "You do not have permission to delete roles."
+    );
+
+    return;
+  }
+
+  const role = roles.find(
+    (r) => r.id === roleId
+  );
+
+  if (
+    role?.slug === "admin" ||
+    role?.name?.toLowerCase() ===
+      "admin"
+  ) {
+    toast.error(
+      "Admin role cannot be deleted."
+    );
+
+    return;
+  }
+
+  if (role) {
+    setRoleToDelete(role);
+    setIsDeleteDialogOpen(true);
+  }
+};
 
   const handleConfirmDelete = async () => {
     if (!roleToDelete) return;
@@ -317,17 +371,30 @@ const TeamsPermissions = () => {
               <div className="lg:col-span-3 space-y-4">
                 {canViewRoles && selectedRole ? (
                   <>
+  {isAdminRole && (
+    <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+      This is a protected system role.
+      Permissions can be viewed but
+      cannot be modified.
+    </div>
+  )}
                     <PermissionTable
                       role={effectiveRole}
                       availablePermissions={availablePermissions}
-                      canEdit={canUpdateRoles}
+                      canEdit={
+  canUpdateRoles && !isAdminRole
+}
                       onPermissionChange={handlePermissionChange}
                     />
 
                     {canUpdateRoles && (
                       <Button
                         onClick={handleSavePermissions}
-                        disabled={isSaving || !isDirty}
+                        disabled={
+  isSaving ||
+  !isDirty ||
+  isAdminRole
+}
                         className="w-full"
                       >
                         {isSaving ? (

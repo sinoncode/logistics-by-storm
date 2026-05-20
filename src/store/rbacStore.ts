@@ -112,7 +112,7 @@ export const useRBACStore = create<RBACState>()(
           if (!selectedRole && roles.length > 0) {
             set({ selectedRole: roles[0] });
           }
-
+const isAdminRole = selectedRole?.slug === "admin";
           return roles;
         } catch (error: any) {
           const errorMessage = error?.response?.data?.message || error.message || 'Failed to fetch roles';
