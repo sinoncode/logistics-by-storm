@@ -55,7 +55,7 @@ export const getPermissions = async () => {
   console.log("🌐 [RBAC Service] Fetching permissions from /permissions");
 
   try {
-    const response = await api.get("/permissions");
+    const response = await api.get("/admin/permissions");
 
     console.log("📨 [RBAC Service] Permissions response:", response);
     console.log("📨 [RBAC Service] Status:", response.status);
@@ -125,8 +125,8 @@ export const getRoles = async (options?: {
 
   const queryString = params.toString();
   const url = queryString
-    ? `/roles?${queryString}`
-    : "/roles";
+    ? `/admin/roles?${queryString}`
+    : "/admin/roles";
 
   try {
     const response = await api.get(url);
@@ -173,7 +173,7 @@ export const getRoleById = async (
   roleId: string
 ) => {
   const response = await api.get(
-    `/roles/${roleId}`
+    `/admin/roles/${roleId}`
   );
 
   // CASE 1:
@@ -214,7 +214,7 @@ export const createRole = async (data: {
   permissions: string[];
 }) => {
   const response = await api.post(
-    "/roles",
+    "/admin/roles",
     data
   );
 
@@ -255,7 +255,7 @@ export const updateRole = async (
   }
 ) => {
   const response = await api.put(
-    `/roles/${roleId}`,
+    `/admin/roles/${roleId}`,
     data
   );
 
@@ -291,5 +291,5 @@ export const updateRole = async (
 export const deleteRole = async (
   roleId: string
 ) => {
-  return api.delete(`/roles/${roleId}`);
+  return api.delete(`/admin/roles/${roleId}`);
 };

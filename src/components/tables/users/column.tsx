@@ -65,10 +65,10 @@ ColumnDef<Customer>[] = [
               {customer.name}
             </p>
 
-            <p className="text-xs text-muted-foreground">
+            {/* <p className="text-xs text-muted-foreground">
               {customer.customer_code ||
                 "No Customer Code"}
-            </p>
+            </p> */}
           </div>
         </div>
       );
