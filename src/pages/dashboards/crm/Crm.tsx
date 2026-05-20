@@ -19,7 +19,7 @@ const Crm = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
 
-                <div className="lg:col-span-12 2xl:col-span-8">
+                <div className="lg:col-span-12 2xl:col-span-12">
                     <LazyWrapper>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-6">
                             <StatsCard />
@@ -27,11 +27,11 @@ const Crm = () => {
                     </LazyWrapper>
                 </div>
 
-                <div className="lg:col-span-12 2xl:col-span-4">
+                {/* <div className="lg:col-span-12 2xl:col-span-4">
                    <LazyWrapper>
                                 <CustomerOverviewCard />
                             </LazyWrapper>
-                </div>
+                </div> */}
 
                 <div className="lg:col-span-12 2xl:col-span-8">
                     <LazyWrapper>

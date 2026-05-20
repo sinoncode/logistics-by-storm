@@ -27,7 +27,7 @@ export const calculateShipmentCharge = async ({
   payload,
 }: CalculateShipmentParams) => {
   const response = await axios.post(
-    `/api/v1/admin/shipment-requests/${shipmentRequestId}/calculate-charge`,
+    `/admin/shipment-requests/${shipmentRequestId}/calculate-charge`,
     payload
   );
 

@@ -21,39 +21,21 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
-
 import { Button } from "@/components/ui/button";
-
-import { Input } from "@/components/ui/input";
 
 import { Label } from "@/components/ui/label";
 
 import { Textarea } from "@/components/ui/textarea";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
 import { Badge } from "@/components/ui/badge";
 
 import { useShipmentDetailsStore } from "@/store/shipmentDetailsStore";
 
+import ShipmentCalculationModal from "@/components/shipment/ShipmentCalculationModal";
+
 import {
   AlertTriangle,
-  BadgeDollarSign,
-  Box,
   Calculator,
-  CalendarDays,
   Download,
   FileImage,
   FileText,
@@ -62,42 +44,11 @@ import {
   PackageCheck,
   PauseCircle,
   Phone,
-  ShieldCheck,
-  Truck,
   User,
   ImageIcon,
-  Weight,
-  Ruler,
+  CalendarDays,
+  Truck,
 } from "lucide-react";
-
-// ======================================================
-// TYPES
-// ======================================================
-
-type CalculationResult = {
-  actualWeight: number;
-  volumetricWeight: string;
-  deliveryType: string;
-  itemType: string;
-  length: number;
-  width: number;
-  height: number;
-  declaredValue: number;
-  finalPrice: string;
-};
-
-type ShipmentCalculationResponse = {
-  success: boolean;
-  message: string;
-
-  data: {
-    shipping_cost: number;
-    tax_amount: number;
-    final_amount: number;
-    volumetric_weight: number;
-    chargeable_weight: number;
-  };
-};
 
 // ======================================================
 // HELPERS
@@ -145,16 +96,6 @@ export default function ShipmentRequestPage() {
   // ======================================================
   // EFFECTS
   // ======================================================
-  const [calculationLoading, setCalculationLoading] =
-  useState(false);
-
-const [
-  calculationResponse,
-  setCalculationResponse,
-] =
-  useState<ShipmentCalculationResponse | null>(
-    null
-  );
 
   useEffect(() => {
     if (id) {
@@ -187,31 +128,10 @@ const [
   // ======================================================
 
   const [calculationResult, setCalculationResult] =
-    useState<CalculationResult | null>(
-      null
-    );
+    useState<any>(null);
 
   // ======================================================
-  // FORM STATE
-  // ======================================================
-
-  const [form, setForm] = useState({
-    actual_weight_lb: 12,
-    length_cm: 40,
-    width_cm: 30,
-    height_cm: 25,
-    declared_value: 120,
-    manual_extra_charge: 0,
-    discount_amount: 0,
-    tax_percentage: 18,
-    volumetric_divisor: 5000,
-    remarks: "",
-    item_type: "electronics",
-    delivery_type: "express",
-  });
-
-  // ======================================================
-  // DOCUMENT
+  // HELPERS
   // ======================================================
 
   const document =
@@ -221,26 +141,15 @@ const [
     ? `https://logisticsystems.webandappdevelopmenttech.com/storage/${document.file_path}`
     : "";
 
-
- const handleDownload = () => {
-  if (!fileUrl) return;
-
-  window.open(fileUrl, "_blank");
-};
-
-
-    const documentType =
-  document?.mime_type ===
-  "application/pdf"
-    ? "Document"
-    : document?.mime_type?.startsWith(
-        "image/"
-      )
-    ? "Image"
-    : "Unknown";
-  // ======================================================
-  // ADDRESS
-  // ======================================================
+  const documentType =
+    document?.mime_type ===
+    "application/pdf"
+      ? "Document"
+      : document?.mime_type?.startsWith(
+          "image/"
+        )
+      ? "Image"
+      : "Unknown";
 
   const fullAddress = [
     shipment?.delivery_address
@@ -259,244 +168,11 @@ const [
     .filter(Boolean)
     .join(", ");
 
-  // ======================================================
-  // CALCULATIONS
-  // ======================================================
+  const handleDownload = () => {
+    if (!fileUrl) return;
 
-  // const calculations = useMemo(() => {
-  //   const volumetricWeight =
-  //     (form.length_cm *
-  //       form.width_cm *
-  //       form.height_cm) /
-  //     form.volumetric_divisor;
-
-  //   const chargeableWeight = Math.max(
-  //     form.actual_weight_lb,
-  //     volumetricWeight
-  //   );
-
-  //   let baseRate = 8;
-
-  //   switch (form.item_type) {
-  //     case "electronics":
-  //       baseRate = 12;
-  //       break;
-
-  //     case "fragile":
-  //       baseRate = 15;
-  //       break;
-
-  //     case "documents":
-  //       baseRate = 5;
-  //       break;
-
-  //     default:
-  //       baseRate = 8;
-  //   }
-
-  //   let deliveryMultiplier = 1;
-
-  //   switch (form.delivery_type) {
-  //     case "express":
-  //       deliveryMultiplier = 1.5;
-  //       break;
-
-  //     case "priority":
-  //       deliveryMultiplier = 2;
-  //       break;
-
-  //     default:
-  //       deliveryMultiplier = 1;
-  //   }
-
-  //   const shippingCost =
-  //     chargeableWeight *
-  //     baseRate *
-  //     deliveryMultiplier;
-
-  //   const declaredCharge =
-  //     form.declared_value * 0.02;
-
-  //   const subtotal =
-  //     shippingCost +
-  //     declaredCharge +
-  //     form.manual_extra_charge;
-
-  //   const taxAmount =
-  //     (subtotal * form.tax_percentage) /
-  //     100;
-
-  //   const finalAmount =
-  //     subtotal +
-  //     taxAmount -
-  //     form.discount_amount;
-
-  //   return {
-  //     volumetricWeight:
-  //       volumetricWeight.toFixed(2),
-
-  //     shippingCost:
-  //       shippingCost.toFixed(2),
-
-  //     taxAmount: taxAmount.toFixed(2),
-
-  //     finalAmount: finalAmount.toFixed(2),
-  //   };
-  // }, [form]);
-
-  // ======================================================
-  // HELPERS
-  // ======================================================
-
-  const updateField = (
-    key: string,
-    value: string | number
-  ) => {
-    setForm((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+    window.open(fileUrl, "_blank");
   };
-
- const handleCalculateShipment =
-  async () => {
-    if (!id) return;
-
-    try {
-      setCalculationLoading(true);
-
-      const payload = {
-        items: [
-          {
-            id:
-              shipment?.items?.[0]?.id,
-
-            actual_weight_lb:
-              form.actual_weight_lb,
-
-            length_cm:
-              form.length_cm,
-
-            width_cm:
-              form.width_cm,
-
-            height_cm:
-              form.height_cm,
-
-            declared_value:
-              form.declared_value,
-
-            tariff_code:
-              shipment?.items?.[0]
-                ?.tariff_code ||
-              "2914.1100",
-          },
-        ],
-
-        manual_extra_charge:
-          form.manual_extra_charge,
-
-        discount_amount:
-          form.discount_amount,
-
-        tax_percentage:
-          form.tax_percentage,
-
-        remarks: form.remarks,
-      };
-
-      const response =
-        await calculateShipmentCharge({
-          shipmentRequestId: id,
-          payload,
-        });
-
-      setCalculationResponse(response);
-
-      setCalculationResult({
-        actualWeight:
-          form.actual_weight_lb,
-
-        volumetricWeight:
-          String(
-            response?.data
-              ?.volumetric_weight
-          ),
-
-        deliveryType:
-          form.delivery_type,
-
-        itemType: form.item_type,
-
-        length: form.length_cm,
-
-        width: form.width_cm,
-
-        height: form.height_cm,
-
-        declaredValue:
-          form.declared_value,
-
-        finalPrice: String(
-          response?.data?.final_amount
-        ),
-      });
-
-      setCalculatorOpen(false);
-    } catch (error) {
-      console.error(
-        "Calculation failed",
-        error
-      );
-    } finally {
-      setCalculationLoading(false);
-    }
-  };
-
-  const calculationPayload = {
-  items: [
-    {
-      id:
-        shipment?.items?.[0]?.id,
-
-      actual_weight_lb:
-        form.actual_weight_lb,
-
-      length_cm:
-        form.length_cm,
-
-      width_cm:
-        form.width_cm,
-
-      height_cm:
-        form.height_cm,
-
-      declared_value:
-        form.declared_value,
-
-      tariff_code:
-        shipment?.items?.[0]
-          ?.tariff_code ||
-        "",
-    },
-  ],
-
-  manual_extra_charge:
-    form.manual_extra_charge,
-
-  discount_amount:
-    form.discount_amount,
-
-  tax_percentage:
-    form.tax_percentage,
-
-  remarks: form.remarks,
-};
-
-await calculateShipmentCharge({
-  shipmentRequestId: id,
-  payload: calculationPayload,
-});
 
   // ======================================================
   // DOCUMENT PREVIEW
@@ -562,6 +238,7 @@ await calculateShipmentCharge({
   // ======================================================
 
   if (loading) {
+    
     return (
       <div className="flex min-h-screen items-center justify-center">
         <p className="text-lg font-medium">
@@ -906,508 +583,89 @@ await calculateShipmentCharge({
 
       {/* DOCUMENT MODAL */}
 
-   <Dialog
-  open={previewOpen}
-  onOpenChange={setPreviewOpen}
->
-  <DialogContent className="max-h-[92vh] max-w-6xl overflow-hidden rounded-[32px] border-0 bg-white p-0 shadow-2xl dark:bg-slate-950">
-    {/* HEADER */}
-
-    <div className="border-b bg-primary px-8 py-6 text-white">
-      <DialogHeader>
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 backdrop-blur">
-              {document?.mime_type?.startsWith(
-                "image/"
-              ) ? (
-                <ImageIcon className="h-7 w-7" />
-              ) : (
-                <FileText className="h-7 w-7" />
-              )}
-            </div>
-
-            <div>
-              <DialogTitle className="text-2xl font-bold">
-                Shipment Document
-              </DialogTitle>
-
-              <DialogDescription className="mt-1 text-white/80">
-                Preview and download shipment
-                attachments
-              </DialogDescription>
-            </div>
-          </div>
-
-          <Badge className="rounded-full border border-white/20 bg-white/10 px-4 py-1 text-white backdrop-blur">
-            {document?.mime_type ===
-            "application/pdf"
-              ? "Document"
-              : document?.mime_type?.startsWith(
-                  "image/"
-                )
-              ? "Image"
-              : "File"}
-          </Badge>
-        </div>
-      </DialogHeader>
-    </div>
-
-    {/* BODY */}
-
-    <div className="space-y-6 overflow-y-scroll h-200 bg-slate-50 p-6 dark:bg-slate-950">
-      {/* PREVIEW */}
-
-      <div className="overflow-scroll h-150 rounded-[28px] border bg-white shadow-sm dark:bg-slate-900">
-        {renderDocumentPreview()}
-      </div>
-
-      {/* FILE INFO */}
-
-      <div className="flex flex-col overflow-y-scroll gap-4  dark:bg-slate-900 lg:flex-row lg:items-center lg:justify-center">
-        {/* <div className="flex items-center gap-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10">
-            <File className="h-7 w-7 text-primary" />
-          </div>
-
-          <div>
-            <h3 className="max-w-[300px] truncate text-lg font-semibold">
-              {document?.original_name ||
-                "Shipment File"}
-            </h3>
-
-            <p className="mt-1 text-sm text-muted-foreground">
-              {document?.mime_type ===
-              "application/pdf"
-                ? "PDF Document"
-                : document?.mime_type?.startsWith(
-                    "image/"
-                  )
-                ? "Image File"
-                : "Attachment"}
-            </p>
-          </div>
-        </div> */}
-
-        {/* DOWNLOAD BUTTON */}
-
-        <Button
-          onClick={handleDownload}
-          disabled={!document}
-          className="h-12 rounded-2xl bg-primary px-6 text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-primary/90"
-        >
-            <Download className="mr-2 h-4 w-4" />
-            Download Document
-        </Button>
-      </div>
-    </div>
-  </DialogContent>
-</Dialog>
-
-
-
-     {/* ====================================================== */}
-      {/* CALCULATOR MODAL */}
-      {/* ====================================================== */}
-
-   <Dialog
-  open={calculatorOpen}
-  onOpenChange={setCalculatorOpen}
->
-  <DialogContent className="w-[800px] max-w-[800px] h-[90vh] overflow-hidden rounded-[32px] border-0 bg-white p-0 shadow-[0_20px_80px_rgba(0,0,0,0.12)] dark:bg-slate-950">
-
-    {/* HEADER */}
-    <div className="border-b border-slate-200/70 bg-gradient-to-r from-green-600 to-emerald-700 px-6 py-5 dark:border-slate-800 dark:from-primary/10 dark:via-slate-950 dark:to-slate-950 ">
-      <DialogHeader>
-        <div className="flex items-start gap-4">
-          <div className="flex h-14 w-25 items-center justify-center rounded-2xl bg-primary/50 text-white shadow-sm">
-            <Calculator className="h-7 w-7 " />
-          </div>
-
-          <div className="space-y-1">
-            <DialogTitle className="text-2xl text-white font-bold tracking-tight">
-              Shipment Calculator
-            </DialogTitle>
-
-            <DialogDescription className="text-sm text-white leading-6">
-              Calculate shipment charges dynamically using
-              dimensions, weight, delivery preference and
-              additional shipment charges.
-            </DialogDescription>
-          </div>
-        </div>
-      </DialogHeader>
-    </div>
-
-    {/* BODY */}
-    <div className="h-[calc(90vh-110px)] overflow-y-auto px-6 pb-25">
-
-      <Tabs
-        defaultValue="basic"
-        className="space-y-6"
+      <Dialog
+        open={previewOpen}
+        onOpenChange={setPreviewOpen}
       >
-        {/* TABS */}
-        <TabsList className="grid w-full grid-cols-2 rounded-2xl bg-slate-100 p-1 dark:bg-slate-900">
-          <TabsTrigger
-            value="basic"
-            className="rounded-xl data-[state=active]:shadow-sm"
-          >
-            Basic Details
-          </TabsTrigger>
+        <DialogContent className="max-h-[92vh] max-w-6xl overflow-hidden rounded-[32px] border-0 bg-white p-0 shadow-2xl dark:bg-slate-950">
+          {/* HEADER */}
 
-          <TabsTrigger
-            value="advanced"
-            className="rounded-xl data-[state=active]:shadow-sm"
-          >
-            Advanced Charges
-          </TabsTrigger>
-        </TabsList>
+          <div className="border-b bg-primary px-8 py-6 text-white">
+            <DialogHeader>
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 backdrop-blur">
+                    {document?.mime_type?.startsWith(
+                      "image/"
+                    ) ? (
+                      <ImageIcon className="h-7 w-7" />
+                    ) : (
+                      <FileText className="h-7 w-7" />
+                    )}
+                  </div>
 
-        {/* BASIC TAB */}
-        <TabsContent
-          value="basic"
-          className="space-y-6"
-        >
+                  <div>
+                    <DialogTitle className="text-2xl font-bold">
+                      Shipment Document
+                    </DialogTitle>
 
-          {/* DIMENSIONS */}
-          <Card className="rounded-3xl border border-slate-200/70 shadow-sm dark:border-slate-800">
-            <CardHeader className="pb-4">
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <Box className="h-5 w-5 text-primary" />
-                Package Dimensions
-              </CardTitle>
-
-              <CardDescription>
-                Enter package dimensions and actual weight.
-              </CardDescription>
-            </CardHeader>
-
-            <CardContent className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-
-              <div className="space-y-2">
-                <Label className="text-sm font-medium">
-                  Actual Weight (LB)
-                </Label>
-
-                <div className="relative">
-                  <Weight className="absolute left-33 top-[-1.5rem] h-4 w-4 text-muted-foreground" />
-
-                  <Input
-                    type="number"
-                    value={form.actual_weight_lb}
-                    onChange={(e) =>
-                      updateField(
-                        "actual_weight_lb",
-                        Number(e.target.value)
-                      )
-                    }
-                    className="h-12 rounded-2xl pl-10"
-                  />
+                    <DialogDescription className="mt-1 text-white/80">
+                      Preview and download shipment
+                      attachments
+                    </DialogDescription>
+                  </div>
                 </div>
-              </div>
 
-              <div className="space-y-2">
-                <Label className="text-sm font-medium">
-                  Length (CM)
-                </Label>
-
-                <div className="relative">
-                  <Ruler className="absolute left-23 top-[-1.5rem] h-4 w-4 text-muted-foreground" />
-
-                  <Input
-                    type="number"
-                    value={form.length_cm}
-                    onChange={(e) =>
-                      updateField(
-                        "length_cm",
-                        Number(e.target.value)
+                <Badge className="rounded-full border border-white/20 bg-white/10 px-4 py-1 text-white backdrop-blur">
+                  {document?.mime_type ===
+                  "application/pdf"
+                    ? "Document"
+                    : document?.mime_type?.startsWith(
+                        "image/"
                       )
-                    }
-                    className="h-12 rounded-2xl pl-10"
-                  />
-                </div>
+                    ? "Image"
+                    : "File"}
+                </Badge>
               </div>
-
-              <div className="space-y-2">
-                <Label className="text-sm font-medium">
-                  Width (CM)
-                </Label>
-
-                <Input
-                  type="number"
-                  value={form.width_cm}
-                  onChange={(e) =>
-                    updateField(
-                      "width_cm",
-                      Number(e.target.value)
-                    )
-                  }
-                  className="h-12 rounded-2xl"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label className="text-sm font-medium">
-                  Height (CM)
-                </Label>
-
-                <Input
-                  type="number"
-                  value={form.height_cm}
-                  onChange={(e) =>
-                    updateField(
-                      "height_cm",
-                      Number(e.target.value)
-                    )
-                  }
-                  className="h-12 rounded-2xl"
-                />
-              </div>
-
-            </CardContent>
-          </Card>
-
-          {/* SHIPPING OPTIONS */}
-          <Card className="rounded-3xl border border-slate-200/70 shadow-sm dark:border-slate-800">
-            <CardHeader className="pb-4">
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <Truck className="h-5 w-5 text-primary" />
-                Shipment Preferences
-              </CardTitle>
-            </CardHeader>
-
-            <CardContent className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-
-              <div className="space-y-2">
-                <Label>Item Type</Label>
-
-                <Select
-                  value={form.item_type}
-                  onValueChange={(value) =>
-                    updateField("item_type", value)
-                  }
-                >
-                  <SelectTrigger className="h-12 rounded-2xl">
-                    <SelectValue />
-                  </SelectTrigger>
-
-                  <SelectContent className="rounded-2xl">
-                    <SelectItem value="electronics">
-                      Electronics
-                    </SelectItem>
-
-                    <SelectItem value="fragile">
-                      Fragile
-                    </SelectItem>
-
-                    <SelectItem value="documents">
-                      Documents
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label>Delivery Preference</Label>
-
-                <Select
-                  value={form.delivery_type}
-                  onValueChange={(value) =>
-                    updateField("delivery_type", value)
-                  }
-                >
-                  <SelectTrigger className="h-12 rounded-2xl">
-                    <SelectValue />
-                  </SelectTrigger>
-
-                  <SelectContent className="rounded-2xl">
-                    <SelectItem value="standard">
-                      Standard
-                    </SelectItem>
-
-                    <SelectItem value="express">
-                      Express
-                    </SelectItem>
-
-                    <SelectItem value="priority">
-                      Priority
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        {/* ADVANCED TAB */}
-        <TabsContent
-          value="advanced"
-          className="space-y-6"
-        >
-
-          <Card className="rounded-3xl border border-slate-200/70 shadow-sm dark:border-slate-800">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <ShieldCheck className="h-5 w-5 text-primary" />
-                Advanced Charges
-              </CardTitle>
-            </CardHeader>
-
-            <CardContent className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-
-              <div className="space-y-2">
-                <Label>Declared Value</Label>
-
-                <Input
-                  type="number"
-                  value={form.declared_value}
-                  onChange={(e) =>
-                    updateField(
-                      "declared_value",
-                      Number(e.target.value)
-                    )
-                  }
-                  className="h-12 rounded-2xl"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label>Tax Percentage</Label>
-
-                <Input
-                  type="number"
-                  value={form.tax_percentage}
-                  onChange={(e) =>
-                    updateField(
-                      "tax_percentage",
-                      Number(e.target.value)
-                    )
-                  }
-                  className="h-12 rounded-2xl"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label>Discount Amount</Label>
-
-                <Input
-                  type="number"
-                  value={form.discount_amount}
-                  onChange={(e) =>
-                    updateField(
-                      "discount_amount",
-                      Number(e.target.value)
-                    )
-                  }
-                  className="h-12 rounded-2xl"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label>Extra Charges</Label>
-
-                <Input
-                  type="number"
-                  value={form.manual_extra_charge}
-                  onChange={(e) =>
-                    updateField(
-                      "manual_extra_charge",
-                      Number(e.target.value)
-                    )
-                  }
-                  className="h-12 rounded-2xl"
-                />
-              </div>
-
-              <div className="space-y-2 sm:col-span-2">
-                <Label>Remarks</Label>
-
-                <Textarea
-                  rows={4}
-                  value={form.remarks}
-                  onChange={(e) =>
-                    updateField(
-                      "remarks",
-                      e.target.value
-                    )
-                  }
-                  className="rounded-2xl"
-                />
-              </div>
-
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-      </Tabs>
-
-      {/* SUMMARY */}
-      <Card className="mt-6 rounded-3xl border-0 bg-gradient-to-r from-green-600 to-emerald-700 text-white shadow-xl">
-        <CardContent className="p-6 space-y-5">
-
-          <div className="flex items-center justify-between">
-            <span className="text-white font-bold">
-              Shipping Cost
-            </span>
-
-            <span className="text-lg font-semibold">
-              ${
-  calculationResponse?.data
-    ?.shipping_cost || "0.00"
-}
-            </span>
+            </DialogHeader>
           </div>
 
-          <div className="flex items-center justify-between">
-            <span className="text-white font-bold">
-              Tax Amount
-            </span>
+          {/* BODY */}
 
-            <span className="text-lg font-semibold">
-             ${
-  calculationResponse?.data
-    ?.tax_amount || "0.00"
-}
-            </span>
-          </div>
+          <div className="space-y-6 overflow-y-auto max-h-[calc(92vh-150px)] bg-slate-50 p-6 dark:bg-slate-950">
+            {/* PREVIEW */}
 
-          <div className="border-t border-white/20 pt-5">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-lg font-bold text-white">
-                  Final Shipment Price
-                </p>
+            <div className="rounded-[28px] border bg-white shadow-sm dark:bg-slate-900">
+              {renderDocumentPreview()}
+            </div>
 
-                <h3 className="text-3xl font-bold tracking-tight">
-                  ${
-  calculationResponse?.data
-    ?.final_amount || "0.00"
-}
-                </h3>
-              </div>
+            {/* DOWNLOAD BUTTON */}
 
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm">
-                <BadgeDollarSign className="h-8 w-8" />
-              </div>
+            <div className="flex justify-center">
+              <Button
+                onClick={handleDownload}
+                disabled={!document}
+                className="h-12 rounded-2xl bg-primary px-6 text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-primary/90"
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Download Document
+              </Button>
             </div>
           </div>
+        </DialogContent>
+      </Dialog>
 
-          <Button
-  onClick={handleCalculateShipment}
-  disabled={calculationLoading}
->
-  {calculationLoading
-    ? "Calculating..."
-    : "Save Calculation"}
-</Button>
+      {/* CALCULATOR MODAL */}
 
-        </CardContent>
-      </Card>
-
-    </div>
-  </DialogContent>
-</Dialog>
+      <ShipmentCalculationModal
+        open={calculatorOpen}
+        onOpenChange={setCalculatorOpen}
+        shipmentId={id}
+        shipment={shipment}
+        onCalculationComplete={(result) => {
+          setCalculationResult(result);
+        }}
+      />
 
       <Dialog
   open={standbyOpen}

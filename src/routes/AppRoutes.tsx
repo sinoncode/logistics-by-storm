@@ -61,7 +61,7 @@ const Nft = lazy(() => import("@/pages/dashboards/nft/Nft"));
 const Crm = lazy(() => import("../pages/dashboards/crm/Crm"));
 const Ecommerce = lazy(() => import("../pages/dashboards/ecommerce/Ecommerce"));
 // const AddUser = lazy(() => import("../pages/users/add-user/AddUser"));
-const AddMember = lazy(() => import("@/pages/teams/add-member/AddMember"));
+// const AddMember = lazy(() => import("@/pages/teams/add-member/AddMember"));
 const Teams = lazy(() => import("../pages/teams/Teams"));
 const TeamMemberView = lazy(() => import("../pages/teams/TeamMemberView"));
 const ShipmentRequestList = lazy(() => import("../pages/shipments-request/ShipmentRequestList"));
