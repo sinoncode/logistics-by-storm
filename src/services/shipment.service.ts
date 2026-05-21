@@ -33,3 +33,31 @@ export const calculateShipmentCharge = async ({
 
   return response.data;
 };
+
+// ======================================================
+// UPDATE SHIPMENT BOOKING STATUS
+// ======================================================
+
+export const updateShipmentBookingStatus =
+  async ({
+    shipmentRequestId,
+    payload,
+  }: {
+    shipmentRequestId: string;
+
+    payload: {
+      booking_status: string;
+
+      admin_remarks: string;
+    };
+  }) => {
+
+    const response = await axios.patch(
+      `/admin/shipment-requests/${shipmentRequestId}/booking-status`,
+      payload
+    );
+
+    return response.data;
+  };
+
+

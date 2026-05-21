@@ -11,6 +11,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  
 } from "@/components/ui/card";
 
 import {
@@ -32,6 +33,7 @@ import { Badge } from "@/components/ui/badge";
 import { useShipmentDetailsStore } from "@/store/shipmentDetailsStore";
 
 import ShipmentCalculationModal from "@/components/shipment/ShipmentCalculationModal";
+import ShipmentStandbyModal from "@/components/shipment/ShipmentStandbyModal";
 
 import {
   AlertTriangle,
@@ -48,6 +50,10 @@ import {
   ImageIcon,
   CalendarDays,
   Truck,
+  Box,
+  Store,
+  Fence,
+  ShoppingBag,
 } from "lucide-react";
 
 // ======================================================
@@ -87,6 +93,7 @@ const formatDate = (date?: string) => {
 export default function ShipmentRequestPage() {
   const { id } = useParams();
 
+  
   const {
     shipment,
     loading,
@@ -272,9 +279,7 @@ export default function ShipmentRequestPage() {
         <div className="flex flex-wrap gap-3">
           <Button
             variant="outline"
-            onClick={() =>
-              setStandbyOpen(true)
-            }
+             onClick={() => setStandbyOpen(true)}
             className="h-12 rounded-2xl border-yellow-200 bg-yellow-500 px-6 text-white hover:bg-yellow-600 hover:text-white"
           >
             <PauseCircle className="mr-2 h-4 w-4" />
@@ -340,7 +345,7 @@ export default function ShipmentRequestPage() {
             </CardHeader>
 
             <CardContent className="space-y-6 p-6">
-              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
                 <InfoCard
                   icon={
                     <PackageCheck className="h-5 w-5 text-primary" />
@@ -348,6 +353,16 @@ export default function ShipmentRequestPage() {
                   title="Request Number"
                   value={
                     shipment?.request_number
+                  }
+                />
+
+                <InfoCard
+                  icon={
+                    <Store className="h-5 w-5 text-violet-600" />
+                  }
+                  title="Supplier"
+                  value={
+                    shipment?.supplier_name
                   }
                 />
 
@@ -380,11 +395,24 @@ export default function ShipmentRequestPage() {
                     shipment?.delivery_type
                   )}
                 />
+
+                {/* <InfoCard
+                  icon={
+                    <Fence className="h-5 w-5 text-blue-900" />
+                  }
+                  title="Tariff code"
+                  value={
+  formatSentenceCase(
+    shipment?.items?.[0]?.commodity_type
+      ?.match(/\(tariff code:\s*([^)]+)\)/i)?.[1] || "--"
+  )
+}
+                /> */}
               </div>
 
               {/* DOCUMENT */}
 
-              <div className="rounded-[28px] border p-6">
+              {/* <div className="rounded-[28px] border p-6">
                 <div className="mb-5 flex items-center gap-2">
                   <FileText className="h-5 w-5 text-primary" />
 
@@ -422,10 +450,250 @@ export default function ShipmentRequestPage() {
                     View
                   </Button>
                 </div>
-              </div>
+              </div> */}
             </CardContent>
           </Card>
+{/* ROUTE SECTION */}
+    <div className="rounded-[28px] border bg-white dark:bg-slate-950 p-6">
+      <div className="flex items-center justify-between flex-wrap gap-6">
+        {/* ORIGIN */}
+        <div className="flex-1 min-w-[240px]">
+          <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">
+            Origin
+          </p>
 
+          <div className="space-y-2">
+            <h3 className="text-lg font-bold">
+             {
+                  shipment
+                    ?.origin_facility
+                    ?.name || "--"
+                }
+            </h3>
+
+            {/* <p className="text-sm text-muted-foreground">
+              US-MIA-WH1
+            </p> */}
+
+            <Badge
+              variant="outline"
+              className="rounded-full"
+            >
+              {
+                  shipment
+                    ?.origin_country?.name ||
+                  "--"
+                }
+            </Badge>
+          </div>
+        </div>
+
+        {/* CENTER */}
+        <div className="hidden lg:flex items-center justify-center px-4">
+          <div className="relative w-40 h-[2px] bg-border">
+            <div className="absolute left-0 -top-[6px] w-3 h-3 rounded-full bg-primary"></div>
+
+            <div className="absolute right-0 -top-[6px] w-3 h-3 rounded-full bg-primary"></div>
+
+            <Truck className="absolute left-1/2 -translate-x-1/2 -top-4 w-7 h-7 text-primary bg-white dark:bg-slate-950 rounded-full p-1" />
+          </div>
+        </div>
+
+        {/* DESTINATION */}
+        <div className="flex-1 min-w-[240px] lg:text-right">
+          <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">
+            Destination
+          </p>
+
+          <div className="space-y-2">
+            <h3 className="text-lg font-bold">
+            {
+                  shipment
+                    ?.destination_facility
+                    ?.name || "--"
+                }
+            </h3>
+
+            {/* <p className="text-sm text-muted-foreground">
+              BS-NAS-PALMDALE
+            </p> */}
+
+            <Badge
+              variant="secondary"
+              className="rounded-full"
+            >
+             {
+                  shipment
+                    ?.destination_country
+                    ?.name || "--"
+                }
+            </Badge>
+          </div>
+        </div>
+      </div>
+    </div>
+
+          {/* ITEMS + DOCUMENTS */}
+          <div className="space-y-6">
+  {shipment?.items?.map((item, index) => (
+    <Card
+      key={item.id}
+      className="overflow-hidden rounded-3xl border bg-white shadow-sm dark:bg-slate-950"
+    >
+      {/* HEADER */}
+      <div className="flex items-center gap-3 px-6 pt-6">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10">
+          <ShoppingBag className="h-5 w-5 text-primary" />
+        </div>
+
+        <div>
+          <CardTitle className="text-2xl">
+            Item {index + 1}
+          </CardTitle>
+        </div>
+      </div>
+
+      {/* CONTENT */}
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2 p-6">
+        {/* ITEM DETAILS */}
+        <div className="rounded-[28px] border p-5 bg-slate-50 dark:bg-slate-900/40">
+          <div className="flex items-center gap-2 mb-5">
+            <Box className="w-5 h-5 text-primary" />
+
+            <h3 className="text-lg font-semibold">
+              Shipment Item
+            </h3>
+          </div>
+
+          <div className=" rounded-2xl border bg-white dark:bg-slate-950 p-5 flex items-center  justify-between">
+            {/* Commodity */}
+            <div>
+              <p className="text-sm text-muted-foreground">
+                Commodity
+              </p>
+
+              <h4 className="mt-1 text-xl font-semibold">
+                {
+                  item?.commodity_type
+                    ?.split(" (")[0] || "--"
+                }
+              </h4>
+            </div>
+
+            {/* Tariff Code */}
+            {/* <div>
+              <p className="text-sm text-muted-foreground">
+                Tariff Code
+              </p>
+
+              <h4 className="mt-1 text-lg font-semibold">
+                {
+                  item?.commodity_type
+                    ?.match(
+                      /\(tariff code:\s*([^)]+)\)/i
+                    )?.[1] || "--"
+                }
+              </h4>
+            </div> */}
+
+            {/* Price */}
+            <div>
+              <p className="text-sm text-muted-foreground">
+                Price
+              </p>
+
+              <h4 className="mt-1 text-xl font-bold text-primary">
+                ${item?.price || 0}
+              </h4>
+            </div>
+          </div>
+        </div>
+
+        {/* DOCUMENT */}
+        <div className="rounded-[28px] border p-5 bg-slate-50 dark:bg-slate-900/40">
+          <div className="flex items-center gap-2 mb-5">
+            <FileText className="w-5 h-5 text-primary" />
+
+            <h3 className="text-lg font-semibold">
+              Shipment Document
+            </h3>
+          </div>
+
+          <div className="rounded-2xl border bg-white dark:bg-slate-950 p-5 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
+                <FileImage className="w-6 h-6 text-primary" />
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-lg">
+                  {document?.original_name
+                    ? document.original_name.length >
+                      15
+                      ? `${document.original_name.slice(
+                          0,
+                          15
+                        )}...`
+                      : document.original_name
+                    : "No Document"}
+                </h4>
+
+                <p className="text-sm text-muted-foreground">
+                  {documentType}
+                </p>
+              </div>
+            </div>
+
+            <Button
+              variant="outline"
+              className="rounded-xl"
+              onClick={() =>
+                setPreviewOpen(true)
+              }
+              disabled={!document}
+            >
+              View
+            </Button>
+          </div>
+        </div>
+      </div>
+    </Card>
+  ))}
+</div>
+
+
+ {/* DELIVERY ADDRESS */}
+    <div className="rounded-[28px] bg-white dark:bg-slate-950 border p-6">
+      <div className="flex items-start gap-4">
+        <div className="w-12 h-12 rounded-2xl bg-primary/10 mt-3 flex items-center justify-center shrink-0">
+          <MapPin className="w-5 h-5 text-primary" />
+        </div>
+
+        <div className="">
+          <div>
+            <p className="text-sm text-muted-foreground">
+              Delivery Address
+            </p>
+
+            <h3 className="text-lg font-semibold mt-1">
+               {
+  shipment?.delivery_address?.label
+    ? shipment.delivery_address.label
+        .toLowerCase()
+        .replace(/\b\w/g, (char) => char.toUpperCase())
+    : "--"
+}
+            </h3>
+          </div>
+
+          <p className="text-[15px] leading-7 text-slate-700 dark:text-slate-300">
+           {fullAddress || "--"}
+          </p>
+        </div>
+      </div>
+    </div>
+   
+    
           {/* CUSTOMER */}
 
           <Card className="overflow-hidden rounded-3xl border bg-white shadow-sm dark:bg-slate-950">
@@ -442,7 +710,7 @@ export default function ShipmentRequestPage() {
                     )}
                   </h2>
 
-                  <div className="mt-2 flex flex-wrap gap-2">
+                  {/* <div className="mt-2 flex flex-wrap gap-2">
                     <Badge className="bg-emerald-500 text-white">
                       Active Customer
                     </Badge>
@@ -451,7 +719,7 @@ export default function ShipmentRequestPage() {
                       {shipment?.user?.id ||
                         "--"}
                     </Badge>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -501,7 +769,7 @@ export default function ShipmentRequestPage() {
         {/* RIGHT */}
 
         <div>
-          <Card className="rounded-3xl border bg-white shadow-sm dark:bg-slate-950">
+          {/* <Card className="rounded-3xl border bg-white shadow-sm dark:bg-slate-950">
             <CardHeader>
               <CardTitle>
                 Shipment Summary
@@ -577,7 +845,108 @@ export default function ShipmentRequestPage() {
                 }`}
               />
             </CardContent>
-          </Card>
+          </Card> */}
+
+                 <Card className="rounded-3xl border border-slate-200/70 dark:border-slate-800 bg-white/80 dark:bg-slate-950/70 backdrop-blur-xl shadow-sm overflow-hidden">
+    
+    <CardHeader className="border-b border-slate-200 dark:border-slate-800 pb-4">
+      <CardTitle className="flex items-center justify-between">
+        <span>Shipment Summary</span>
+
+        
+          <Badge className=" text-white rounded-full px-3 py-1">
+            Item 1
+          </Badge>
+
+      </CardTitle>
+    </CardHeader>
+
+    <CardContent className="p-6 space-y-5">
+
+      {/* Weight */}
+      <div className="flex items-center justify-between">
+        <span className="text-muted-foreground">
+          Actual Weight
+        </span>
+
+        <span className="font-semibold text-slate-900 dark:text-white">
+         12LB
+        </span>
+      </div>
+
+      {/* Volumetric Weight */}
+      <div className="flex items-center justify-between">
+        <span className="text-muted-foreground">
+          Volumetric Weight
+        </span>
+
+        <span className="font-semibold text-slate-900 dark:text-white">
+          42 LB
+        </span>
+      </div>
+
+      {/* Delivery */}
+      <div className="flex items-center justify-between">
+        <span className="text-muted-foreground">
+          Delivery
+        </span>
+
+        <Badge className="rounded-full">
+          Express
+        </Badge>
+      </div>
+
+      {/* Package Type */}
+      <div className="flex items-center justify-between">
+        <span className="text-muted-foreground">
+          Package Type
+        </span>
+
+        <span className="font-semibold text-slate-900 dark:text-white">
+          Electronics
+        </span>
+      </div>
+
+      {/* Dimensions */}
+      <div className="flex items-center justify-between">
+        <span className="text-muted-foreground">
+          Dimensions
+        </span>
+
+        <span className="font-semibold text-slate-900 dark:text-white text-right">
+          41
+        </span>
+      </div>
+
+      {/* Declared Value */}
+      <div className="flex items-center justify-between">
+        <span className="text-muted-foreground">
+          Declared Value
+        </span>
+
+        <span className="font-semibold text-slate-900 dark:text-white">
+          $
+         0
+        </span>
+      </div>
+
+      {/* Final Price */}
+      <div className="pt-4 border-t border-dashed border-slate-200 dark:border-slate-800">
+        <div className="flex items-center justify-between">
+          <span className="text-base font-semibold">
+            Final Shipment Price
+          </span>
+
+          <span className="text-2xl font-bold text-primary">
+            $
+            0.00
+          </span>
+        </div>
+      </div>
+
+    </CardContent>
+  </Card>
+          
         </div>
       </div>
 
@@ -667,119 +1036,11 @@ export default function ShipmentRequestPage() {
         }}
       />
 
-      <Dialog
+    <ShipmentStandbyModal
   open={standbyOpen}
   onOpenChange={setStandbyOpen}
->
-  <DialogContent className="sm:max-w-lg rounded-3xl border-0 p-0 overflow-hidden shadow-2xl">
-
-    {/* Header */}
-    <div className="relative overflow-hidden bg-gradient-to-r from-yellow-500 to-amber-500 px-6 py-6 text-white">
-
-      <div className="absolute inset-0 bg-black/5" />
-
-      <div className="relative flex items-start gap-4">
-
-        <div className="h-12 w-25 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-lg">
-          <AlertTriangle className="w-7 h-7" />
-        </div>
-
-        <div>
-          <DialogTitle className="text-2xl font-bold tracking-tight">
-            Put Shipment on Standby
-          </DialogTitle>
-
-          <DialogDescription className="text-yellow-50 mt-2 text-sm leading-6">
-            Provide a reason for putting this shipment
-            on standby. This message will be recorded
-            for tracking and operational review.
-          </DialogDescription>
-        </div>
-
-      </div>
-    </div>
-
-    {/* Body */}
-    <div className="p-6 space-y-5">
-
-      {/* Reason Input */}
-      <div className="space-y-3">
-
-        <Label className="text-sm font-semibold text-slate-700 dark:text-slate-200">
-          Reason
-        </Label>
-
-        <div className="relative">
-
-          <Textarea
-            value={standbyReason}
-            onChange={(e) =>
-              setStandbyReason(e.target.value)
-            }
-            placeholder="Write the reason for standby shipment..."
-            className="min-h-[140px] rounded-2xl border-slate-200 dark:border-slate-700 focus-visible:ring-2 focus-visible:ring-yellow-500 resize-none text-[15px] leading-7 shadow-sm"
-          />
-
-          <div className="absolute bottom-4 right-4 text-xs text-muted-foreground">
-            {standbyReason.length}/500
-          </div>
-
-        </div>
-      </div>
-
-      {/* Info Box */}
-      <div className="rounded-2xl border border-yellow-200 bg-yellow-50 px-4 py-4 flex items-start gap-3">
-
-        <div className="mt-0.5">
-          <AlertTriangle className="w-5 h-5 text-yellow-600" />
-        </div>
-
-        <div>
-          <p className="text-sm font-semibold text-yellow-800">
-            Shipment Status Warning
-          </p>
-
-          <p className="text-sm text-yellow-700 mt-1 leading-6">
-            Once marked as standby, shipment processing
-            may pause until reviewed by operations.
-          </p>
-        </div>
-      </div>
-
-      {/* Footer */}
-      <div className="flex items-center justify-end gap-3 pt-2">
-
-        <Button
-          variant="outline"
-          onClick={() =>
-            setStandbyOpen(false)
-          }
-          className="rounded-xl h-11 px-5"
-        >
-          Cancel
-        </Button>
-
-        <Button
-          disabled={!standbyReason.trim()}
-          onClick={() => {
-            console.log(
-              "Standby Reason:",
-              standbyReason
-            );
-
-            setStandbyOpen(false);
-            setStandbyReason("");
-          }}
-          className="rounded-xl h-11 px-6 bg-yellow-500 hover:bg-yellow-600 text-white shadow-sm"
-        >
-          <PauseCircle className="w-4 h-4 mr-2" />
-          Send Standby Request
-        </Button>
-
-      </div>
-    </div>
-  </DialogContent>
-</Dialog>
+  shipmentId={shipment?.id}
+/>
     </div>
   );
 }
@@ -809,7 +1070,7 @@ function InfoCard({
             {title}
           </p>
 
-          <h3 className="mt-1 text-sm font-semibold">
+          <h3 className="mt-1 break-all text-sm font-semibold">
             {value || "--"}
           </h3>
         </div>
