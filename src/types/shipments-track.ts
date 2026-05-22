@@ -80,3 +80,46 @@ export interface ShipmentListResponse {
     total: number;
   };
 }
+
+export interface TrackingLog {
+  id: number;
+  status: string;
+  description: string | null;
+  created_at: string;
+}
+
+export interface ShipmentDetails {
+  id: number;
+  tracking_number: string;
+  current_status: string;
+  delivery_type: string;
+
+  origin_country: {
+    name: string;
+  };
+
+  destination_country: {
+    name: string;
+  };
+
+  origin_facility: {
+    name: string;
+  };
+
+  destination_facility: {
+    name: string;
+  };
+
+  user: {
+    name: string;
+    email: string;
+  };
+
+  delivery_address: {
+    address_line_1: string;
+  };
+
+  tracking_logs: TrackingLog[];
+
+  created_at: string;
+}

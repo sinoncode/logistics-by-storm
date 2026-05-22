@@ -277,7 +277,7 @@ export const router = createBrowserRouter([
             path: "shipments", element: <Shipments /> 
           },
           {
-            path: "shipments-detail", element: <ShipmentDetail />
+            path: "/shipments-detail/:id", element: <ShipmentDetail />
           },
         ],
       },

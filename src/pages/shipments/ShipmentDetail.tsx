@@ -1,4 +1,7 @@
 import { useMemo, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+import { useShipmentDetailsStore } from "@/store/shipmentTrackStore";
 
 import {
   Card,
@@ -8,28 +11,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
 
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
-
-import { Button } from "@/components/ui/button";
-
-import { Input } from "@/components/ui/input";
-
-import { Label } from "@/components/ui/label";
-
-import { Textarea } from "@/components/ui/textarea";
 
 import {
   Select,
@@ -45,21 +27,12 @@ import {
   Truck,
   PackageCheck,
   CalendarDays,
-  BadgeDollarSign,
-  FileImage,
   User,
   Mail,
-  Phone,
   MapPin,
-  Calculator,
-  Download,
-  FileText,
   CheckCircle2,
-  PauseCircle,
-  AlertTriangle,
   Package,
   Warehouse,
-  Building2,
   Home,
   Navigation,
 } from "lucide-react";
@@ -87,9 +60,39 @@ export default function ShipmentRequestPage() {
   const [animationKey, setAnimationKey] = useState(0);
 
   // Trigger animation restart when status changes
-  useEffect(() => {
-    setAnimationKey(prev => prev + 1);
-  }, [trackingStatus]);
+  // ======================================================
+// FETCH SHIPMENT
+// ======================================================
+
+// ======================================================
+// SYNC TRACKING STATUS
+// ======================================================
+
+const {
+  shipmentDetails,
+  loading,
+  error,
+  getShipmentDetails,
+  updateTrackingStatus,
+} = useShipmentDetailsStore();
+
+
+const trackingStatusFromApi = shipmentDetails?.current_status;
+
+
+
+useEffect(() => {
+  if (trackingStatusFromApi) {
+    setTrackingStatus(trackingStatusFromApi);
+  }
+}, [trackingStatusFromApi]);
+// ======================================================
+// RESTART ANIMATION
+// ======================================================
+
+useEffect(() => {
+  setAnimationKey((prev) => prev + 1);
+}, [trackingStatus]);
 
   // ======================================================
   // FORM STATE
@@ -115,28 +118,46 @@ export default function ShipmentRequestPage() {
   // MOCK DATA
   // ======================================================
 
-  const shipmentData = {
-    trackingNo: "#TRK102589",
-    supplier: "Global Trade Supplier Ltd.",
-    date: "08 May 2026",
-    commodity: "Electronic Accessories",
-    price: "$2,450",
+  // const shipmentData = {
+  //   trackingNo: "#TRK102589",
+  //   supplier: "Global Trade Supplier Ltd.",
+  //   date: "08 May 2026",
+  //   commodity: "Electronic Accessories",
+  //   price: "$2,450",
 
-    document: {
-      type: "pdf",
-      url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-      fileName: "shipment-document.pdf",
-    },
-  };
+  //   document: {
+  //     type: "pdf",
+  //     url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+  //     fileName: "shipment-document.pdf",
+  //   },
+  // };
 
-  const customerData = {
-    customerId: "#CUS1025",
-    name: "Kathryn Murphy",
-    email: "kathryn@gmail.com",
-    phone: "+91 9876543210",
-    address: "A-302, Sector 62, Noida, Uttar Pradesh, India - 201309",
-  };
+  // const customerData = {
+  //   customerId: "#CUS1025",
+  //   name: "Kathryn Murphy",
+  //   email: "kathryn@gmail.com",
+  //   phone: "+91 9876543210",
+  //   address: "A-302, Sector 62, Noida, Uttar Pradesh, India - 201309",
+  // };
+// ======================================================
+// ROUTE PARAMS
+// ======================================================
 
+const { id } = useParams();
+
+
+useEffect(() => {
+  if (id) {
+    getShipmentDetails(id);
+  }
+}, [id, getShipmentDetails]);
+// ======================================================
+// DYNAMIC DATA
+// ======================================================
+
+const shipmentData = shipmentDetails;
+
+const customerData = shipmentDetails?.user;
   // ======================================================
   // TRACKING LOGIC
   // ======================================================
@@ -231,35 +252,59 @@ export default function ShipmentRequestPage() {
     });
   };
 
-  const renderDocumentPreview = () => {
-    if (shipmentData.document.type === "image") {
-      return (
-        <img
-          src={shipmentData.document.url}
-          alt="Document"
-          className="w-full max-h-[75vh] rounded-2xl object-contain"
-        />
-      );
-    }
+//   const renderDocumentPreview = () => {
+//     if (shipmentData?.document?.type === "image") {
+//       return (
+//         <img
+//           src={shipmentData?.document?.url}
+//           alt="Document"
+//           className="w-full max-h-[75vh] rounded-2xl object-contain"
+//         />
+//       );
+//     }
 
-    if (shipmentData.document.type === "pdf") {
-      return (
-        <iframe
-          src={shipmentData.document.url}
-          className="w-full h-[75vh] rounded-2xl border"
-          title="PDF Preview"
-        />
-      );
-    }
+//     if (shipmentData?.document?.type === "pdf") {
+//       return (
+//         <iframe
+//           src={shipmentData?.document?.url}
+//           className="w-full h-[75vh] rounded-2xl border"
+//           title="PDF Preview"
+//         />
+//       );
+//     }
 
-    return (
-      <div className="flex flex-col items-center justify-center py-20 text-center">
-        <FileText className="w-16 h-16 text-primary mb-4" />
-        <h3 className="text-xl font-semibold">Document Preview</h3>
-        <p className="text-muted-foreground mt-2">Preview unavailable</p>
-      </div>
-    );
-  };
+//     if (loading) {
+//   return (
+//     <div className="min-h-screen flex items-center justify-center">
+//       <div className="text-lg font-semibold">
+//         Loading Shipment...
+//       </div>
+//     </div>
+//   );
+// }
+
+// if (error) {
+//   return (
+//     <div className="min-h-screen flex items-center justify-center">
+//       <div className="text-red-500 font-semibold">
+//         {error}
+//       </div>
+//     </div>
+//   );
+// }
+
+// if (!shipmentDetails) {
+//   return null;
+// }
+
+//     return (
+//       <div className="flex flex-col items-center justify-center py-20 text-center">
+//         <FileText className="w-16 h-16 text-primary mb-4" />
+//         <h3 className="text-xl font-semibold">Document Preview</h3>
+//         <p className="text-muted-foreground mt-2">Preview unavailable</p>
+//       </div>
+//     );
+//   };
 
   // ======================================================
   // UI
@@ -300,7 +345,22 @@ export default function ShipmentRequestPage() {
           </Button> */}
 
            <div className="w-full xl:w-[340px]">
-              <Select value={trackingStatus} onValueChange={setTrackingStatus}>
+            <Select
+  value={trackingStatus}
+  onValueChange={async (value) => {
+  if (!id) return;
+
+  const previousStatus = trackingStatus;
+
+  setTrackingStatus(value);
+
+  try {
+    await updateTrackingStatus(id, value);
+  } catch {
+    setTrackingStatus(previousStatus);
+  }
+}}
+>
                 <SelectTrigger className="h-11 sm:h-14 rounded-2xl border-2 shadow-sm text-sm sm:text-base">
                   <SelectValue placeholder="Select Tracking Status" />
                 </SelectTrigger>
@@ -755,29 +815,29 @@ export default function ShipmentRequestPage() {
             <StatusCard
               icon={<PackageCheck className="w-4 h-4 sm:w-5 sm:h-5" />}
               label="Tracking Number"
-              value="#TRK102589"
+              value={shipmentData?.tracking_number || "-"}
               gradient="from-emerald-500/10 to-green-500/10"
               iconBg="bg-emerald-500/10"
               iconColor="text-emerald-600"
             />
 
             <StatusCard
-              icon={<MapPin className="w-4 h-4 sm:w-5 sm:h-5" />}
-              label="Destination"
-              value="Nassau"
-              gradient="from-orange-500/10 to-amber-500/10"
-              iconBg="bg-orange-500/10"
-              iconColor="text-orange-600"
-            />
+  icon={<MapPin className="w-4 h-4 sm:w-5 sm:h-5" />}
+  label="Destination"
+  value={shipmentData?.destination_country?.name || "-"}
+  gradient="from-orange-500/10 to-amber-500/10"
+  iconBg="bg-orange-500/10"
+  iconColor="text-orange-600"
+/>
 
-            <StatusCard
+            {/* <StatusCard
               icon={<CalendarDays className="w-4 h-4 sm:w-5 sm:h-5" />}
               label="Est. Delivery"
-              value="22 May 2026"
+              value={shipmentData?.estimated_delivery || "-"}
               gradient="from-cyan-500/10 to-blue-500/10"
               iconBg="bg-cyan-500/10"
               iconColor="text-cyan-600"
-            />
+            /> */}
           </div>
         </CardContent>
       </Card>
@@ -825,23 +885,29 @@ export default function ShipmentRequestPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
                 <InfoCard
                   icon={<PackageCheck className="w-4 h-4 sm:w-5 sm:h-5" />}
-                  title="Request Number"
-                  value="SR-20260514155711"
+                  title="Tracking Number"
+                  value={shipmentData?.tracking_number || "-"}
                 />
-                <InfoCard
+                {/* <InfoCard
                   icon={<Truck className="w-4 h-4 sm:w-5 sm:h-5" />}
                   title="Supplier Tracking"
-                  value="#215456"
-                />
+                  value={shipmentData?.supplierTracking || "-"}
+                /> */}
                 <InfoCard
                   icon={<CalendarDays className="w-4 h-4 sm:w-5 sm:h-5" />}
                   title="Requested At"
-                  value="14 May 2026"
+                 value={
+  shipmentData?.created_at
+    ? new Date(
+        shipmentData.created_at
+      ).toLocaleDateString()
+    : "-"
+}
                 />
                 <InfoCard
                   icon={<MapPin className="w-4 h-4 sm:w-5 sm:h-5" />}
                   title="Delivery Type"
-                  value="Door Delivery"
+                  value={shipmentData?.delivery_type || "-"}
                 />
               </div>
 
@@ -853,11 +919,12 @@ export default function ShipmentRequestPage() {
                       Origin
                     </p>
                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-slate-100 dark:to-slate-300 bg-clip-text text-transparent">
-                      Miami Warehouse
-                    </h3>
-                    <p className="text-sm sm:text-base text-muted-foreground mt-1 sm:mt-2">
-                      United States
-                    </p>
+  {shipmentData?.origin_facility?.name || "-"}
+</h3>
+
+<p className="text-sm sm:text-base text-muted-foreground mt-1 sm:mt-2">
+  {shipmentData?.origin_country?.name || "-"}
+</p>
                   </div>
 
                   <div className="hidden lg:flex items-center justify-center flex-1 px-8">
@@ -874,17 +941,17 @@ export default function ShipmentRequestPage() {
                       Destination
                     </p>
                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-slate-100 dark:to-slate-300 bg-clip-text text-transparent">
-                      Nassau Store
+                     {shipmentData?.destination_facility?.name || "-"}
                     </h3>
                     <p className="text-sm sm:text-base text-muted-foreground mt-1 sm:mt-2">
-                      Bahamas
+                      {shipmentData?.destination_country?.name || "-"}
                     </p>
                   </div>
                 </div>
               </div>
 
               {/* DOCUMENT */}
-              <div className="rounded-[24px] sm:rounded-[28px] border-2 p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-5 bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-900/60 dark:to-slate-800/60 shadow-sm hover:shadow-md transition-shadow duration-300">
+              {/* <div className="rounded-[24px] sm:rounded-[28px] border-2 p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-5 bg-gradient-to-br from-white to-slate-50/50 dark:from-slate-900/60 dark:to-slate-800/60 shadow-sm hover:shadow-md transition-shadow duration-300">
                 <div className="flex items-center gap-3 sm:gap-4">
                   <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-blue-500/10 flex items-center justify-center">
                     <FileImage className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
@@ -894,7 +961,7 @@ export default function ShipmentRequestPage() {
                       Shipment Document
                     </h3>
                     <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                      shipment-document.pdf
+                      {shipmentData?.document?.fileName || "document"}
                     </p>
                   </div>
                 </div>
@@ -907,7 +974,7 @@ export default function ShipmentRequestPage() {
                   <FileText className="w-4 h-4 mr-2" />
                   View Document
                 </Button>
-              </div>
+              </div> */}
             </CardContent>
           </Card>
 
@@ -924,19 +991,9 @@ export default function ShipmentRequestPage() {
 
                   <div>
                     <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold">
-                      {customerData.name}
+                      {customerData?.name}
                     </h2>
-                    <div className="flex items-center gap-2 sm:gap-3 mt-2 sm:mt-3 flex-wrap">
-                      <Badge className="rounded-full px-2 sm:px-4 py-1 bg-gradient-to-r from-emerald-500 to-green-600 text-xs sm:text-sm">
-                        Active Customer
-                      </Badge>
-                      <Badge
-                        variant="outline"
-                        className="rounded-full px-2 sm:px-4 py-1 border-2 text-xs sm:text-sm"
-                      >
-                        {customerData.customerId}
-                      </Badge>
-                    </div>
+                   
                   </div>
                 </div>
               </div>
@@ -944,26 +1001,26 @@ export default function ShipmentRequestPage() {
 
             <CardContent className="p-4 sm:p-6">
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
-                <CustomerInfoCard
-                  icon={<Mail className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />}
-                  title="Email Address"
-                  value={customerData.email}
-                  bg="bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-500/10 dark:to-blue-500/5"
-                />
+               <CustomerInfoCard
+  icon={<Mail className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />}
+  title="Email Address"
+  value={customerData?.email || "-"}
+  bg="bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-500/10 dark:to-blue-500/5"
+/>
 
-                <CustomerInfoCard
+                {/* <CustomerInfoCard
                   icon={<Phone className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-600" />}
                   title="Phone Number"
-                  value={customerData.phone}
+                  value={customerData?.phone || "-"}
                   bg="bg-gradient-to-br from-emerald-100 to-emerald-50 dark:from-emerald-500/10 dark:to-emerald-500/5"
-                />
+                /> */}
 
-                <CustomerInfoCard
+                {/* <CustomerInfoCard
                   icon={<MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-orange-600" />}
                   title="Shipping Address"
-                  value={customerData.address}
+                  value={customerData?.address || "-"}
                   bg="bg-gradient-to-br from-orange-100 to-orange-50 dark:from-orange-500/10 dark:to-orange-500/5"
-                />
+                /> */}
               </div>
             </CardContent>
           </Card>
@@ -975,7 +1032,7 @@ export default function ShipmentRequestPage() {
       {/* ====================================================== */}
 
       {/* DOCUMENT MODAL */}
-      <Dialog open={previewOpen} onOpenChange={setPreviewOpen}>
+      {/* <Dialog open={previewOpen} onOpenChange={setPreviewOpen}>
         <DialogContent className="max-w-5xl rounded-3xl p-4 sm:p-6">
           <DialogHeader>
             <DialogTitle className="text-xl sm:text-2xl">Shipment Document</DialogTitle>
@@ -989,8 +1046,8 @@ export default function ShipmentRequestPage() {
 
             <div className="flex justify-end">
               <a
-                href={shipmentData.document.url}
-                download={shipmentData.document.fileName}
+                href={shipmentData?.document?.url}
+                download={shipmentData?.document?.fileName}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -1002,7 +1059,7 @@ export default function ShipmentRequestPage() {
             </div>
           </div>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
 
       {/* CALCULATOR MODAL */}
       {/* <Dialog open={calculatorOpen} onOpenChange={setCalculatorOpen}>
@@ -1322,7 +1379,7 @@ const CustomerInfoCard = ({
 }: {
   icon: React.ReactNode;
   title: string;
-  value: string;
+  value?: string;
   bg: string;
 }) => {
   return (

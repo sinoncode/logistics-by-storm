@@ -14,3 +14,12 @@ export const getShipments =
 
     return response.data;
   };
+
+
+  export const getShipmentDetails = async (id: string) => {
+  const response = await axios.get(
+    `/admin/shipments/${id}`
+  );
+
+  return response.data.data;
+};
