@@ -140,21 +140,6 @@ export const data = {
       icon: UsersRound,
       isActive: true,
       items: [
-        // {
-        //   title: "Shipments Request",
-        //   url: "/shipment-request",
-        //   circleColor: "bg-primary",
-        // },
-        // {
-        //   title: "Shipments",
-        //   url: "#",
-        //   circleColor: "bg-yellow-500",
-        // },
-        // {
-        //   title: "View Profile",
-        //   url: "/view-profile",
-        //   circleColor: "bg-red-600",
-        // },
       ],
     },
     {
@@ -163,21 +148,18 @@ export const data = {
       icon: UsersRound,
       isActive: true,
       items: [
-        // {
-        //   title: "Shipments Request",
-        //   url: "/shipment-request",
-        //   circleColor: "bg-primary",
-        // },
-        // {
-        //   title: "Shipments",
-        //   url: "#",
-        //   circleColor: "bg-yellow-500",
-        // },
-        // {
-        //   title: "View Profile",
-        //   url: "/view-profile",
-        //   circleColor: "bg-red-600",
-        // },
+      ],
+    },
+
+     {
+      label: "Payments",
+    },
+    {
+      title: "Payments",
+      url: "/payment-lists",
+      icon: UsersRound,
+      isActive: true,
+      items: [
       ],
     },
     // {

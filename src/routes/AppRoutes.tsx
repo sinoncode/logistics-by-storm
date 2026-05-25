@@ -68,6 +68,10 @@ const ShipmentRequestList = lazy(() => import("../pages/shipments-request/Shipme
 const ShipmentListView = lazy(() => import("../pages/shipments-request/ShipmentListView"));
 const Shipments = lazy(() => import("../pages/shipments/Shipments"));
 const ShipmentDetail = lazy(() => import("../pages/shipments/ShipmentDetail"));
+const PaymentsList = lazy(() => import("../pages/payments/payments-list/PaymentList"));
+// const PaymentDetails = lazy(() => import("../pages/payments/payments-details/PaymentsDetails"));
+
+
 
 export const router = createBrowserRouter([
   {
@@ -279,6 +283,12 @@ export const router = createBrowserRouter([
           {
             path: "/shipments-detail/:id", element: <ShipmentDetail />
           },
+           {
+            path: "payment-lists", element: <PaymentsList /> 
+          },
+          // {
+          //   path: "/shipments-detail/:id", element: <ShipmentDetail />
+          // },
         ],
       },
     ]
