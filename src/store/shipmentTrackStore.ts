@@ -6,24 +6,26 @@ import axios from "@/lib/axios";
 ========================================================= */
 
 export interface User {
-  id: number;
+  id: string;
   name: string;
   email: string;
 }
 
 export interface Country {
-  id: number;
+  id: string;
   name: string;
 }
 
 export interface Facility {
-  id: number;
+  id: string;
   name: string;
 }
 
 export interface ShipmentDetails {
-  id: number;
+  id: string;
+
   tracking_number: string;
+
   current_status: string;
 
   created_at: string;
@@ -31,9 +33,11 @@ export interface ShipmentDetails {
   delivery_type: string;
 
   origin_country: Country;
+
   destination_country: Country;
 
   origin_facility: Facility;
+
   destination_facility: Facility;
 
   user: User;
@@ -72,7 +76,7 @@ const API_BASE_URL =
 ========================================================= */
 
 export const useShipmentDetailsStore =
-  create<ShipmentDetailsStore>((set, get) => ({
+  create<ShipmentDetailsStore>((set) => ({
     shipmentDetails: null,
 
     loading: false,
@@ -93,15 +97,6 @@ export const useShipmentDetailsStore =
         const response = await axios.get(
           `${API_BASE_URL}/admin/shipments/${id}`
         );
-
-        /**
-         * Adjust this according to your API response
-         *
-         * Example:
-         * response.data.data
-         * OR
-         * response.data.shipment
-         */
 
         const shipment =
           response.data?.data || response.data;
@@ -130,48 +125,46 @@ export const useShipmentDetailsStore =
     ===================================================== */
 
     updateTrackingStatus: async (
-      id: string,
-      status: string
-    ) => {
-      try {
-        set({
-          loading: true,
-          error: null,
-        });
+  id: string,
+  status: string
+) => {
+  try {
+    set({
+      loading: true,
+      error: null,
+    });
 
-        const response = await axios.patch(
-          `${API_BASE_URL}/admin/shipments/${id}/tracking-status`,
-          {
+    await axios.post(
+      `${API_BASE_URL}/admin/shipments/${id}/tracking/status`,
+      {
+        status,
+      }
+    );
+
+    set((state) => ({
+      shipmentDetails: state.shipmentDetails
+        ? {
+            ...state.shipmentDetails,
             current_status: status,
           }
-        );
+        : null,
 
-        const updatedShipment =
-          response.data?.data || response.data;
+      loading: false,
+    }));
+  } catch (error: any) {
+    console.error(
+      "UPDATE TRACKING STATUS ERROR:",
+      error
+    );
 
-        /**
-         * Update local store instantly
-         */
-
-        set({
-          shipmentDetails: updatedShipment,
-          loading: false,
-        });
-      } catch (error: any) {
-        console.error(
-          "UPDATE TRACKING STATUS ERROR:",
-          error
-        );
-
-        set({
-          loading: false,
-          error:
-            error?.response?.data?.message ||
-            "Failed to update tracking status",
-        });
-      }
-    },
-
+    set({
+      loading: false,
+      error:
+        error?.response?.data?.message ||
+        "Failed to update tracking status",
+    });
+  }
+},
     /* =====================================================
        CLEAR STORE
     ===================================================== */

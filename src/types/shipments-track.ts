@@ -123,3 +123,62 @@ export interface ShipmentDetails {
 
   created_at: string;
 }
+
+
+// ======================================================
+// TRACKING STATUS
+// ======================================================
+
+export type ShipmentTrackingStatus =
+  | "pending"
+  | "received_at_origin"
+  | "dispatched"
+  | "in_transit"
+  | "arrived_at_destination"
+  | "out_for_delivery"
+  | "delivered"
+  | "exception"
+  | "cancelled"
+  | "returned";
+
+// ======================================================
+// USER
+// ======================================================
+
+export interface ShipmentUser {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export interface ShipmentFacility {
+  id: string;
+  name: string;
+}
+
+export interface ShipmentCountry {
+  id: string;
+  name: string;
+}
+
+export interface ShipmentDetails {
+  id: string;
+
+  tracking_number: string;
+
+  current_status: string;
+
+  created_at: string;
+
+  delivery_type: string;
+
+  user: ShipmentUser;
+
+  origin_facility: ShipmentFacility;
+
+  destination_facility: ShipmentFacility;
+
+  origin_country: ShipmentCountry;
+
+  destination_country: ShipmentCountry;
+}

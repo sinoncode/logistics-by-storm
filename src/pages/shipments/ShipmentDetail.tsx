@@ -38,12 +38,47 @@ import {
 } from "lucide-react";
 
 const trackingSteps = [
-  { id: "order_placed", label: "Order Placed", icon: Package },
-  { id: "picked_up", label: "Package Picked Up", icon: PackageCheck },
-  { id: "in_transit", label: "In Transit", icon: Truck },
-  { id: "sorting_facility", label: "Arrived at Sorting Facility", icon: Warehouse },
-  { id: "out_delivery", label: "Out for Delivery", icon: Navigation },
-  { id: "delivered", label: "Delivered", icon: Home },
+  {
+    id: "pending",
+    label: "Pending",
+    icon: Package,
+  },
+
+  {
+    id: "received_at_origin",
+    label: "Received At Origin",
+    icon: PackageCheck,
+  },
+
+  {
+    id: "dispatched",
+    label: "Dispatched",
+    icon: Truck,
+  },
+
+  {
+    id: "in_transit",
+    label: "In Transit",
+    icon: Truck,
+  },
+
+  {
+    id: "arrived_at_destination",
+    label: "Arrived At Destination",
+    icon: Warehouse,
+  },
+
+  {
+    id: "out_for_delivery",
+    label: "Out For Delivery",
+    icon: Navigation,
+  },
+
+  {
+    id: "delivered",
+    label: "Delivered",
+    icon: Home,
+  },
 ];
 
 export default function ShipmentRequestPage() {
@@ -55,7 +90,7 @@ export default function ShipmentRequestPage() {
   const [calculatorOpen, setCalculatorOpen] = useState(false);
   const [standbyOpen, setStandbyOpen] = useState(false);
   const [standbyReason, setStandbyReason] = useState("");
-  const [trackingStatus, setTrackingStatus] = useState("in_transit");
+  const [trackingStatus, setTrackingStatus] = useState("pending");
   const [calculationResult, setCalculationResult] = useState<any>(null);
   const [animationKey, setAnimationKey] = useState(0);
 
@@ -309,7 +344,21 @@ const customerData = shipmentDetails?.user;
   // ======================================================
   // UI
   // ======================================================
+if (loading) {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      Loading Shipment...
+    </div>
+  );
+}
 
+if (error) {
+  return (
+    <div className="min-h-screen flex items-center justify-center text-red-500">
+      {error}
+    </div>
+  );
+}
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-50 to-blue-50/30 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6">
       {/* ====================================================== */}
@@ -802,7 +851,7 @@ const customerData = shipmentDetails?.user;
           </div>
 
           {/* STATUS CARDS */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5 mt-6 sm:mt-8 lg:mt-10">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5 mt-6 sm:mt-8 lg:mt-10">
             <StatusCard
               icon={<Truck className="w-4 h-4 sm:w-5 sm:h-5" />}
               label="Current Status"
@@ -907,7 +956,11 @@ const customerData = shipmentDetails?.user;
                 <InfoCard
                   icon={<MapPin className="w-4 h-4 sm:w-5 sm:h-5" />}
                   title="Delivery Type"
-                  value={shipmentData?.delivery_type || "-"}
+                  value={shipmentData?.delivery_type
+  ? shipmentData.delivery_type
+      .toLowerCase()
+      .replace(/\b\w/g, (char) => char.toUpperCase())
+  : "-"}
                 />
               </div>
 
@@ -1314,7 +1367,7 @@ const StatusCard = ({
 }) => {
   return (
     <div
-      className={`rounded-2xl sm:rounded-3xl border-2 bg-gradient-to-br ${gradient} p-3 sm:p-5 hover:shadow-lg hover:scale-105 transition-all duration-300`}
+      className={`rounded-2xl sm:rounded-3xl border-2 bg-gradient-to-br ${gradient} p-3 sm:p-5  transition-all duration-300`}
     >
       <div className="flex items-center gap-2 sm:gap-3">
         <div
@@ -1350,7 +1403,7 @@ const InfoCard = ({
   value: string;
 }) => {
   return (
-    <div className="rounded-2xl sm:rounded-3xl border-2 p-3 sm:p-5 bg-gradient-to-br from-slate-50 to-white dark:from-slate-900/60 dark:to-slate-800/60 hover:shadow-lg hover:scale-105 transition-all duration-300">
+    <div className="rounded-2xl sm:rounded-3xl border-2 p-3 sm:p-5 bg-gradient-to-br from-slate-50 to-white dark:from-slate-900/60 dark:to-slate-800/60 transition-all duration-300">
       <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
         <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/10 to-blue-500/10 flex items-center justify-center text-primary">
           {icon}
@@ -1383,7 +1436,7 @@ const CustomerInfoCard = ({
   bg: string;
 }) => {
   return (
-    <div className="rounded-2xl sm:rounded-3xl border-2 p-3 sm:p-5 bg-white dark:bg-slate-900/60 hover:shadow-lg hover:scale-105 transition-all duration-300">
+    <div className="rounded-2xl sm:rounded-3xl border-2 p-3 sm:p-5 bg-white dark:bg-slate-900/60  transition-all duration-300">
       <div className="flex items-start gap-3 sm:gap-4">
         <div
           className={`h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl flex items-center justify-center ${bg} flex-shrink-0`}

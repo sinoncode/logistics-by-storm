@@ -23,3 +23,19 @@ export const getShipments =
 
   return response.data.data;
 };
+
+
+export const updateShipmentTrackingStatusApi = async (
+  shipmentId: string | number,
+  status: string
+) => {
+  const response = await axios.post(
+    `/api/v1/admin/shipments/${shipmentId}/tracking/status`,
+    {
+      shipment_id: Number(shipmentId),
+      status,
+    }
+  );
+
+  return response.data;
+};
