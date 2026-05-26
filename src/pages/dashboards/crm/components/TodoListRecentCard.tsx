@@ -10,17 +10,10 @@ const TodoListRecentCard = () => {
             <CardContent className="px-0">
                 <Tabs defaultValue="todoList" className="gap-0">
                     <div className="flex items-center justify-between border-b border-neutral-200 dark:border-slate-600">
-                        <TabsList className='bg-transparent dark:bg-transparent rounded-none h-[50px]  p-0'>
-                            <TabsTrigger value="todoList" className='py-2.5 px-4 font-medium text-base inline-flex items-center gap-3 dark:bg-transparent text-neutral-600 hover:text-primary dark:text-white dark:hover:text-blue-500 border-0 border-b-1 border-transparent dark:border-transparent data-[state=active]:border-primary dark:data-[state=active]:border-primary dark:data-[state=active]:bg-transparent rounded-[0] data-[state=active]:shadow-none data-[state=active]:text-primary cursor-pointer translate-y-px'>
-                                Recent Shipments
-                            </TabsTrigger>
-                            {/* <TabsTrigger value="recentLeads" className='py-2.5 px-4 font-medium text-base inline-flex items-center gap-3 dark:bg-transparent text-neutral-600 hover:text-primary dark:text-white dark:hover:text-blue-500 border-0 border-b-1 border-transparent dark:border-transparent data-[state=active]:border-primary dark:data-[state=active]:border-primary dark:data-[state=active]:bg-transparent rounded-[0] data-[state=active]:shadow-none data-[state=active]:text-primary cursor-pointer translate-y-px'>
-                                Recent Leads
-                            </TabsTrigger> */}
-                        </TabsList>
-                        <div className="pe-6">
-                            <CommonLink />
-                        </div>
+                       <div className="w-full flex items-center flex-wrap gap-2 justify-between py-4 px-6 border-b border-neutral-200 dark:border-slate-600">
+                    <h6 className="mb-0 font-bold text-lg">Recent Shipments</h6>
+                    <CommonLink href='/shipment-request'/>
+                </div>
                     </div>
 
                     <div className="p-6">

@@ -1,65 +1,252 @@
-import BarChartYear from '@/components/charts/BarChartYear';
-import CustomSelect from '@/components/shared/CustomSelect';
-import { Card, CardContent } from '@/components/ui/card';
-import { ArrowBigUp, ShoppingCart, SquareKanban } from 'lucide-react';
+import { useEffect } from "react";
 
-const EarningStatisticsCard = () => {
+import {
+  ArrowBigUp,
+  DollarSign,
+  TrendingUp,
+} from "lucide-react";
+
+import BarChartYear from "@/components/charts/BarChartYear";
+
+import CustomSelect from "@/components/shared/CustomSelect";
+
+import {
+  Card,
+  CardContent,
+} from "@/components/ui/card";
+
+import { useDashboardStore }
+  from "@/store/dashboardStore";
+
+import { useRevenueChartStore }
+  from "@/store/revenueChartStore";
+
+const EarningStatisticsCard =
+  () => {
+
+    /* =====================================================
+       DASHBOARD STORE
+    ===================================================== */
+
+    const {
+      dashboard,
+      loading:
+        dashboardLoading,
+      fetchDashboard,
+    } = useDashboardStore();
+
+    /* =====================================================
+       REVENUE CHART STORE
+    ===================================================== */
+
+    const {
+      revenueChart,
+      filter,
+      loading:
+        revenueLoading,
+      setFilter,
+      fetchRevenueChart,
+    } =
+      useRevenueChartStore();
+
+    /* =====================================================
+       FETCH INITIAL DATA
+    ===================================================== */
+
+    useEffect(() => {
+      fetchDashboard();
+
+      fetchRevenueChart(
+        "monthly"
+      );
+    }, []);
+
+    /* =====================================================
+       HANDLE FILTER CHANGE
+    ===================================================== */
+
+    const handleFilterChange = (
+      value: string
+    ) => {
+
+      const selectedFilter =
+        value.toLowerCase();
+
+      setFilter(
+        selectedFilter
+      );
+
+      fetchRevenueChart(
+        selectedFilter
+      );
+
+      console.log(value);
+    };
+
+    /* =====================================================
+       LOADING
+    ===================================================== */
+
+    if (
+      dashboardLoading ||
+      revenueLoading
+    ) {
+      return (
+        <div className="py-10 text-center text-sm text-neutral-500">
+          Loading revenue statistics...
+        </div>
+      );
+    }
+
     return (
-        <Card className="card h-full rounded-lg border-0">
-            <CardContent className="card-body p-0">
-                <div className="flex items-center flex-wrap gap-2 justify-between">
-                    <div>
-                        <h6 className="mb-0 font-bold text-lg">Earning Statistic</h6>
-                        <span className="text-sm font-medium text-neutral-600 dark:text-neutral-100">Yearly earning overview</span>
-                    </div>
-                    <div className="">
-                        <CustomSelect
-                            placeholder="Yearly"
-                            options={["Yearly", "Monthly", "Weekly", "Today"]}
-                        />
-                    </div>
+      <Card className="card h-full rounded-2xl border border-gray-200 dark:border-neutral-700 shadow-sm overflow-hidden">
+
+        <CardContent className="p-6">
+
+          {/* ============================================
+              HEADER
+          ============================================= */}
+
+          <div className="flex items-center justify-between flex-wrap gap-4">
+
+            <div>
+              <h6 className="text-xl font-bold">
+                Revenue Statistics
+              </h6>
+
+              <p className="text-sm text-neutral-500">
+                Dynamic revenue analytics overview
+              </p>
+            </div>
+
+            <div className="min-w-[140px]">
+
+              <CustomSelect
+  placeholder={
+    filter.charAt(0).toUpperCase() +
+    filter.slice(1)
+  }
+  options={[
+    "Weekly",
+    "Monthly",
+    "Yearly",
+  ]}
+  onValueChange={
+    handleFilterChange
+  }
+/>
+
+            </div>
+          </div>
+
+          {/* ============================================
+              STATS
+          ============================================= */}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 mt-7">
+
+            {/* Revenue */}
+
+            <div className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-4 bg-gradient-to-br from-cyan-50 to-white dark:from-neutral-900 dark:to-neutral-900">
+
+              <div className="flex items-center gap-3">
+
+                <div className="w-12 h-12 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center">
+                  <DollarSign size={22} />
                 </div>
 
-                <div className="mt-5 flex justify-center flex-wrap gap-3">
+                <div>
+                  <p className="text-sm text-neutral-500">
+                    Revenue
+                  </p>
 
-                    <div className="inline-flex items-center gap-2 p-2 rounded-lg border transition hover:border-primary border-neutral-200 dark:border-neutral-500 dark:hover:border-primary pe-[46px] br-hover-primary group">
-                        <span className="bg-neutral-100 dark:bg-slate-600 w-[44px] h-[44px] text-2xl transition rounded-lg flex justify-center items-center text-neutral-600 dark:text-neutral-100 group-hover:text-white group-hover:bg-primary">
-                            <ShoppingCart />
-                        </span>
-                        <div>
-                            <span className="text-neutral-600 dark:text-neutral-100 text-sm font-medium">Sales</span>
-                            <h6 className="text-base font-semibold mb-0">$200k</h6>
-                        </div>
-                    </div>
-
-                    <div className="inline-flex items-center gap-2 p-2 rounded-lg border transition hover:border-primary border-neutral-200 dark:border-neutral-500 dark:hover:border-primary pe-[46px] br-hover-primary group">
-                        <span className="bg-neutral-100 dark:bg-slate-600 w-[44px] h-[44px] text-2xl transition rounded-lg flex justify-center items-center text-neutral-600 dark:text-neutral-100 group-hover:text-white group-hover:bg-primary">
-                            <SquareKanban />
-                        </span>
-                        <div>
-                            <span className="text-neutral-600 dark:text-neutral-100 text-sm font-medium">Income</span>
-                            <h6 className="text-base font-semibold mb-0">$200k</h6>
-                        </div>
-                    </div>
-
-                    <div className="inline-flex items-center gap-2 p-2 rounded-lg border transition hover:border-primary border-neutral-200 dark:border-neutral-500 dark:hover:border-primary pe-[46px] br-hover-primary group">
-                        <span className="bg-neutral-100 dark:bg-slate-600 w-[44px] h-[44px] text-2xl transition rounded-lg flex justify-center items-center text-neutral-600 dark:text-neutral-100 group-hover:text-white group-hover:bg-primary">
-                            <ArrowBigUp />
-                        </span>
-                        <div>
-                            <span className="text-neutral-600 dark:text-neutral-100 text-sm font-medium">Profit</span>
-                            <h6 className="text-base font-semibold mb-0">$200k</h6>
-                        </div>
-                    </div>
+                  <h4 className="text-xl font-bold">
+                    $
+                    {dashboard?.tiles?.total_revenue?.toFixed(
+                      2
+                    ) || "0.00"}
+                  </h4>
                 </div>
 
-                <div className="-mb-4 mt-0">
-                    <BarChartYear chartHeight={330} />
+              </div>
+            </div>
+
+            {/* Shipments */}
+
+            <div className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-4 bg-gradient-to-br from-yellow-50 to-white dark:from-neutral-900 dark:to-neutral-900">
+
+              <div className="flex items-center gap-3">
+
+                <div className="w-12 h-12 rounded-xl bg-yellow-100 text-yellow-600 flex items-center justify-center">
+                  <TrendingUp size={22} />
                 </div>
-                
-            </CardContent>
-        </Card>
+
+                <div>
+                  <p className="text-sm text-neutral-500">
+                    Total Shipments
+                  </p>
+
+                  <h4 className="text-xl font-bold">
+                    {
+                      dashboard?.tiles
+                        ?.total_shipments
+                    }
+                  </h4>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Completed */}
+
+            <div className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-4 bg-gradient-to-br from-green-50 to-white dark:from-neutral-900 dark:to-neutral-900">
+
+              <div className="flex items-center gap-3">
+
+                <div className="w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center">
+                  <ArrowBigUp size={22} />
+                </div>
+
+                <div>
+                  <p className="text-sm text-neutral-500">
+                    Completed
+                  </p>
+
+                  <h4 className="text-xl font-bold">
+                    {
+                      dashboard?.tiles
+                        ?.completed_shipments
+                    }
+                  </h4>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          {/* ============================================
+              CHART
+          ============================================= */}
+
+          <div className="mt-8">
+
+            <BarChartYear
+              chartHeight={330}
+              labels={
+                revenueChart
+                  ?.labels || []
+              }
+              seriesData={
+                revenueChart
+                  ?.data || []
+              }
+            />
+
+          </div>
+
+        </CardContent>
+      </Card>
     );
-};
+  };
 
 export default EarningStatisticsCard;

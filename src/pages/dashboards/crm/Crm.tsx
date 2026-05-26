@@ -8,7 +8,7 @@ const CountriesStatusCard = lazy(() => import("./components/CountriesStatusCard"
 const CustomerOverviewCard = lazy(() => import("./components/CustomerOverviewCard"))
 const EarningStatisticsCard = lazy(() => import("./components/EarningStatisticsCard"))
 const LastTransactionCard = lazy(() => import("./components/LastTransactionCard"))
-const RevenueGrowthCard = lazy(() => import("./components/RevenueGrowthCard"))
+const ShipmentAnalyticsCard = lazy(() => import("./components/ShipmentAnalyticsCard"))
 const StatsCard = lazy(() => import("./components/StatsCard"))
 const TodoListRecentCard = lazy(() => import("./components/TodoListRecentCard"))
 
@@ -33,7 +33,7 @@ const Crm = () => {
                             </LazyWrapper>
                 </div> */}
 
-                <div className="lg:col-span-12 2xl:col-span-8">
+                <div className="lg:col-span-6 2xl:col-span-6">
                     <LazyWrapper>
                         <EarningStatisticsCard />
                     </LazyWrapper>
@@ -54,9 +54,9 @@ const Crm = () => {
                     </div>
                 </div> */}
 
-                <div className="lg:col-span-6 2xl:col-span-4">
+                <div className="lg:col-span-6 2xl:col-span-6">
                     <LazyWrapper>
-                        <ClientPaymentStatusCard />
+                        <ShipmentAnalyticsCard />
                     </LazyWrapper>
                 </div>
 

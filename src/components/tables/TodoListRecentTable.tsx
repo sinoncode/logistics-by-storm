@@ -1,157 +1,229 @@
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table";
-import { EllipsisVertical } from "lucide-react";
-import { Badge } from "../ui/badge";
 
-interface TransactionsDataType {
-  name: string;
-  id: string;
-  assignedTo: string;
-  dueDate: string;
-  status: "Active" | "Rejected" | "Pending";
-  statusVariant:
-    | "default"
-    | "secondary"
-    | "destructive"
-    | "outline"
-    | "success"
-    | "warning"
-    | "info"
-    | "danger";
-}
+import { Badge } from "@/components/ui/badge";
 
-const transactions: TransactionsDataType[] = [
-  {
-    name: "Hotel Management System",
-    id: "#5632",
-    assignedTo: "Kathryn Murphy",
-    dueDate: "27 Mar 2024",
-    status: "Active",
-    statusVariant: "success",
-  },
-  {
-    name: "Hotel Management System",
-    id: "#5632",
-    assignedTo: "Darlene Robertson",
-    dueDate: "27 Mar 2024",
-    status: "Rejected",
-    statusVariant: "danger",
-  },
-  {
-    name: "Hotel Management System",
-    id: "#5632",
-    assignedTo: "Courtney Henry",
-    dueDate: "27 Mar 2024",
-    status: "Pending",
-    statusVariant: "warning",
-  },
-  {
-    name: "Hotel Management System",
-    id: "#5632",
-    assignedTo: "Jenny Wilson",
-    dueDate: "27 Mar 2024",
-    status: "Active",
-    statusVariant: "success",
-  },
-];
+import {
+  EllipsisVertical,
+  Eye,
+} from "lucide-react";
 
-const TodoListRecentTable = () => {
-  return (
-    <Table className="table-auto border-spacing-0 border-separate">
-      <TableHeader>
-        <TableRow className="border-0">
-          <TableHead className="px-4 h-12 bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 rounded-tl-lg">
-            Task Name
-          </TableHead>
-          <TableHead className="px-4 h-12 bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
-            Assigned To
-          </TableHead>
-          <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
-            Due Date
-          </TableHead>
-          <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
-            Status
-          </TableHead>
-          <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 rounded-tr-lg">
-            Action
-          </TableHead>
-        </TableRow>
-      </TableHeader>
+import { Link } from "react-router-dom";
 
-      <TableBody>
-        {transactions.map((txn, index) => {
-          const isLast = index === transactions.length - 1;
-          return (
-            <TableRow key={index}>
-              {/* Task Name */}
-              <TableCell
-                className={`py-6 px-4 border-b first:border-s last:border-e border-neutral-200 dark:border-slate-600 ${
-                  isLast ? "rounded-bl-lg" : ""
-                }`}
-              >
-                <div>
-                  <span className="block font-medium text-base text-neutral-700 dark:text-neutral-200">
-                    {txn.name}
-                  </span>
-                  <span className="block text-sm text-neutral-500 dark:text-neutral-300 font-normal">
-                    {txn.id}
-                  </span>
-                </div>
-              </TableCell>
+import { useDashboardStore }
+  from "@/store/dashboardStore";
 
-              {/* Assigned To */}
-              <TableCell className="py-6 px-4 border-b first:border-s last:border-e border-neutral-200 dark:border-slate-600">
-                {txn.assignedTo}
-              </TableCell>
+const getStatusVariant = (
+  status: string
+):
+  | "success"
+  | "warning"
+  | "danger"
+  | "info" => {
+  switch (status) {
+    case "delivered":
+      return "success";
 
-              {/* Due Date */}
-              <TableCell className="py-6 px-4 border-b first:border-s last:border-e border-neutral-200 dark:border-slate-600 text-center">
-                {txn.dueDate}
-              </TableCell>
+    case "out_for_delivery":
+      return "info";
 
-              {/* Status */}
-              <TableCell className="py-6 px-4 border-b first:border-s last:border-e border-neutral-200 dark:border-slate-600 text-center">
-                <Badge variant={txn.statusVariant} className="rounded-[50rem]">
-                  {txn.status}
-                </Badge>
-              </TableCell>
+    case "received_at_origin":
+      return "warning";
 
-              {/* Action */}
-              <TableCell
-                className={`py-6 px-4 border-b first:border-s last:border-e border-neutral-200 dark:border-slate-600 text-center ${
-                  isLast ? "rounded-br-lg" : ""
-                }`}
-              >
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="text-2xl px-2.5 py-2.5 rounded-lg text-neutral-700 dark:text-white hover:bg-neutral-200 dark:hover:bg-slate-700 data-[state=open]:bg-gray-300 dark:data-[state=open]:bg-slate-600 cursor-pointer">
-                    <EllipsisVertical className="w-5 h-5" />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem>Profile</DropdownMenuItem>
-                    <DropdownMenuItem>Billing</DropdownMenuItem>
-                    <DropdownMenuItem>Team</DropdownMenuItem>
-                    <DropdownMenuItem>Subscription</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </TableCell>
-            </TableRow>
-          );
-        })}
-      </TableBody>
-    </Table>
+    default:
+      return "danger";
+  }
+};
+
+const formatStatus = (
+  status: string
+) => {
+  return status
+    .replace(/_/g, " ")
+    .replace(
+      /\b\w/g,
+      (char) =>
+        char.toUpperCase()
+    );
+};
+
+const formatDate = (
+  date: string
+) => {
+  return new Date(
+    date
+  ).toLocaleDateString(
+    "en-IN",
+    {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }
   );
 };
+
+const TodoListRecentTable =
+  () => {
+    const { dashboard } =
+      useDashboardStore();
+
+    const shipments =
+      dashboard?.recent_shipments ||
+      [];
+
+    return (
+      <Table className="table-auto border-spacing-0 border-separate">
+
+        {/* =========================================
+            TABLE HEADER
+        ========================================== */}
+
+        <TableHeader>
+          <TableRow className="border-0">
+
+            <TableHead className="px-4 h-12 bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 rounded-tl-lg">
+              Tracking
+            </TableHead>
+
+            <TableHead className="px-4 h-12 bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
+              Customer
+            </TableHead>
+
+            {/* <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
+              Created At
+            </TableHead> */}
+
+            <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
+              Status
+            </TableHead>
+
+            <TableHead className="px-4 h-12 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 rounded-tr-lg">
+              Action
+            </TableHead>
+
+          </TableRow>
+        </TableHeader>
+
+        {/* =========================================
+            TABLE BODY
+        ========================================== */}
+
+        <TableBody>
+
+          {shipments.map(
+            (
+              shipment,
+              index
+            ) => {
+              const isLast =
+                index ===
+                shipments.length - 1;
+
+              return (
+                <TableRow
+                  key={
+                    shipment.id
+                  }
+                >
+
+                  {/* Tracking */}
+
+                  <TableCell
+                    className={`py-5 px-4 border-b first:border-s last:border-e border-neutral-200 dark:border-slate-600 ${
+                      isLast
+                        ? "rounded-bl-lg"
+                        : ""
+                    }`}
+                  >
+                    <div>
+                      <span className="block font-semibold text-sm text-neutral-700 dark:text-neutral-100">
+                        {
+                          shipment.tracking_number
+                        }
+                      </span>
+
+                    </div>
+                  </TableCell>
+
+                  {/* Customer */}
+
+                  <TableCell className="py-5 px-4 border-b first:border-s last:border-e border-neutral-200 dark:border-slate-600">
+
+                    <span className="font-medium text-sm">
+                      {
+                        shipment.customer_name
+                      }
+                    </span>
+
+                  </TableCell>
+
+                  {/* Date */}
+
+                  {/* <TableCell className="py-5 px-4 border-b first:border-s last:border-e border-neutral-200 dark:border-slate-600 text-center text-sm">
+
+                    {formatDate(
+                      shipment.created_at
+                    )}
+
+                  </TableCell> */}
+
+                  {/* Status */}
+
+                  <TableCell className="py-5 px-4 border-b first:border-s last:border-e border-neutral-200 dark:border-slate-600 text-center">
+
+                    <Badge
+                      variant={getStatusVariant(
+                        shipment.status
+                      )}
+                      className="rounded-full px-3 py-1 text-xs"
+                    >
+                      {formatStatus(
+                        shipment.status
+                      )}
+                    </Badge>
+
+                  </TableCell>
+
+                  {/* Action */}
+
+                  <TableCell
+                    className={`py-5 px-4 border-b first:border-s last:border-e border-neutral-200 dark:border-slate-600 text-center ${
+                      isLast
+                        ? "rounded-br-lg"
+                        : ""
+                    }`}
+                  >
+
+                   <Link
+                            to={`/shipments-detail/${shipment.id}`}
+                            className="flex items-center gap-2"
+                          >
+                            <Eye className="w-4 h-4" />
+                          </Link>
+
+                  </TableCell>
+
+                </TableRow>
+              );
+            }
+          )}
+
+        </TableBody>
+      </Table>
+    );
+  };
 
 export default TodoListRecentTable;

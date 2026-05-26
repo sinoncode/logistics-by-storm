@@ -8,7 +8,7 @@ const LastTransactionCard = () => {
             <CardContent className="card-body p-0">
                 <div className="flex items-center flex-wrap gap-2 justify-between py-4 px-6 border-b border-neutral-200 dark:border-slate-600">
                     <h6 className="mb-0 font-bold text-lg">Recent Payments</h6>
-                    <CommonLink />
+                    <CommonLink href='/payment-lists'/>
                 </div>
 
                 <div className="p-6">
