@@ -8,16 +8,38 @@ interface ShipmentLineChartProps {
   seriesData: number[];
 
   chartHeight?: number;
+
+  filter?: string;
 }
 
 const ShipmentLineChart = ({
   labels,
   seriesData,
   chartHeight = 300,
+  filter = "yearly",
 }: ShipmentLineChartProps) => {
+
+  /* =========================================
+     FORMAT LABELS
+  ========================================= */
+
+const formattedLabels =
+  filter === "monthly"
+    ? labels.map((label) => {
+        // "01 May"
+        // becomes "01"
+
+        return label.split(" ")[0];
+      })
+    : labels;
+
+  /* =========================================
+     CHART OPTIONS
+  ========================================= */
+
   const options: ApexOptions = {
     chart: {
-      type: "line",
+      type: "area",
 
       height: chartHeight,
 
@@ -32,11 +54,21 @@ const ShipmentLineChart = ({
       animations: {
         enabled: true,
 
-        easing: "easeinout",
+        speed: 900,
 
-        speed: 800,
+        animateGradually: {
+          enabled: true,
+          delay: 150,
+        },
+
+        dynamicAnimation: {
+          enabled: true,
+          speed: 500,
+        },
       },
     },
+
+    colors: ["#487FFF"],
 
     stroke: {
       curve: "smooth",
@@ -44,12 +76,24 @@ const ShipmentLineChart = ({
       width: 4,
     },
 
-    colors: ["#487FFF"],
+    fill: {
+      type: "gradient",
+
+      gradient: {
+        shadeIntensity: 1,
+
+        opacityFrom: 0.35,
+
+        opacityTo: 0.03,
+
+        stops: [0, 100],
+      },
+    },
 
     grid: {
       borderColor: "#e5e7eb",
 
-      strokeDashArray: 4,
+      strokeDashArray: 5,
 
       padding: {
         left: 10,
@@ -58,21 +102,44 @@ const ShipmentLineChart = ({
     },
 
     markers: {
-      size: 5,
+      size: 4,
 
       strokeWidth: 2,
 
       hover: {
-        size: 8,
+        size: 7,
       },
     },
 
+    dataLabels: {
+      enabled: false,
+    },
+
     xaxis: {
-      categories: labels,
+      categories:
+        formattedLabels,
 
       labels: {
+        show: true,
+
+        rotate: 0,
+
+        hideOverlappingLabels:
+          false,
+
+        trim: true,
+
         style: {
           fontSize: "12px",
+
+          colors:
+            "#6b7280",
+        },
+
+        formatter: (
+          value: string
+        ) => {
+          return value;
         },
       },
 
@@ -97,29 +164,33 @@ const ShipmentLineChart = ({
       theme: "light",
 
       y: {
-        formatter: (value) =>
+        formatter: (
+          value: number
+        ) =>
           `${value} Shipments`,
       },
     },
 
-    dataLabels: {
-      enabled: false,
-    },
+    responsive: [
+      {
+        breakpoint: 768,
 
-    fill: {
-      type: "gradient",
+        options: {
+          stroke: {
+            width: 3,
+          },
 
-      gradient: {
-        shadeIntensity: 1,
-
-        opacityFrom: 0.4,
-
-        opacityTo: 0.05,
-
-        stops: [0, 100],
+          markers: {
+            size: 3,
+          },
+        },
       },
-    },
+    ],
   };
+
+  /* =========================================
+     SERIES
+  ========================================= */
 
   const series = [
     {

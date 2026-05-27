@@ -30,18 +30,13 @@ const CustomerList = () => {
   return (
     <>
       <Breadcrumb
-        title="Users List"
-        text="Users List"
+        title="Customer List"
+        text="Customer List"
       />
 
       <LazyWrapper>
         <Card className="card h-full !p-0 !block border-0 overflow-hidden mb-6">
 
-          <CardHeader className="border-b border-neutral-200 dark:border-slate-600 px-6 py-4">
-            <h2 className="text-xl font-semibold">
-              Customers List
-            </h2>
-          </CardHeader>
 
           <CardContent className="p-6">
 

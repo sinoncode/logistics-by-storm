@@ -151,7 +151,7 @@ export const columns:
           <Button
             size="icon"
             variant="ghost"
-            className="rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300"
+            className="rounded-4xl bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300"
             onClick={() =>
               navigate(
                 `/payemnts-details/${row.original.id}`
@@ -163,13 +163,13 @@ export const columns:
 
           {/* DELETE */}
 
-          <Button
+          {/* <Button
             size="icon"
             variant="ghost"
             className="rounded-xl bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-300"
           >
             <Trash2 className="w-4 h-4" />
-          </Button>
+          </Button> */}
         </div>
       );
     },

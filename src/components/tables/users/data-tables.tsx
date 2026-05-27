@@ -22,12 +22,12 @@ import {
   SlidersHorizontal,
 } from "lucide-react";
 
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+// import {
+//   DropdownMenu,
+//   DropdownMenuCheckboxItem,
+//   DropdownMenuContent,
+//   DropdownMenuTrigger,
+// } from "@/components/ui/dropdown-menu";
 
 import {
   Table,
@@ -122,7 +122,7 @@ export function DataTable<TData, TValue>({
             onChange={(e) =>
               setGlobalFilter(e.target.value)
             }
-            className="pl-10 h-11 rounded-2xl"
+            className="pl-10 h-11 rounded-xl"
           />
         </div>
 
@@ -164,7 +164,7 @@ export function DataTable<TData, TValue>({
 
       {/* TABLE */}
 
-      <div className="rounded-3xl border overflow-hidden">
+      <div className="rounded-xl border overflow-hidden">
         <Table>
           <TableHeader>
             {table

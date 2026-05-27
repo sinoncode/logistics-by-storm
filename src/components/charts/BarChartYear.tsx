@@ -8,6 +8,8 @@ interface BarChartYearProps {
   labels?: string[];
 
   seriesData?: number[];
+
+  filter?: string;
 }
 
 const BarChartYear = ({
@@ -16,6 +18,8 @@ const BarChartYear = ({
   labels = [],
 
   seriesData = [],
+
+  filter,
 }: BarChartYearProps) => {
   const chartOptions: ApexOptions = {
     chart: {
@@ -46,15 +50,48 @@ const BarChartYear = ({
       show: false,
     },
 
-    xaxis: {
-      categories: labels,
+  xaxis: {
+  categories: labels,
 
-      labels: {
-        style: {
-          fontSize: "12px",
-        },
-      },
+  labels: {
+    show: true,
+
+    formatter: (
+      value: string
+    ) => {
+
+      /* =========================
+         MONTHLY
+         Show only dates
+      ========================= */
+
+      if (
+        filter === "monthly"
+      ) {
+
+        // 01 May => 01
+
+        return value.split(
+          " "
+        )[0];
+      }
+
+      /* =========================
+         YEARLY / WEEKLY
+      ========================= */
+
+      return value;
     },
+  },
+
+  axisBorder: {
+    show: true,
+  },
+
+  axisTicks: {
+    show: true,
+  },
+},
 
     yaxis: {
       labels: {

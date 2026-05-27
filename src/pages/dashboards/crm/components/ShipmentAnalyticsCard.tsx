@@ -161,17 +161,16 @@ const ShipmentAnalyticsCard =
                 Loading shipment chart...
               </div>
             ) : (
-              <ShipmentLineChart
-                chartHeight={320}
-                labels={
-                  shipmentChart?.labels ||
-                  []
-                }
-                seriesData={
-                  shipmentChart?.data ||
-                  []
-                }
-              />
+             <ShipmentLineChart
+  labels={
+    shipmentChart?.labels || []
+  }
+  seriesData={
+    shipmentChart?.data || []
+  }
+  filter={filter}
+  chartHeight={320}
+/>
             )}
           </div>
         </CardContent>

@@ -84,7 +84,11 @@ const ProfileDropdown = () => {
             </h6>
 
             <span className="text-sm text-neutral-500 dark:text-neutral-300">
-              {user?.role?.[0] || "Admin"}
+              {(user?.role?.[0] || "Admin")
+  .replace(/_/g, " ")
+  .replace(/\b\w/g, (char) =>
+    char.toUpperCase()
+  )}
             </span>
 
           </div>
@@ -108,7 +112,7 @@ const ProfileDropdown = () => {
 
             </li>
 
-            <li className="flex">
+            {/* <li className="flex">
 
               <Link
                 to="/company"
@@ -118,7 +122,7 @@ const ProfileDropdown = () => {
                 Settings
               </Link>
 
-            </li>
+            </li> */}
 
             <li className="flex ms-[2px]">
 

@@ -209,7 +209,7 @@ const TodoListRecentTable =
 
                    <Link
                             to={`/shipments-detail/${shipment.id}`}
-                            className="flex items-center gap-2"
+                            className="w-9 h-9 rounded-lg border border-neutral-200 dark:border-slate-600 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-200"
                           >
                             <Eye className="w-4 h-4" />
                           </Link>

@@ -1,7 +1,18 @@
 import {
   House,
   Settings,
-  UsersRound,
+
+  Package,
+  Truck,
+  ClipboardList,
+
+  Users,
+
+  ShieldCheck,
+  CreditCard,
+
+  Bell,
+  Building2,
 } from "lucide-react";
 
 export const data = {
@@ -12,80 +23,38 @@ export const data = {
       icon: House,
       isActive: true,
       items: [
-        // {
-        //   title: "AI",
-        //   url: "/dashboard",
-        //   circleColor: "bg-primary",
-        // },
-        // {
-        //   title: "Logistics Dashboard",
-        //   url: "/crm",
-        //   circleColor: "bg-yellow-500",
-        // },
-        // {
-        //   title: "eCommerce",
-        //   url: "/ecommerce",
-        //   circleColor: "bg-cyan-500",
-        // },
-        // {
-        //   title: "Cryptocurrency",
-        //   url: "/cryptocurrency",
-        //   circleColor: "bg-red-500",
-        // },
-        // {
-        //   title: "Investment",
-        //   url: "/investment",
-        //   circleColor: "bg-green-600",
-        // },
-        // {
-        //   title: "LMS / Learning System",
-        //   url: "/lms",
-        //   circleColor: "bg-violet-600",
-        // },
-        // {
-        //   title: "NFT & Gaming",
-        //   url: "/nft",
-        //   circleColor: "bg-primary",
-        // },
-        // {
-        //   title: "Medical",
-        //   url: "/medical",
-        //   circleColor: "bg-red-600",
-        // },
-        // {
-        //   title: "Analytics",
-        //   url: "/analytics",
-        //   circleColor: "bg-violet-600",
-        // },
-        // {
-        //   title: "POS & Inventory",
-        //   url: "/inventory",
-        //   circleColor: "bg-yellow-500",
-        // },
-        // {
-        //   title: "Finance & Banking",
-        //   url: "/finance",
-        //   circleColor: "bg-green-500",
-        // },
-        // {
-        //   title: "Booking System",
-        //   url: "/booking",
-        //   circleColor: "bg-red-500",
-        // },
-        // {
-        //   title: "Help Desk",
-        //   url: "/help",
-        //   circleColor: "bg-blue-500",
-        // },
+       
       ],
     },
+
+ {
+      label: "Shipments",
+    },
+    {
+      title: "Shipment Requests",
+      url: "/shipment-request",
+      icon: ClipboardList,
+      isActive: true,
+      items: [
+      ],
+    },
+    {
+      title: "Shipments",
+      url: "/shipments",
+      icon: Truck,
+      isActive: true,
+      items: [
+      ],
+    },
+
+
     {
       label: "Customer",
     },
     {
       title: "Customers",
       url: "/customers-list",
-      icon: UsersRound,
+      icon: Users,
       isActive: true,
       items: [
         // {
@@ -111,7 +80,7 @@ export const data = {
     {
       title: "Teams",
       url: "/teams-list",
-      icon: UsersRound,
+      icon: ShieldCheck,
       isActive: true,
       items: [
         {
@@ -131,33 +100,14 @@ export const data = {
         // },
       ],
     },
-    {
-      label: "Shipments",
-    },
-    {
-      title: "Shipment Requests",
-      url: "/shipment-request",
-      icon: UsersRound,
-      isActive: true,
-      items: [
-      ],
-    },
-    {
-      title: "Shipments",
-      url: "/shipments",
-      icon: UsersRound,
-      isActive: true,
-      items: [
-      ],
-    },
-
+   
      {
       label: "Payments",
     },
     {
       title: "Payments",
       url: "/payment-lists",
-      icon: UsersRound,
+      icon: CreditCard,
       isActive: true,
       items: [
       ],

@@ -133,7 +133,7 @@ export const columns: ColumnDef<ShipmentRequest>[] = [
           <Button
             size="icon"
             variant="ghost"
-            className="rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300"
+            className="rounded-4xl bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300"
             onClick={() =>
               navigate(
                 `/shipment-request-detail/${row.original.id}`
@@ -143,13 +143,13 @@ export const columns: ColumnDef<ShipmentRequest>[] = [
             <Eye className="w-5 h-5" />
           </Button>
 
-          <Button
+          {/* <Button
             size="icon"
             variant="ghost"
-            className="rounded-xl bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-300"
+            className="rounded-4xl bg-red-500/10 text-red-500 hover:bg-red-400 hover:text-white transition-all duration-300"
           >
             <Trash2 className="w-5 h-5" />
-          </Button>
+          </Button> */}
         </div>
       );
     },

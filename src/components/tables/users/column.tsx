@@ -64,11 +64,6 @@ ColumnDef<Customer>[] = [
             <p className="font-semibold text-sm text-slate-900 dark:text-white">
               {customer.name}
             </p>
-
-            {/* <p className="text-xs text-muted-foreground">
-              {customer.customer_code ||
-                "No Customer Code"}
-            </p> */}
           </div>
         </div>
       );
@@ -184,7 +179,7 @@ ColumnDef<Customer>[] = [
           <Button
             size="icon"
             variant="ghost"
-            className="rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300"
+            className="rounded-4xl bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300"
             onClick={() =>
               navigate(
                 `/customer-details/${row.original.id}`
@@ -196,13 +191,13 @@ ColumnDef<Customer>[] = [
 
           {/* DELETE */}
 
-          <Button
+          {/* <Button
             size="icon"
             variant="ghost"
             className="rounded-xl bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-300"
           >
             <Trash2 className="w-4 h-4" />
-          </Button>
+          </Button> */}
         </div>
       );
     },

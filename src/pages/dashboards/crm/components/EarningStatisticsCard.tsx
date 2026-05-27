@@ -21,6 +21,8 @@ import { useDashboardStore }
 import { useRevenueChartStore }
   from "@/store/revenueChartStore";
 
+  import { useMemo } from "react";
+
 const EarningStatisticsCard =
   () => {
 
@@ -84,6 +86,109 @@ const EarningStatisticsCard =
     };
 
     /* =====================================================
+   REPORT PERIOD LABEL
+===================================================== */
+
+const reportLabel =
+  useMemo(() => {
+
+    if (
+      !revenueChart?.labels?.length
+    ) {
+      return "";
+    }
+
+    /* =========================
+       MONTHLY
+    ========================= */
+
+    if (
+      filter === "monthly"
+    ) {
+
+      const firstLabel =
+        revenueChart.labels[0];
+
+      // Example: 01 May
+
+      const month =
+        firstLabel.split(" ")[1];
+
+      return `${month} Monthly Report`;
+    }
+
+    /* =========================
+       YEARLY
+    ========================= */
+
+    if (
+      filter === "yearly"
+    ) {
+
+      const currentYear =
+        new Date().getFullYear();
+
+      return `${currentYear} Yearly Report`;
+    }
+
+    /* =========================
+       WEEKLY
+    ========================= */
+
+   if (
+  filter === "weekly"
+) {
+
+  const fromDate =
+    new Date(
+      revenueChart.range.from
+    );
+
+  const month =
+    fromDate.toLocaleString(
+      "default",
+      {
+        month: "short",
+      }
+    );
+
+  const day =
+    fromDate.getDate();
+
+  let week =
+    "1st";
+
+  if (
+    day >= 8 &&
+    day <= 14
+  ) {
+    week = "2nd";
+  } else if (
+    day >= 15 &&
+    day <= 21
+  ) {
+    week = "3rd";
+  } else if (
+    day >= 22 &&
+    day <= 28
+  ) {
+    week = "4th";
+  } else if (
+    day >= 29
+  ) {
+    week = "5th";
+  }
+
+  return `${month} ${week} Week Report`;
+}
+
+    return "";
+  }, [
+    filter,
+    revenueChart,
+  ]);
+
+    /* =====================================================
        LOADING
     ===================================================== */
 
@@ -143,7 +248,7 @@ const EarningStatisticsCard =
               STATS
           ============================================= */}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 mt-7">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 gap-4 mt-7">
 
             {/* Revenue */}
 
@@ -175,31 +280,30 @@ const EarningStatisticsCard =
 
             <div className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-4 bg-gradient-to-br from-yellow-50 to-white dark:from-neutral-900 dark:to-neutral-900">
 
-              <div className="flex items-center gap-3">
+  <div className="flex items-center gap-3">
 
-                <div className="w-12 h-12 rounded-xl bg-yellow-100 text-yellow-600 flex items-center justify-center">
-                  <TrendingUp size={22} />
-                </div>
+    <div className="w-12 h-12 rounded-xl bg-yellow-100 text-yellow-600 flex items-center justify-center">
+      <TrendingUp size={22} />
+    </div>
 
-                <div>
-                  <p className="text-sm text-neutral-500">
-                    Total Shipments
-                  </p>
+    <div>
 
-                  <h4 className="text-xl font-bold">
-                    {
-                      dashboard?.tiles
-                        ?.total_shipments
-                    }
-                  </h4>
-                </div>
+      <p className="text-sm text-neutral-500">
+        Report Period
+      </p>
 
-              </div>
-            </div>
+      <h4 className="text-lg font-bold">
+        {reportLabel}
+      </h4>
+
+    </div>
+
+  </div>
+</div>
 
             {/* Completed */}
 
-            <div className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-4 bg-gradient-to-br from-green-50 to-white dark:from-neutral-900 dark:to-neutral-900">
+            {/* <div className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-4 bg-gradient-to-br from-green-50 to-white dark:from-neutral-900 dark:to-neutral-900">
 
               <div className="flex items-center gap-3">
 
@@ -221,7 +325,7 @@ const EarningStatisticsCard =
                 </div>
 
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* ============================================
@@ -230,18 +334,16 @@ const EarningStatisticsCard =
 
           <div className="mt-8">
 
-            <BarChartYear
-              chartHeight={330}
-              labels={
-                revenueChart
-                  ?.labels || []
-              }
-              seriesData={
-                revenueChart
-                  ?.data || []
-              }
-            />
-
+          <BarChartYear
+  chartHeight={330}
+  labels={
+    revenueChart?.labels || []
+  }
+  seriesData={
+    revenueChart?.data || []
+  }
+  filter={filter}
+/>
           </div>
 
         </CardContent>

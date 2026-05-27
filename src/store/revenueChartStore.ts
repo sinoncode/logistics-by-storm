@@ -12,6 +12,13 @@ const RevenueChartSchema =
   z.object({
     filter: z.string(),
 
+     range: z.object({
+      from: z.string(),
+
+      to: z.string(),
+    }),
+
+    
     labels: z.array(
       z.string()
     ),

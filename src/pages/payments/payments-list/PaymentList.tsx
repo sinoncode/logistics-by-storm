@@ -31,6 +31,13 @@ const PaymentsList = () => {
     fetchPayments();
   }, []);
 
+  const paidPayments =
+  payments.filter(
+    (payment) =>
+      payment.status?.toLowerCase() ===
+      "paid"
+  );
+
   return (
     <>
       <Breadcrumb
@@ -41,11 +48,6 @@ const PaymentsList = () => {
       <LazyWrapper>
         <Card className="card h-full !p-0 !block border-0 overflow-hidden mb-6">
 
-          <CardHeader className="border-b border-neutral-200 dark:border-slate-600 px-6 py-4">
-            <h2 className="text-xl font-semibold">
-              Payments List
-            </h2>
-          </CardHeader>
 
           <CardContent className="p-6">
 
@@ -56,7 +58,7 @@ const PaymentsList = () => {
             ) : (
               <DataTable
               columns={columns}
-                data={payments}
+                data={paidPayments} 
               />
             )}
 

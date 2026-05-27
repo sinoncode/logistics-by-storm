@@ -1,53 +1,216 @@
-import UserGridBgImageHere from '@/assets/images/user-grid/user-grid-bg1.png';
-import UserGridImageHere from '@/assets/images/user-grid/user-grid-img14.png';
+import { useEffect } from "react";
 
+import UserGridBgImageHere from "@/assets/images/user-grid/logistics-by-storm-user-profile-background.png";
+
+import UserGridImageHere from "@/assets/images/user-grid/logistics-by-storm-user-profile-image.png";
+
+import { useProfileStore } from "@/store/profileStore";
 
 const ViewProfileSidebar = () => {
+
+  /* =====================================================
+     PROFILE STORE
+  ===================================================== */
+
+  const {
+    profile,
+    loading,
+    fetchProfile,
+  } = useProfileStore();
+
+  /* =====================================================
+     FETCH PROFILE
+  ===================================================== */
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
+  /* =====================================================
+     LOADING
+  ===================================================== */
+
+  if (loading) {
     return (
-        <div className="user-grid-card relative border border-slate-200 dark:border-slate-600 rounded-2xl overflow-hidden bg-white dark:bg-[#273142] h-full">
-            <img src={UserGridBgImageHere} alt="" className="w-full object-fit-cover" />
-            <div className="pb-6 ms-6 mb-6 me-6 -mt-[100px]">
-                <div className="text-center border-b border-slate-200 dark:border-slate-600">
-                    <img src={UserGridImageHere} alt="" className="border br-white border-width-2-px w-200-px h-[200px] rounded-full object-fit-cover mx-auto" />
-                    <h6 className="mb-0 mt-4">Robiul Hasan</h6>
-                    <span className="text-neutral-500 dark:text-neutral-300 mb-4">ifrandom@gmail.com</span>
-                </div>
-                <div className="mt-6">
-                    <h6 className="text-xl mb-4">Personal Info</h6>
-                    <ul>
-                        <li className="flex items-center gap-1 mb-3">
-                            <span className="w-[30%] text-base font-semibold text-neutral-600 dark:text-neutral-200">Full Name</span>
-                            <span className="w-[70%] text-neutral-500 dark:text-neutral-300 font-medium">: Robiul Hasan</span>
-                        </li>
-                        <li className="flex items-center gap-1 mb-3">
-                            <span className="w-[30%] text-base font-semibold text-neutral-600 dark:text-neutral-200"> Email</span>
-                            <span className="w-[70%] text-neutral-500 dark:text-neutral-300 font-medium">: robiulhasan9559@gmail.com</span>
-                        </li>
-                        <li className="flex items-center gap-1 mb-3">
-                            <span className="w-[30%] text-base font-semibold text-neutral-600 dark:text-neutral-200"> Phone Number</span>
-                            <span className="w-[70%] text-neutral-500 dark:text-neutral-300 font-medium">: (1) 2536 2561 2365</span>
-                        </li>
-                        <li className="flex items-center gap-1 mb-3">
-                            <span className="w-[30%] text-base font-semibold text-neutral-600 dark:text-neutral-200"> Department</span>
-                            <span className="w-[70%] text-neutral-500 dark:text-neutral-300 font-medium">: Development</span>
-                        </li>
-                        <li className="flex items-center gap-1 mb-3">
-                            <span className="w-[30%] text-base font-semibold text-neutral-600 dark:text-neutral-200"> Designation</span>
-                            <span className="w-[70%] text-neutral-500 dark:text-neutral-300 font-medium">: Front End Developer</span>
-                        </li>
-                        <li className="flex items-center gap-1 mb-3">
-                            <span className="w-[30%] text-base font-semibold text-neutral-600 dark:text-neutral-200"> Languages</span>
-                            <span className="w-[70%] text-neutral-500 dark:text-neutral-300 font-medium">: English</span>
-                        </li>
-                        <li className="flex items-center gap-1">
-                            <span className="w-[30%] text-base font-semibold text-neutral-600 dark:text-neutral-200"> Bio</span>
-                            <span className="w-[70%] text-neutral-500 dark:text-neutral-300 font-medium">: Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+      <div className="flex items-center justify-center h-full py-20">
+        Loading profile...
+      </div>
     );
+  }
+
+  return (
+    <div className="relative overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#273142] h-full shadow-sm">
+
+      {/* ============================================
+          COVER IMAGE
+      ============================================= */}
+
+      <img
+        src={UserGridBgImageHere}
+        alt="Background"
+        className="w-full h-[180px] object-cover"
+      />
+
+      {/* ============================================
+          PROFILE SECTION
+      ============================================= */}
+
+      <div className="px-6 pb-6 -mt-[90px]">
+
+        {/* PROFILE IMAGE */}
+
+        <div className="flex flex-col items-center text-center border-b border-slate-200 dark:border-slate-700 pb-6">
+
+          <img
+            src={
+              profile?.avatar ||
+              UserGridImageHere
+            }
+            alt="Profile"
+            className="w-[180px] h-[180px] rounded-full border-4 border-white dark:border-slate-800 object-cover shadow-lg"
+          />
+
+          {/* NAME */}
+
+          <h4 className="mt-5 text-2xl font-bold text-slate-900 dark:text-white capitalize">
+            {profile?.name || "-"}
+          </h4>
+
+          {/* EMAIL */}
+
+          <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-300">
+            {profile?.email || "-"}
+          </p>
+
+          {/* STATUS */}
+
+          <div className="mt-4">
+            <span className="px-4 py-1.5 rounded-full text-sm font-medium bg-green-100 text-green-600 dark:bg-green-500/10 dark:text-green-400 capitalize">
+              {profile?.status || "Active"}
+            </span>
+          </div>
+
+        </div>
+
+        {/* ============================================
+            PERSONAL INFO
+        ============================================= */}
+
+        <div className="mt-7">
+
+          <h5 className="text-xl font-semibold mb-5 text-slate-900 dark:text-white">
+            Personal Information
+          </h5>
+
+          <div className="space-y-4">
+
+            {/* FULL NAME */}
+
+            <div className="flex items-start">
+              <span className="w-[38%] text-sm font-semibold text-slate-700 dark:text-slate-200">
+                Full Name
+              </span>
+
+              <span className="w-[62%] text-sm text-neutral-500 dark:text-neutral-300 capitalize">
+                : {profile?.name || "-"}
+              </span>
+            </div>
+
+            {/* EMAIL */}
+
+            <div className="flex items-start">
+              <span className="w-[38%] text-sm font-semibold text-slate-700 dark:text-slate-200">
+                Email
+              </span>
+
+              <span className="w-[62%] text-sm text-neutral-500 dark:text-neutral-300 break-all">
+                : {profile?.email || "-"}
+              </span>
+            </div>
+
+            {/* PHONE */}
+
+            <div className="flex items-start">
+              <span className="w-[38%] text-sm font-semibold text-slate-700 dark:text-slate-200">
+                Phone Number
+              </span>
+
+              <span className="w-[62%] text-sm text-neutral-500 dark:text-neutral-300">
+                : {profile?.phone || "-"}
+              </span>
+            </div>
+
+            {/* GENDER */}
+
+            <div className="flex items-start">
+              <span className="w-[38%] text-sm font-semibold text-slate-700 dark:text-slate-200">
+                Gender
+              </span>
+
+              <span className="w-[62%] text-sm text-neutral-500 dark:text-neutral-300 capitalize">
+                : {profile?.gender || "-"}
+              </span>
+            </div>
+
+            {/* LANGUAGE */}
+
+            <div className="flex items-start">
+              <span className="w-[38%] text-sm font-semibold text-slate-700 dark:text-slate-200">
+                Language
+              </span>
+
+              <span className="w-[62%] text-sm text-neutral-500 dark:text-neutral-300 capitalize">
+                :{" "}
+                {profile?.preferred_language ||
+                  "English"}
+              </span>
+            </div>
+
+            {/* DATE OF BIRTH */}
+
+            {/* <div className="flex items-start">
+              <span className="w-[38%] text-sm font-semibold text-slate-700 dark:text-slate-200">
+                Date Of Birth
+              </span>
+
+              <span className="w-[62%] text-sm text-neutral-500 dark:text-neutral-300">
+                :{" "}
+                {profile?.date_of_birth ||
+                  "-"}
+              </span>
+            </div> */}
+
+            {/* COMPANY */}
+
+            {/* <div className="flex items-start">
+              <span className="w-[38%] text-sm font-semibold text-slate-700 dark:text-slate-200">
+                Company
+              </span>
+
+              <span className="w-[62%] text-sm text-neutral-500 dark:text-neutral-300">
+                :{" "}
+                {profile?.company_name ||
+                  "Not Added"}
+              </span>
+            </div> */}
+
+            {/* TIN */}
+
+            {/* <div className="flex items-start">
+              <span className="w-[38%] text-sm font-semibold text-slate-700 dark:text-slate-200">
+                TIN Number
+              </span>
+
+              <span className="w-[62%] text-sm text-neutral-500 dark:text-neutral-300">
+                : {profile?.tin || "-"}
+              </span>
+            </div> */}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ViewProfileSidebar;

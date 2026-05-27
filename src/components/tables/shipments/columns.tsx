@@ -27,7 +27,7 @@ function ActionCell({
     <Button
       size="icon"
       variant="ghost"
-      className="rounded-full"
+      className="rounded-4xl bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300"
       onClick={() =>
         navigate(
           `/shipments-detail/${shipment.id}`
@@ -38,6 +38,41 @@ function ActionCell({
     </Button>
   );
 }
+
+const statusColors: Record<
+  string,
+  string
+> = {
+  pending:
+    "bg-yellow-100 text-yellow-700 border border-yellow-200",
+
+  received_at_origin:
+    "bg-blue-100 text-blue-700 border border-blue-200",
+
+  dispatched:
+    "bg-indigo-100 text-indigo-700 border border-indigo-200",
+
+  in_transit:
+    "bg-cyan-100 text-cyan-700 border border-cyan-200",
+
+  arrived_at_destination:
+    "bg-purple-100 text-purple-700 border border-purple-200",
+
+  out_for_delivery:
+    "bg-orange-100 text-orange-700 border border-orange-200",
+
+  delivered:
+    "bg-green-100 text-green-700 border border-green-200",
+
+  exception:
+    "bg-red-100 text-red-700 border border-red-200",
+
+  cancelled:
+    "bg-red-100 text-red-700 border border-red-200",
+
+  returned:
+    "bg-gray-100 text-gray-700 border border-gray-200",
+};
 
 export const columns: ColumnDef<Shipment>[] =
   [
@@ -84,16 +119,16 @@ export const columns: ColumnDef<Shipment>[] =
 
         return (
           <Badge
-            className={
-              status === "completed"
-                ? "bg-green-500"
-                : status === "pending"
-                ? "bg-yellow-500"
-                : "bg-red-500"
-            }
-          >
-            {status}
-          </Badge>
+  className={`capitalize rounded-full px-3 py-1 font-medium ${statusColors[status]}`}
+>
+  {status
+    .replace(/_/g, " ")
+    .replace(
+      /\b\w/g,
+      (char) =>
+        char.toUpperCase()
+    )}
+</Badge>
         );
       },
     },

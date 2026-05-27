@@ -37,6 +37,7 @@ export interface Payments {
 
   currency_code: string;
 
+  status: string;
   amount: string;
 
   paid_at: string | null;
@@ -116,7 +117,7 @@ export const usePaymentsStore =
             amount: item.amount,
 
             paid_at: item.paid_at,
-
+status: item.status,
             created_at: item.created_at,
 
             shipment_request_id:
