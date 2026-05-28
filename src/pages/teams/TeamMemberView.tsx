@@ -1,295 +1,439 @@
-import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { Save } from "lucide-react";
+"use client";
+
+import {
+  useEffect,
+  useState,
+} from "react";
+
+import {
+  useParams,
+} from "react-router-dom";
+
+import {
+  Save,
+  Mail,
+  Phone,
+  ShieldCheck,
+  Calendar,
+  User,
+} from "lucide-react";
+
 import { toast } from "react-toastify";
 
-import { useLocalStorage } from "@/hooks/useLocalStorage";
+import api from "@/lib/axios";
+
 import Breadcrumb from "@/layouts/Breadcrumb";
 
-const rolesList = [
-  "Manager",
-  "Admin",
-  "Shipment Care",
-  "Delivery Agents",
-  "Super Admin",
-];
+type Member = {
+  id: string;
+
+  name: string;
+
+  email: string;
+
+  phone: string;
+
+  status: string;
+
+  created_at: string;
+
+  role?: string;
+};
+
+type Role = {
+  id: number;
+  name: string;
+};
 
 const TeamMemberView = () => {
-  const { id } = useParams();
-  const { members, setMembers } = useLocalStorage();
 
-  const member = members.find((m) => m.id === id);
-const [formData, setFormData] = useState({
-  role: member?.role || "",
-  status: member?.status || "",
-});
+  const { id } = useParams();
+
+  const [member, setMember] =
+    useState<Member | null>(null);
+
+  const [roles, setRoles] =
+    useState<Role[]>([]);
+
+  const [loading, setLoading] =
+    useState(true);
+
+  const [saving, setSaving] =
+    useState(false);
+
+  const [formData, setFormData] =
+    useState({
+      role: "",
+      status: "",
+    });
+
+  /* =========================================
+     FETCH MEMBER DETAILS
+  ========================================= */
+
+  const fetchMember =
+    async () => {
+
+      try {
+
+        const response =
+          await api.get(
+            `/admin/teams/${id}`
+          );
+
+        const data =
+          response.data.data;
+
+        setMember(data);
+
+        setFormData({
+          role:
+            data.role || "",
+
+          status:
+            data.status || "inactive",
+        });
+
+      } catch (error) {
+
+        console.error(error);
+
+        toast.error(
+          "Failed to fetch member details"
+        );
+
+      } finally {
+
+        setLoading(false);
+      }
+    };
+
+  /* =========================================
+     FETCH ROLES
+  ========================================= */
+
+  const fetchRoles =
+    async () => {
+
+      try {
+
+        const response =
+          await api.get(
+            "/admin/roles"
+          );
+
+        setRoles(
+          response?.data?.data?.data || []
+        );
+
+      } catch (error) {
+
+        console.error(error);
+      }
+    };
+
+  useEffect(() => {
+
+    fetchMember();
+
+    fetchRoles();
+
+  }, []);
+
+  /* =========================================
+     HANDLE CHANGE
+  ========================================= */
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+
+    setFormData({
+      ...formData,
+      [e.target.name]:
+        e.target.value,
+    });
+  };
+
+  /* =========================================
+     SAVE MEMBER
+  ========================================= */
+
+  const handleSave =
+    async () => {
+
+      try {
+
+        setSaving(true);
+
+        await api.put(
+          `/admin/teams/${id}`,
+          {
+            role:
+              formData.role,
+
+            status:
+              formData.status,
+          }
+        );
+
+        toast.success(
+          "Member updated successfully"
+        );
+
+      } catch (error) {
+
+        console.error(error);
+
+        toast.error(
+          "Failed to update member"
+        );
+
+      } finally {
+
+        setSaving(false);
+      }
+    };
+
+  /* =========================================
+     LOADING
+  ========================================= */
+
+  if (loading) {
+
+    return (
+      <div className="p-10 text-center text-lg font-medium">
+        Loading member details...
+      </div>
+    );
+  }
+
+  /* =========================================
+     NOT FOUND
+  ========================================= */
 
   if (!member) {
+
     return (
-      <div className="p-6 text-red-500 font-semibold">
+      <div className="p-10 text-center text-red-500 font-semibold">
         Member not found
       </div>
     );
   }
 
- 
-  // Handle input changes
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  // Save updated data
-  const handleSave = () => {
-
-    const updatedMembers = members.map((m) =>
-      m.id === id
-      ? {
-    ...m,
-    role: formData.role,
-    status: formData.status,
-  }
-        : m
-    );
-
-    setMembers(updatedMembers);
-
-    toast.success("Member details updated successfully!");
-  };
-
   return (
     <>
-      <Breadcrumb title="Team Member" text="Member Details" />
+      <Breadcrumb
+        title="Team Member"
+        text="Member Details"
+      />
 
-     <div className="  bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 animate-in fade-in duration-500">
+      <div className="min-h-screen p-4 md:p-8 bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-black">
 
-        <div className="backdrop-blur-xl bg-white/90 dark:bg-slate-900/90 rounded-[32px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] border border-white/20 overflow-hidden transition-all duration-300">
+        <div className="max-w-7xl mx-auto rounded-[32px] overflow-hidden bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800">
 
           {/* HEADER */}
-         <div className="relative overflow-hidden bg-[#02374C] from-primary via-blue-500 to-indigo-600 p-10">
 
-            <div className="flex flex-col lg:flex-row items-center gap-6">
+          <div className="relative overflow-hidden bg-[#02374C] p-8 md:p-12">
 
-              {/* IMAGE */}
-              <div>
-                <img
-                  src={member.avatar}
-                  alt={member.name}
-                  className="w-40 h-40 rounded-[28px] object-cover border-[6px] border-white/30 shadow-2xl backdrop-blur-md hover:scale-105 transition duration-300"
+            <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
+
+            <div className="absolute bottom-0 left-0 w-60 h-60 bg-white/10 rounded-full blur-3xl" />
+
+            <div className="relative flex flex-col lg:flex-row gap-8 items-center">
+
+              {/* AVATAR */}
+
+              <div className="w-40 h-40 rounded-[32px] bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center shadow-2xl">
+
+                <User
+                  size={70}
+                  className="text-white"
                 />
+
               </div>
 
               {/* INFO */}
+
               <div className="flex-1 text-center lg:text-left">
 
-                <h2 className="text-5xl font-black tracking-tight text-white">
+                <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight">
                   {member.name}
-                </h2>
+                </h1>
 
-               <p className="text-xl text-blue-100 mt-3 font-medium">
-                  {formData.role}
+                <p className="text-blue-100 mt-3 text-lg">
+                  Team Member Profile
                 </p>
 
-                <div className="mt-4">
+                <div className="mt-6 flex flex-wrap gap-3 justify-center lg:justify-start">
+
                   <span
-                    className={`px-6 py-2 rounded-full backdrop-blur-md border border-white/20 shadow-lg text-sm font-semibold ${
-                      formData.status === "Active"
+                    className={`px-5 py-2 rounded-full text-sm font-semibold ${
+                      formData.status ===
+                      "active"
                         ? "bg-green-100 text-green-700"
                         : "bg-red-100 text-red-700"
                     }`}
                   >
                     {formData.status}
                   </span>
+
                 </div>
 
               </div>
 
             </div>
-<div className="absolute top-0 right-0 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
-<div className="absolute bottom-0 left-0 w-52 h-52 bg-white/10 rounded-full blur-3xl"></div>
+
           </div>
 
           {/* BODY */}
-          <div className="p-8">
 
-            <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-8">
-              Personal Information
-            </h3>
+          <div className="p-6 md:p-10">
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
               {/* EMAIL */}
-              <div className="group bg-white dark:bg-slate-800 rounded-3xl p-6 border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                <p className="text-sm font-medium uppercase tracking-wide text-gray-400">
-                  Email Address
-                </p>
 
-                <h4 className="text-xl pt-3 font-semibold text-gray-800 dark:text-white break-all">
+              <div className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-6 transition-all duration-300 hover:shadow-xl">
+
+                <div className="flex items-center gap-3 mb-4">
+
+                  <Mail
+                    size={20}
+                    className="text-primary"
+                  />
+
+                  <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
+                    Email Address
+                  </p>
+
+                </div>
+
+                <h2 className="text-lg font-bold break-all">
                   {member.email}
-                </h4>
+                </h2>
+
               </div>
 
               {/* PHONE */}
-              <div className="group bg-white dark:bg-slate-800 rounded-3xl p-6 border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                <p className="text-sm font-medium uppercase tracking-wide text-gray-400">
-                  Phone Number
-                </p>
 
-                <h4 className="text-xl pt-3 font-semibold text-gray-800 dark:text-white">
+              <div className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-6 transition-all duration-300 hover:shadow-xl">
+
+                <div className="flex items-center gap-3 mb-4">
+
+                  <Phone
+                    size={20}
+                    className="text-primary"
+                  />
+
+                  <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
+                    Phone Number
+                  </p>
+
+                </div>
+
+                <h2 className="text-lg font-bold">
                   {member.phone}
-                </h4>
+                </h2>
+
               </div>
 
-              {/* DATE JOINED */}
-              {/* <div className="group bg-white dark:bg-slate-800 rounded-3xl p-6 border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                <p className="text-sm font-medium uppercase tracking-wide text-gray-400">
-                  Date Joined
-                </p>
-
-                <h4 className="text-xl font-semibold text-gray-800 dark:text-white">
-                  {member.joinDate}
-                </h4>
-              </div> */}
-
               {/* ROLE */}
-              <div className="group bg-white dark:bg-slate-800 rounded-3xl p-6 border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                <p className="text-sm font-medium uppercase tracking-wide text-gray-400">
-                  Role
-                </p>
+
+              <div className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-6">
+
+                <div className="flex items-center gap-3 mb-4">
+
+                  <ShieldCheck
+                    size={20}
+                    className="text-primary"
+                  />
+
+                  <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
+                    Role
+                  </p>
+
+                </div>
 
                 <select
                   name="role"
                   value={formData.role}
                   onChange={handleChange}
-                  className="w-full h-12 mt-3 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 text-sm outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full h-12 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 outline-none"
                 >
-                  {rolesList.map((role) => (
-                    <option key={role} value={role}>
-                      {role}
+
+                  <option value="">
+                    Select Role
+                  </option>
+
+                  {roles.map((role) => (
+                    <option
+                      key={role.id}
+                      value={role.name}
+                    >
+                      {role.name}
                     </option>
                   ))}
+
                 </select>
+
               </div>
 
               {/* STATUS */}
-              <div className="group bg-white dark:bg-slate-800 rounded-3xl p-6 border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                <p className="text-sm font-medium uppercase tracking-wide text-gray-400">
-                  Status
-                </p>
+
+              <div className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-6">
+
+                <div className="flex items-center gap-3 mb-4">
+
+                  <Calendar
+                    size={20}
+                    className="text-primary"
+                  />
+
+                  <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">
+                    Status
+                  </p>
+
+                </div>
 
                 <select
                   name="status"
                   value={formData.status}
                   onChange={handleChange}
-                  className="w-full h-12 mt-3 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 text-sm outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full h-12 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 outline-none"
                 >
-                  <option value="Active">Active</option>
-                  <option value="Inactive">Inactive</option>
+
+                  <option value="active">
+                    Active
+                  </option>
+
+                  <option value="inactive">
+                    Inactive
+                  </option>
+
                 </select>
+
               </div>
-
-              {/* MEMBER ID */}
-              {/* <div className="group bg-white dark:bg-slate-800 rounded-3xl p-6 border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                <p className="text-sm text-gray-500 mb-2">
-                  Member ID
-                </p>
-
-                <h4 className="text-xl font-semibold text-gray-800 dark:text-white">
-                  {member.id}
-                </h4>
-              </div> */}
-
-            </div>
-
-            {/* PASSWORD SECTION */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-
-              {/* PASSWORD */}
-              {/* <div className="group bg-white dark:bg-slate-800 rounded-3xl p-6 border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-
-                <p className="text-sm text-gray-500 mb-3">
-                  Password
-                </p>
-
-                <div className="relative">
-
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    placeholder="Enter password"
-                    className="w-full h-14 rounded-2xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-5 text-xl font-medium outline-none focus:ring-4 focus:ring-primary/20 focus:border-primary transition-all duration-200"
-                  />
-
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                   className="absolute top-1/2 right-4 -translate-y-1/2 text-gray-400 hover:text-primary transition-colors duration-200"
-                  >
-                    {showPassword ? (
-                      <EyeOff size={22} />
-                    ) : (
-                      <Eye size={22} />
-                    )}
-                  </button>
-
-                </div>
-
-              </div> */}
-
-              {/* CONFIRM PASSWORD */}
-              {/* <div className="group bg-white dark:bg-slate-800 rounded-3xl p-6 border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-
-                <p className="text-sm text-gray-500 mb-3">
-                  Confirm Password
-                </p>
-
-                <div className="relative">
-
-                  <input
-                    type={showConfirmPassword ? "text" : "password"}
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    placeholder="Confirm password"
-                    className="w-full h-14 rounded-2xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-5 text-xl font-medium outline-none focus:ring-4 focus:ring-primary/20 focus:border-primary transition-all duration-200"
-                  />
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setShowConfirmPassword(!showConfirmPassword)
-                    }
-                    className="absolute top-1/2 right-4 -translate-y-1/2 text-gray-400 hover:text-primary transition-colors duration-200"
-                  >
-                    {showConfirmPassword ? (
-                      <EyeOff size={22} />
-                    ) : (
-                      <Eye size={22} />
-                    )}
-                  </button>
-
-                </div>
-
-              </div> */}
 
             </div>
 
             {/* SAVE BUTTON */}
-            <div className="flex justify-end mt-2">
+
+            <div className="flex justify-end mt-10">
 
               <button
-  onClick={handleSave}
-  className="h-14 px-10 rounded-2xl bg-green-600 hover:bg-[#02374C] hover:scale-[1.02] hover:shadow-2xl text-white text-lg font-semibold flex items-center gap-3 transition-all duration-300"
->
-  <Save size={20} />
-  Save Changes
-</button>
+                onClick={handleSave}
+                disabled={saving}
+                className="h-14 px-10 rounded-2xl bg-green-600 hover:bg-[#02374C] text-white font-semibold text-lg flex items-center gap-3 transition-all duration-300 hover:scale-[1.02]"
+              >
+
+                <Save size={20} />
+
+                {saving
+                  ? "Saving..."
+                  : "Save Changes"}
+
+              </button>
 
             </div>
 

@@ -142,10 +142,12 @@ export default function ShipmentRequestPage() {
   // ======================================================
 
   const document =
-    shipment?.documents?.[0];
+    shipment?.documents?.[1];
+
+    console.log(document);
 
   const fileUrl = document?.file_path
-    ? `https://logisticsystems.webandappdevelopmenttech.com/storage/${document.file_path}`
+    ? `${document.file_path}`
     : "";
 
   const documentType =

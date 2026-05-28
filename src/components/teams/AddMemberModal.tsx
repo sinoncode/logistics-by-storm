@@ -1,3 +1,9 @@
+"use client";
+
+import {
+  useEffect,
+} from "react";
+
 import {
   Dialog,
   DialogContent,
@@ -5,41 +11,78 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-// import AddMemberForm from "/home/Rohan Kamat/Desktop/logistics-by-storm/src/pages/teams/add-member/AddMember";
-import AddMemberForm from "@/pages/teams/add-member/AddMember";
+import {
+  useRoleStore,
+} from "@/store/teamStore";
 
-type Role = {
-  id: string;
-  name: string;
-};
+import AddMemberForm
+from "@/components/teams/AddMemberForm";
 
 type Props = {
   open: boolean;
-  onOpenChange: (open: boolean) => void;
-  onAddMember: (data: any) => void;
-  roles: Role[];
+
+  onOpenChange: (
+    open: boolean
+  ) => void;
+
+  onSuccess?: () => void;
 };
 
 export const AddMemberModal = ({
   open,
   onOpenChange,
-  onAddMember,
-  roles,
+  onSuccess,
 }: Props) => {
-  const handleSubmit = (data: any) => {
-    onAddMember(data);
-    onOpenChange(false); // close modal after submit
-  };
+
+  const {
+    roles,
+    fetchRoles,
+    roleLoading,
+  } = useRoleStore();
+
+  useEffect(() => {
+
+    fetchRoles();
+
+  }, []);
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-     <DialogContent className="!max-w-4xl w-full">
+    <Dialog
+      open={open}
+      onOpenChange={
+        onOpenChange
+      }
+    >
+
+      <DialogContent className="max-w-3xl">
+
         <DialogHeader>
-          <DialogTitle>Add Team Member</DialogTitle>
+
+          <DialogTitle>
+            Add Team Member
+          </DialogTitle>
+
         </DialogHeader>
 
-        <AddMemberForm onSubmit={handleSubmit} roles={roles} />
+        <AddMemberForm
+          roles={
+            Array.isArray(roles)
+              ? roles
+              : []
+          }
+          isLoading={
+            roleLoading
+          }
+          onSuccess={() => {
+
+            onSuccess?.();
+
+            onOpenChange(false);
+          }}
+        />
+
       </DialogContent>
+
     </Dialog>
   );
 };

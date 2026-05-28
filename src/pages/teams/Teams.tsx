@@ -107,21 +107,7 @@ const TeamsPage = () => {
       <LazyWrapper>
         <Card className="card h-full !p-0 !block border-0 overflow-hidden mb-6">
           <CardHeader className="border-b border-neutral-200 dark:border-slate-600 !py-4 px-6 flex items-center flex-wrap gap-3 justify-between">
-            <div className="flex items-center flex-wrap gap-3">
-              <span className="text-base font-medium text-neutral-500">Show</span>
-
-              <CustomSelect
-                placeholder="10"
-                options={["5", "10", "15", "20", "25", "50"]}
-              />
-
-              <SearchBox />
-
-              <CustomSelect
-                placeholder="Status"
-                options={["All", "Active", "Inactive"]}
-              />
-            </div>
+           
 
             <Button
               onClick={() => setIsModalOpen(true)}
