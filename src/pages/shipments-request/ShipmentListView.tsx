@@ -142,7 +142,7 @@ export default function ShipmentRequestPage() {
   // ======================================================
 
   const document =
-    shipment?.documents?.[1];
+    shipment?.documents?.[0];
 
     console.log(document);
 
