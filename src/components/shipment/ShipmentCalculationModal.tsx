@@ -620,26 +620,11 @@ setItemCalculationSummary(
 
                       </CardHeader>
 
-                      <CardContent className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+                      <CardContent className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-2">
 
                         {/* WEIGHT */}
 
-                        <FieldInput
-                          label="Actual Weight (LB)"
-                          icon={
-                            <Weight className="h-4 w-4" />
-                          }
-                          value={
-                            currentForm?.actual_weight_lb
-                          }
-                          onChange={(value) =>
-                            updateItemField(
-                              index,
-                              "actual_weight_lb",
-                              value
-                            )
-                          }
-                        />
+                      
 
                         {/* LENGTH */}
 
@@ -703,6 +688,22 @@ setItemCalculationSummary(
                             updateItemField(
                               index,
                               "declared_value",
+                              value
+                            )
+                          }
+                        />
+                          <FieldInput
+                          label="Actual Weight (LB)"
+                          icon={
+                            <Weight className="h-4 w-4" />
+                          }
+                          value={
+                            currentForm?.actual_weight_lb
+                          }
+                          onChange={(value) =>
+                            updateItemField(
+                              index,
+                              "actual_weight_lb",
                               value
                             )
                           }
@@ -776,7 +777,7 @@ setItemCalculationSummary(
                 }
               />
 
-              <div className="space-y-2 md:col-span-2">
+              {/* <div className="space-y-2 md:col-span-2">
 
                 <Label>
                   Remarks
@@ -796,7 +797,7 @@ setItemCalculationSummary(
                   className="rounded-2xl"
                 />
 
-              </div>
+              </div> */}
 
             </CardContent>
 

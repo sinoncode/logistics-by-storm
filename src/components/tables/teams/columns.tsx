@@ -60,19 +60,73 @@ ColumnDef<TeamMember>[] = [
       return (
         <div className="flex items-center gap-3">
 
-          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-            <User className="w-5 h-5 text-primary" />
-          </div>
+  {/* PROFILE AVATAR */}
+  <div
+    className="w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold uppercase shadow-md"
+    style={{
+      backgroundColor: (() => {
 
-          <div>
-            <p className="font-medium">
-              {member.name}
-            </p>
-          </div>
-        </div>
+        const colors = [
+          "#2563EB",
+          "#7C3AED",
+          "#059669",
+          "#DC2626",
+          "#EA580C",
+          "#0891B2",
+          "#DB2777",
+          "#4F46E5",
+        ];
+
+        const name =
+          member.name || "";
+
+        let hash = 0;
+
+        for (
+          let i = 0;
+          i < name.length;
+          i++
+        ) {
+          hash =
+            name.charCodeAt(i) +
+            ((hash << 5) - hash);
+        }
+
+        return colors[
+          Math.abs(hash) %
+            colors.length
+        ];
+      })(),
+    }}
+  >
+
+    {
+  member.name
+    ?.trim()
+    .split(" ")
+    .filter(Boolean)
+    .map((word) => word[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase() || "U"
+}
+
+  </div>
+
+  {/* USER INFO */}
+  <div>
+
+    <p className="font-medium">
+      {member.name}
+    </p>
+
+  </div>
+
+</div>
       );
     },
   },
+
 
   /* =====================================================
      EMAIL
@@ -92,6 +146,36 @@ ColumnDef<TeamMember>[] = [
     accessorKey: "phone",
 
     header: "Phone",
+  },
+
+
+
+
+    /* =====================================================
+     ROLE
+  ===================================================== */
+
+  {
+    accessorKey: "role",
+
+    header: "Role",
+
+    cell: ({ row }) => {
+
+      const member =
+        row.original;
+
+      return (
+        <div className="flex items-center gap-3">
+
+          <div>
+            <p className="font-medium">
+              {member.role}
+            </p>
+          </div>
+        </div>
+      );
+    },
   },
 
   /* =====================================================
@@ -157,13 +241,13 @@ ColumnDef<TeamMember>[] = [
             <Eye className="w-4 h-4" />
           </Button>
 
-          <Button
+          {/* <Button
             size="icon"
             variant="ghost"
             className="text-red-500"
           >
             <Trash2 className="w-4 h-4" />
-          </Button>
+          </Button> */}
         </div>
       );
     },
