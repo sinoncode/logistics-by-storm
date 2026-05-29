@@ -70,6 +70,7 @@ const Shipments = lazy(() => import("../pages/shipments/Shipments"));
 const ShipmentDetail = lazy(() => import("../pages/shipments/ShipmentDetail"));
 const PaymentsList = lazy(() => import("../pages/payments/payments-list/PaymentList"));
 const PaymentDetails = lazy(() => import("../pages/payments/payments-details/PaymentsDetails"));
+const CreatePassword = lazy(() => import("../pages/auth/member-create-password/CreatePassword"));
 
 
 
@@ -89,6 +90,10 @@ export const router = createBrowserRouter([
       {
         path: "/auth/forgot-password",
         element: <ForgotPassword />,
+      },
+      {
+        path: "/create-password",
+        element: <CreatePassword />
       },
     ]
   },
@@ -289,6 +294,7 @@ export const router = createBrowserRouter([
           {
             path: "/payemnts-details/:id", element: <PaymentDetails />
           },
+            
         ],
       },
     ]
