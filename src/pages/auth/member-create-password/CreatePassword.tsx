@@ -236,9 +236,9 @@ const CreatePassword = () => {
 
         {/* GLOW EFFECTS */}
 
-        <div className="absolute top-[-100px] right-[-100px] w-80 h-80 bg-white/10 rounded-full blur-3xl" />
+        <div className="absolute  w-full h-full bg-white/10 rounded-full blur-3xl" />
 
-        <div className="absolute bottom-[-120px] left-[-120px] w-96 h-96 bg-lime-100/10 rounded-full blur-3xl" />
+        <div className="absolute w-full h-full bg-lime-100/10 rounded-full blur-3xl" />
 
         <div className="flex items-center justify-center">
 
@@ -247,7 +247,7 @@ const CreatePassword = () => {
               AuthImage
             }
             alt="Create Password"
-            className="w-full h-full object-contain"
+            className="w-full h-full object-cover"
           />
 
         </div>
