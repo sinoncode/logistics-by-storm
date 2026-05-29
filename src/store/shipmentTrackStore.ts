@@ -114,8 +114,7 @@ export const useShipmentDetailsStore =
         set({
           loading: false,
           error:
-            error?.response?.data?.message ||
-            "Failed to fetch shipment details",
+            error?.response?.data?.message || "Failed to fetch shipment details",
         });
       }
     },

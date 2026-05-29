@@ -152,7 +152,7 @@ const CreatePassword = () => {
         setIsLoading(true);
 
         await api.post(
-          "/admin/create-password",
+          "/auth/create-password",
           {
             email,
             token,
@@ -168,7 +168,7 @@ const CreatePassword = () => {
         form.reset();
 
         navigate(
-          "/login"
+          "/auth/login"
         );
 
       } catch (
