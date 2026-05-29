@@ -92,7 +92,7 @@ export const router = createBrowserRouter([
         element: <ForgotPassword />,
       },
       {
-        path: "/create-password",
+        path: "/auth/create-password",
         element: <CreatePassword />
       },
     ]
