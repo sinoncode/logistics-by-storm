@@ -49,6 +49,27 @@ export const data = {
 
 
     {
+      label: "Package",
+    },
+    {
+      title: "Search Package",
+      url: "/search-package",
+      icon: ClipboardList,
+      isActive: true,
+      items: [
+      ],
+    },
+    {
+      title: "Unregistered Package",
+      url: "/unregistered-package",
+      icon: Truck,
+      isActive: true,
+      items: [
+      ],
+    },
+
+
+    {
       label: "Customer",
     },
     {

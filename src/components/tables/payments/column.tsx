@@ -154,7 +154,7 @@ export const columns:
             className="rounded-4xl bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300"
             onClick={() =>
               navigate(
-                `/payemnts-details/${row.original.id}`
+                `/payment-details/${row.original.id}`
               )
             }
           >

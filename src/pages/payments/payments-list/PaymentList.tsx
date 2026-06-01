@@ -51,16 +51,13 @@ const PaymentsList = () => {
 
           <CardContent className="p-6">
 
-            {loading ? (
-              <div className="flex items-center justify-center py-20">
-                Loading payments...
-              </div>
-            ) : (
+            
               <DataTable
               columns={columns}
                 data={paidPayments} 
+                loading={loading}
               />
-            )}
+            
 
           </CardContent>
         </Card>

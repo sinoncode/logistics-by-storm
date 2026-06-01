@@ -7,20 +7,24 @@ import {
 
 import type {
   Customer,
+  
 } from "@/store/customerStore";
 
 interface Props {
   users: Customer[];
+
+  loading: boolean;
 }
 
 export default function UsersListTable({
-  users,
+  users,loading
 }: Props) {
 
   return (
     <DataTable
       columns={columns}
       data={users}
+      loading={loading}
     />
   );
 }

@@ -39,16 +39,13 @@ const CustomerList = () => {
 
 
           <CardContent className="p-6">
-
-            {loading ? (
-              <div className="flex items-center justify-center py-20">
-                Loading customers...
-              </div>
-            ) : (
+ 
               <UsersListTable
                 users={customers}
+                loading={loading}
+                
               />
-            )}
+            
 
           </CardContent>
         </Card>

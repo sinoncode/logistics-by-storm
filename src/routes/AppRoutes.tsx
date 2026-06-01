@@ -71,6 +71,8 @@ const ShipmentDetail = lazy(() => import("../pages/shipments/ShipmentDetail"));
 const PaymentsList = lazy(() => import("../pages/payments/payments-list/PaymentList"));
 const PaymentDetails = lazy(() => import("../pages/payments/payments-details/PaymentsDetails"));
 const CreatePassword = lazy(() => import("../pages/auth/member-create-password/CreatePassword"));
+const SearchPackage = lazy(() => import("../pages/packages/search-package/SearchPackage"));
+const UnregisteredPackage = lazy(() => import("../pages/packages/unregistered-package/UnregisteredPackage"));
 
 
 
@@ -292,7 +294,13 @@ export const router = createBrowserRouter([
             path: "payment-lists", element: <PaymentsList /> 
           },
           {
-            path: "/payemnts-details/:id", element: <PaymentDetails />
+            path: "/payment-details/:id", element: <PaymentDetails />
+          },
+          {
+            path: "/search-package", element: <SearchPackage />
+          },
+          {
+            path: "/unregistered-package", element: <UnregisteredPackage />
           },
             
         ],

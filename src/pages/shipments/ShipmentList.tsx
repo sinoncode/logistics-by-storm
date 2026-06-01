@@ -40,19 +40,20 @@ export default function ShipmentListPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="p-10">
-        Loading shipments...
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="p-10">
+  //       Loading shipments...
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="p-6">
       <DataTable
         columns={columns}
         data={shipments}
+        loading={loading}
       />
     </div>
   );

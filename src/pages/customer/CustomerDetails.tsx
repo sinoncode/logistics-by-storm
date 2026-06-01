@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import CustomerDetailsSkeleton from "./CustomerDetailsSkeleton";
 
 import Breadcrumb from "@/layouts/Breadcrumb";
 
@@ -50,7 +51,7 @@ const CustomerDetails = () => {
   if (loading) {
     return (
       <div className="p-6 text-xl font-semibold">
-        Loading customer details...
+        <CustomerDetailsSkeleton />
       </div>
     );
   }
@@ -80,26 +81,26 @@ const CustomerDetails = () => {
       date: shipment.created_at || "-",
     })) || [];
 
-  const completedOrders = [
-    {
-      id: "#ORD-5001",
-      amount: "₹12,500",
-      date: "02 May 2026",
-    },
-    {
-      id: "#ORD-5002",
-      amount: "₹8,200",
-      date: "18 Apr 2026",
-    },
-  ];
+  // const completedOrders = [
+  //   {
+  //     id: "#ORD-5001",
+  //     amount: "₹12,500",
+  //     date: "02 May 2026",
+  //   },
+  //   {
+  //     id: "#ORD-5002",
+  //     amount: "₹8,200",
+  //     date: "18 Apr 2026",
+  //   },
+  // ];
 
-  const requestedShipments = [
-    {
-      id: "#REQ-102",
-      status: "Pending",
-      date: "20 May 2026",
-    },
-  ];
+  // const requestedShipments = [
+  //   {
+  //     id: "#REQ-102",
+  //     status: "Pending",
+  //     date: "20 May 2026",
+  //   },
+  // ];
 
   return (
     <>
@@ -233,7 +234,7 @@ const CustomerDetails = () => {
                   Addresses
                 </TabsTrigger>
 
-                <TabsTrigger
+                {/* <TabsTrigger
                   value="completed"
                   className="rounded-xl px-5 py-3"
                 >
@@ -245,7 +246,7 @@ const CustomerDetails = () => {
                   className="rounded-xl px-5 py-3"
                 >
                   Requested Shipments
-                </TabsTrigger>
+                </TabsTrigger> */}
 
               </TabsList>
 
@@ -331,7 +332,7 @@ const CustomerDetails = () => {
               </TabsContent>
 
               {/* COMPLETED */}
-              <TabsContent
+              {/* <TabsContent
                 value="completed"
                 className="mt-8"
               >
@@ -340,10 +341,10 @@ const CustomerDetails = () => {
                   title="Completed Orders"
                   data={completedOrders}
                 />
-              </TabsContent>
+              </TabsContent> */}
 
               {/* REQUESTED */}
-              <TabsContent
+              {/* <TabsContent
                 value="requested"
                 className="mt-8"
               >
@@ -352,7 +353,7 @@ const CustomerDetails = () => {
                   title="Requested Shipments"
                   data={requestedShipments}
                 />
-              </TabsContent>
+              </TabsContent> */}
 
             </Tabs>
 

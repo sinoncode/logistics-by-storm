@@ -11,7 +11,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 
-
+import { Skeleton } from "@/components/ui/skeleton";
 
 import {
   Select,
@@ -80,6 +80,202 @@ const trackingSteps = [
     icon: Home,
   },
 ];
+
+export const ShipmentTrackingSkeleton = () => {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-50 to-blue-50/30 p-3 sm:p-4 md:p-6 space-y-6 animate-pulse">
+      {/* ====================================================== */}
+      {/* HEADER */}
+      {/* ====================================================== */}
+
+      <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-5">
+        <div className="space-y-3">
+          <Skeleton className="h-10 w-[320px] rounded-xl" />
+          <Skeleton className="h-5 w-[420px] rounded-xl" />
+        </div>
+
+        <Skeleton className="h-14 w-full xl:w-[340px] rounded-2xl" />
+      </div>
+
+      {/* ====================================================== */}
+      {/* TRACKING CARD */}
+      {/* ====================================================== */}
+
+      <Card className="rounded-[36px] border-0 shadow-xl overflow-hidden">
+        <CardHeader className="border-b p-6">
+          <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-5">
+            <div className="flex items-center gap-4">
+              <Skeleton className="h-16 w-16 rounded-3xl" />
+
+              <div className="space-y-3">
+                <Skeleton className="h-8 w-72 rounded-xl" />
+                <Skeleton className="h-4 w-96 rounded-xl" />
+              </div>
+            </div>
+
+            <Skeleton className="h-14 w-[320px] rounded-2xl" />
+          </div>
+        </CardHeader>
+
+        <CardContent className="p-8">
+          {/* Truck Area */}
+          <div className="relative h-[300px] overflow-hidden">
+            {/* Truck Placeholder */}
+            <div className="flex justify-center mb-16">
+              <Skeleton className="h-28 w-40 rounded-3xl" />
+            </div>
+
+            {/* Progress Line */}
+            <Skeleton className="absolute top-[130px] left-0 w-full h-2 rounded-full" />
+
+            {/* Tracking Steps */}
+            <div className="absolute top-[110px] left-0 w-full flex justify-between">
+              {Array.from({ length: 7 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="flex flex-col items-center"
+                >
+                  <Skeleton className="h-8 w-8 rounded-full" />
+
+                  <div className="mt-5 flex flex-col items-center gap-2">
+                    <Skeleton className="h-4 w-20 rounded-lg" />
+                    <Skeleton className="h-5 w-14 rounded-full" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Status Cards */}
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div
+                key={i}
+                className="rounded-3xl border p-5"
+              >
+                <div className="flex items-center gap-3">
+                  <Skeleton className="h-12 w-12 rounded-2xl" />
+
+                  <div className="flex-1 space-y-2">
+                    <Skeleton className="h-3 w-24" />
+                    <Skeleton className="h-5 w-36" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* ====================================================== */}
+      {/* SHIPMENT INFO CARD */}
+      {/* ====================================================== */}
+
+      <Card className="rounded-[36px] border-0 shadow-xl overflow-hidden">
+        <CardHeader className="border-b p-6">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+            <div className="flex items-center gap-4">
+              <Skeleton className="h-16 w-16 rounded-3xl" />
+
+              <div className="space-y-2">
+                <Skeleton className="h-8 w-56" />
+                <Skeleton className="h-4 w-72" />
+              </div>
+            </div>
+
+            <div className="flex gap-2">
+              <Skeleton className="h-8 w-32 rounded-full" />
+              <Skeleton className="h-8 w-36 rounded-full" />
+            </div>
+          </div>
+        </CardHeader>
+
+        <CardContent className="p-6 space-y-6">
+          {/* Info Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div
+                key={i}
+                className="rounded-3xl border p-5"
+              >
+                <div className="flex items-center gap-3">
+                  <Skeleton className="h-11 w-11 rounded-2xl" />
+
+                  <div className="space-y-2 flex-1">
+                    <Skeleton className="h-3 w-24" />
+                    <Skeleton className="h-5 w-full" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Route Section */}
+          <div className="rounded-[30px] border p-8">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
+              {/* Origin */}
+              <div className="space-y-3">
+                <Skeleton className="h-3 w-20" />
+                <Skeleton className="h-10 w-48" />
+                <Skeleton className="h-5 w-32" />
+              </div>
+
+              {/* Route */}
+              <div className="hidden lg:flex flex-1 px-8 items-center">
+                <Skeleton className="h-2 w-full rounded-full" />
+              </div>
+
+              {/* Destination */}
+              <div className="space-y-3">
+                <Skeleton className="h-3 w-24" />
+                <Skeleton className="h-10 w-48" />
+                <Skeleton className="h-5 w-32" />
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* ====================================================== */}
+      {/* CUSTOMER CARD */}
+      {/* ====================================================== */}
+
+      <Card className="rounded-[36px] border-0 shadow-xl overflow-hidden">
+        <div className="border-b p-6">
+          <div className="flex items-center gap-5">
+            <Skeleton className="h-20 w-20 rounded-3xl" />
+
+            <div className="space-y-3">
+              <Skeleton className="h-9 w-64" />
+              <Skeleton className="h-4 w-40" />
+            </div>
+          </div>
+        </div>
+
+        <CardContent className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div
+                key={i}
+                className="rounded-3xl border p-5"
+              >
+                <div className="flex gap-4">
+                  <Skeleton className="h-12 w-12 rounded-2xl" />
+
+                  <div className="flex-1 space-y-2">
+                    <Skeleton className="h-3 w-28" />
+                    <Skeleton className="h-5 w-full" />
+                    <Skeleton className="h-5 w-3/4" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
 
 export default function ShipmentRequestPage() {
   // ======================================================
@@ -345,11 +541,7 @@ const customerData = shipmentDetails?.user;
   // UI
   // ======================================================
 if (loading) {
-  return (
-    <div className="min-h-screen flex items-center justify-center">
-      Loading Shipment...
-    </div>
-  );
+  return <ShipmentTrackingSkeleton />;
 }
 
 if (error) {
