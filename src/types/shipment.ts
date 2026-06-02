@@ -2,26 +2,33 @@
 // FILE: src/types/shipment.ts
 // ======================================================
 
-export type CalculationResult = {
+export interface CalculationItem {
+  id: number;
+
+  commodity: string;
+
   actualWeight: number;
 
-  volumetricWeight: string;
+  volumetricWeight: number;
 
   deliveryType: string;
 
-  itemType: string;
-
-  length: number;
-
-  width: number;
-
-  height: number;
+  dimensions: string;
 
   declaredValue: number;
 
-  finalPrice: string;
-};
+  commodityType: string;
+}
 
+export interface CalculationResult {
+  items: CalculationItem[];
+
+  shippingCost: number;
+
+  taxAmount: number;
+
+  finalPrice: number;
+}
 // ======================================================
 // CALCULATION API RESPONSE
 // ======================================================

@@ -353,45 +353,56 @@ setItemCalculationSummary(
   itemSummary
 );
 
-        onCalculationComplete?.({
-          actualWeight:
-            itemForms?.[0]
-              ?.actual_weight_lb,
+      const summaries = shipment.items.map(
+  (item: any, index: number) => ({
+    id: item.id,
 
-          volumetricWeight:
-            String(
-              response?.data
-                ?.volumetric_weight
-            ),
+    commodity:
+      item?.commodity_type?.split(" (")[0] ||
+      "--",
 
-          deliveryType:
-            shipment?.delivery_type,
+    actualWeight:
+      itemForms[index]?.actual_weight_lb || 0,
 
-          itemType:
-            shipment?.items?.[0]
-              ?.commodity_type,
+    volumetricWeight:
+      (
+        (itemForms[index]?.length_cm || 0) *
+        (itemForms[index]?.width_cm || 0) *
+        (itemForms[index]?.height_cm || 0)
+      ) / 139,
 
-          length:
-            itemForms?.[0]
-              ?.length_cm,
+    deliveryType:
+      shipment?.delivery_type || "--",
 
-          width:
-            itemForms?.[0]
-              ?.width_cm,
+    dimensions: `${
+      itemForms[index]?.length_cm || 0
+    } × ${
+      itemForms[index]?.width_cm || 0
+    } × ${
+      itemForms[index]?.height_cm || 0
+    }`,
 
-          height:
-            itemForms?.[0]
-              ?.height_cm,
+    declaredValue:
+      itemForms[index]?.declared_value || 0,
 
-          declaredValue:
-            itemForms?.[0]
-              ?.declared_value,
+    commodityType:
+      item?.commodity_type?.split(" (")[0] ||
+      "--",
+  })
+);
 
-          finalPrice: String(
-            response?.data
-              ?.final_amount
-          ),
-        });
+onCalculationComplete?.({
+  items: summaries,
+
+  finalPrice:
+    response?.data?.final_amount || 0,
+
+  shippingCost:
+    response?.data?.shipping_cost || 0,
+
+  taxAmount:
+    response?.data?.tax_amount || 0,
+});
 
         toast.success(
           "Shipment calculation completed successfully"

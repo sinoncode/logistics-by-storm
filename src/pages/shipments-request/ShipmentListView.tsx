@@ -185,6 +185,8 @@ export default function ShipmentRequestPage() {
     window.open(fileUrl, "_blank");
   };
 
+
+  
   // ======================================================
   // DOCUMENT PREVIEW
   // ======================================================
@@ -1069,105 +1071,199 @@ if (loading) {
             </CardContent>
           </Card> */}
 
-                 <Card className="rounded-3xl border border-slate-200/70 dark:border-slate-800 bg-white/80 dark:bg-slate-950/70 backdrop-blur-xl shadow-sm overflow-hidden">
-    
-    <CardHeader className="border-b border-slate-200 dark:border-slate-800 pb-4">
-      <CardTitle className="flex items-center justify-between">
-        <span>Shipment Summary</span>
+          
+<div className="space-y-6">
+  {calculationResult?.items?.map(
+    (item: any, index: number) => (
+      <Card
+        key={item.id}
+        className="rounded-3xl border border-slate-200/70 dark:border-slate-800 bg-white/80 dark:bg-slate-950/70 backdrop-blur-xl shadow-sm overflow-hidden"
+      >
+        <CardHeader className="border-b border-slate-200 dark:border-slate-800 pb-4">
+          <CardTitle className="flex items-center justify-between">
+            <span>Shipment Summary</span>
 
-        
-          <Badge className=" text-white rounded-full px-3 py-1">
-            Item 1
-          </Badge>
+            <Badge className="rounded-full px-3 py-1">
+              Item {index + 1}
+            </Badge>
+          </CardTitle>
+        </CardHeader>
 
+        <CardContent className="p-6 space-y-5">
+
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground">
+              Actual Weight
+            </span>
+
+            <span className="font-semibold">
+              {item.actualWeight} LB
+            </span>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground">
+              Volumetric Weight
+            </span>
+
+            <span className="font-semibold">
+              {Number(
+                item.volumetricWeight
+              ).toFixed(2)}{" "}
+              LB
+            </span>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground">
+              Delivery
+            </span>
+
+            <Badge className="rounded-full">
+              {formatSentenceCase(
+                item.deliveryType
+              )}
+            </Badge>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground">
+              Package Type
+            </span>
+
+            <span className="font-semibold">
+              {item.commodityType}
+            </span>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground">
+              Dimensions
+            </span>
+
+            <span className="font-semibold text-right">
+              {item.dimensions}
+            </span>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground">
+              Declared Value
+            </span>
+
+            <span className="font-semibold">
+              ${item.declaredValue}
+            </span>
+          </div>
+
+        </CardContent>
+      </Card>
+    )
+  )}
+
+  {/* TOTAL CARD */}
+
+  <Card className="rounded-3xl overflow-hidden border-0 bg-gradient-to-r from-[#67c05e] to-[#4ba942] text-white">
+    <CardHeader>
+      <CardTitle>
+        Total Shipment Summary
       </CardTitle>
     </CardHeader>
 
-    <CardContent className="p-6 space-y-5">
+    <CardContent className="space-y-5">
 
-      {/* Weight */}
       <div className="flex items-center justify-between">
-        <span className="text-muted-foreground">
-          Actual Weight
-        </span>
+        <span>Total Items</span>
 
-        <span className="font-semibold text-slate-900 dark:text-white">
-         12LB
+        <span className="font-bold">
+          {calculationResult?.items
+            ?.length || 0}
         </span>
       </div>
 
-      {/* Volumetric Weight */}
       <div className="flex items-center justify-between">
-        <span className="text-muted-foreground">
-          Volumetric Weight
+        <span>
+          Total Declared Value
         </span>
 
-        <span className="font-semibold text-slate-900 dark:text-white">
-          42 LB
-        </span>
-      </div>
-
-      {/* Delivery */}
-      <div className="flex items-center justify-between">
-        <span className="text-muted-foreground">
-          Delivery
-        </span>
-
-        <Badge className="rounded-full">
-          Express
-        </Badge>
-      </div>
-
-      {/* Package Type */}
-      <div className="flex items-center justify-between">
-        <span className="text-muted-foreground">
-          Package Type
-        </span>
-
-        <span className="font-semibold text-slate-900 dark:text-white">
-          Electronics
-        </span>
-      </div>
-
-      {/* Dimensions */}
-      <div className="flex items-center justify-between">
-        <span className="text-muted-foreground">
-          Dimensions
-        </span>
-
-        <span className="font-semibold text-slate-900 dark:text-white text-right">
-          41
-        </span>
-      </div>
-
-      {/* Declared Value */}
-      <div className="flex items-center justify-between">
-        <span className="text-muted-foreground">
-          Declared Value
-        </span>
-
-        <span className="font-semibold text-slate-900 dark:text-white">
+        <span className="font-bold">
           $
-         0
+          {calculationResult?.items?.reduce(
+            (
+              total: number,
+              item: any
+            ) =>
+              total +
+              Number(
+                item.declaredValue
+              ),
+            0
+          )}
         </span>
       </div>
 
-      {/* Final Price */}
-      <div className="pt-4 border-t border-dashed border-slate-200 dark:border-slate-800">
+      <div className="flex items-center justify-between">
+        <span>
+          Total Actual Weight
+        </span>
+
+        <span className="font-bold">
+          {calculationResult?.items?.reduce(
+            (
+              total: number,
+              item: any
+            ) =>
+              total +
+              Number(
+                item.actualWeight
+              ),
+            0
+          )}{" "}
+          LB
+        </span>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <span>
+          Shipping Cost
+        </span>
+
+        <span className="font-bold">
+          $
+          {calculationResult?.shippingCost ||
+            0}
+        </span>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <span>
+          Tax Amount
+        </span>
+
+        <span className="font-bold">
+          $
+          {calculationResult?.taxAmount ||
+            0}
+        </span>
+      </div>
+
+      <div className="border-t border-white/20 pt-5">
         <div className="flex items-center justify-between">
-          <span className="text-base font-semibold">
+          <span className="text-lg font-semibold">
             Final Shipment Price
           </span>
 
-          <span className="text-2xl font-bold text-primary">
+          <span className="text-3xl font-bold">
             $
-            0.00
+            {calculationResult?.finalPrice ||
+              0}
           </span>
         </div>
       </div>
 
     </CardContent>
   </Card>
+</div>
           
         </div>
       </div>

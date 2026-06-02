@@ -422,31 +422,18 @@ const EditProfileTabContent =
                   Preferred Language
                 </Label>
 
-                <Select
-  value={
-    formData.gender
-  }
-  onValueChange={(
-    value
-  ) => {
-
+         <Select
+  value={formData.preferred_language}
+  onValueChange={(value) => {
     setFormData({
       ...formData,
-
-      gender:
-        value,
+      preferred_language: value,
     });
 
-    setErrors(
-      (
-        prev: any
-      ) => ({
-        ...prev,
-
-        gender:
-          null,
-      })
-    );
+    setErrors((prev: any) => ({
+      ...prev,
+      preferred_language: null,
+    }));
   }}
 >
 
@@ -500,30 +487,19 @@ const EditProfileTabContent =
                 </Label>
 
                 <Select
-                  value={
-                    formData.gender
-                  }
-                 onValueChange={(value) => {
+  value={formData.gender}
+  onValueChange={(value) => {
+    setFormData({
+      ...formData,
+      gender: value,
+    });
 
-  setFormData({
-    ...formData,
-
-    preferred_language:
-      value,
-  });
-
-  setErrors(
-    (
-      prev: any
-    ) => ({
+    setErrors((prev: any) => ({
       ...prev,
-
-      preferred_language:
-        null,
-    })
-  );
-}}
-                >
+      gender: null,
+    }));
+  }}
+>
 
                     {errors?.gender && (
   <p className="mt-1 text-sm text-red-500 font-medium">
@@ -572,7 +548,7 @@ const EditProfileTabContent =
 
             {/* COMPANY */}
 
-            <div className="col-span-12 sm:col-span-6">
+            {/* <div className="col-span-12 sm:col-span-6">
 
               <div className="mb-5">
 
@@ -591,11 +567,11 @@ const EditProfileTabContent =
                   }
                 />
               </div>
-            </div>
+            </div> */}
 
             {/* TIN */}
 
-            <div className="col-span-12 sm:col-span-6">
+            {/* <div className="col-span-12 sm:col-span-6">
 
               <div className="mb-5">
 
@@ -616,7 +592,7 @@ const EditProfileTabContent =
   </p>
 )}
               </div>
-            </div>
+            </div> */}
 
             {/* DESCRIPTION */}
 

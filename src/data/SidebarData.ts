@@ -1,18 +1,15 @@
 import {
   House,
   Settings,
-
-  Package,
   Truck,
   ClipboardList,
 
   Users,
+  Search,
+  PackageX,
 
   ShieldCheck,
   CreditCard,
-
-  Bell,
-  Building2,
 } from "lucide-react";
 
 export const data = {
@@ -26,6 +23,27 @@ export const data = {
        
       ],
     },
+
+     {
+      label: "Package",
+    },
+    {
+      title: "Search Package",
+      url: "/search-package",
+      icon: Search,
+      isActive: true,
+      items: [
+      ],
+    },
+    {
+      title: "Unregistered Package",
+      url: "/unregistered-package",
+      icon: PackageX,
+      isActive: true,
+      items: [
+      ],
+    },
+
 
  {
       label: "Shipments",
@@ -48,26 +66,7 @@ export const data = {
     },
 
 
-    {
-      label: "Package",
-    },
-    {
-      title: "Search Package",
-      url: "/search-package",
-      icon: ClipboardList,
-      isActive: true,
-      items: [
-      ],
-    },
-    {
-      title: "Unregistered Package",
-      url: "/unregistered-package",
-      icon: Truck,
-      isActive: true,
-      items: [
-      ],
-    },
-
+   
 
     {
       label: "Customer",

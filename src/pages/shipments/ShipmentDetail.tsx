@@ -686,14 +686,14 @@ if (error) {
             <div className="absolute h-50 inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent rounded-3xl" />
 
             {/* MAIN TRACK LINE */}
-            <div className="relative h-1.5 sm:h-2 rounded-full bg-gradient-to-r from-slate-200 via-slate-200 to-slate-200 dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 shadow-inner">
+            <div className="relative h-3 sm:h-2 rounded-full bg-gradient-to-r from-slate-200 via-slate-200 to-slate-200 dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 shadow-inner">
               {/* ACTIVE PROGRESS LINE */}
               <div
                 key={`progress-${animationKey}`}
-                className="absolute left-0 top-0 h-full rounded-full bg-primary shadow-lg shadow-primary/50"
+                className="absolute left-0 top-0 w-[50%] h-full rounded-full bg-primary shadow-lg shadow-primary/50"
                 style={{
                   width: truckPosition,
-                  animation: "expandWidth 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards",
+                  animation: "expandWidth 3.5s cubic-bezier(0.2, 0, 0.2, 0.3) forwards",
                 }}
               />
 
@@ -704,7 +704,7 @@ if (error) {
                 style={{
                   left: truckPosition,
                   transform: "translateX(-50%)",
-                  animation: "moveTruck 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards",
+                  animation: "moveTruck 3.5s cubic-bezier(0.2, 0, 0.2, 0.3) forwards",
                 }}
               >
                 {/* TRUCK GLOW EFFECT */}
@@ -974,7 +974,7 @@ if (error) {
               </div>
 
               {/* TRACKING STEPS */}
-              <div className="absolute mt-4 -top-3 left-0 w-full -translate-y-1/2 flex justify-between px-0">
+              <div className="absolute mt-0 top-3 left-0 w-full -translate-y-1/2 flex justify-between px-0 overflow-x-hidden">
                 {trackingSteps.map((step, index) => {
                   const completed = index <= activeStepIndex;
                   const active = index === activeStepIndex;
@@ -988,7 +988,7 @@ if (error) {
                     >
                       {/* CHECKPOINT DOT */}
                       <div
-                        className={`relative h-6 w-6 sm:h-8 sm:w-8 rounded-full border-[3px] sm:border-[4px] transition-all duration-700 z-10 ${
+                        className={`relative h-6 w-6 sm:h-8 sm:w-8 mb-7 rounded-full border-[3px] sm:border-[4px] transition-all duration-700 z-10 ${
                           completed
                             ? "bg-primary  border-primary shadow-lg shadow-primary/50 scale-110"
                             : "bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700"
@@ -1007,7 +1007,7 @@ if (error) {
                       </div>
 
                       {/* STEP LABEL */}
-                      <div className="mt-3 sm:mt-6 lg:mt-8 w-[80px] sm:w-[110px] lg:w-[140px] text-center">
+                      <div className="mt-5 sm:mt-6 lg:mt-8 w-[80px] sm:w-[110px] lg:w-[140px] text-center">
                         <div
   className={`inline-flex items-center justify-center gap-1 sm:gap-2 mb-1.5 sm:mb-2 ${
     completed
