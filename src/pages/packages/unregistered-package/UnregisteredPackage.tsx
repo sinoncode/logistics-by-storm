@@ -125,7 +125,7 @@ export default function UnregisteredReceive() {
       />
 
       <div className="p-6">
-        <div className="grid xl:grid-cols-[650px_1fr] gap-8">
+        <div className="grid xl:grid-cols-[450px_1fr] gap-8">
           {/* LEFT SIDE */}
 
           <Card className="overflow-hidden border-0 shadow-2xl bg-gradient-to-br from-[#02374C] via-[#03506F] to-[#046C94] text-white">
