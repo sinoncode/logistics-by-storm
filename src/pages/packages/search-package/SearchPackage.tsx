@@ -306,7 +306,7 @@ console.log(response);
                             }
                           </div>
 
-                          <div className="flex items-end gap-2 flex justify-end text-end">
+                          <div className="flex items-end gap-2">
                             <Phone className="h-4 w-4 text-muted-foreground" />
 
                             {
