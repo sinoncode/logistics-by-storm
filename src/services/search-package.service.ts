@@ -1,13 +1,14 @@
 import api from "@/lib/axios";
+// import { query } from "firebase/firestore";
 
 export const searchShipmentRequests = async (
-  search: string
+  query: string
 ) => {
   const response = await api.get(
     "/admin/warehouse/search-requests",
     {
       params: {
-        search,
+        query,
       },
     }
   );
