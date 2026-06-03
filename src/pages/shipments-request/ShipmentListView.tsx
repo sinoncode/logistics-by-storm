@@ -679,7 +679,7 @@ if (loading) {
           </Card>
 {/* ROUTE SECTION */}
     <div className="rounded-[28px] border bg-white dark:bg-slate-950 p-6">
-      <div className="flex items-center justify-between flex-wrap gap-6">
+      <div className="block md:block lg:flex items-center justify-between gap-20">
         {/* ORIGIN */}
         <div className="flex-1 min-w-[240px]">
           <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">

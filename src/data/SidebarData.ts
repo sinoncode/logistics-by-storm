@@ -26,12 +26,22 @@ export const data = {
 
      {
       label: "Package",
+      permission: [
+        "shipment_packages.create",
+"shipment_packages.update",
+"shipment_packages.view"
+      ],
     },
     {
       title: "Search Package",
       url: "/search-package",
       icon: Search,
       isActive: true,
+      permission: [
+        "shipment_packages.create",
+"shipment_packages.update",
+"shipment_packages.view"
+      ],
       items: [
       ],
     },
@@ -47,65 +57,108 @@ export const data = {
 
  {
       label: "Shipments",
+       permissions: [
+        "shipment_requests.view",
+    "shipment_requests.create",
+    "shipment_requests.update",
+    "shipment_requests.review",
+    "shipment_requests.receive",
+    "shipment_requests.cancel",
+     "shipments.view",
+    "shipments.create",
+    "shipments.update_status",
+    "shipments.cancel",
+       ]
     },
-    {
-      title: "Shipment Requests",
-      url: "/shipment-request",
-      icon: ClipboardList,
-      isActive: true,
-      items: [
-      ],
-    },
-    {
-      title: "Shipments",
-      url: "/shipments",
-      icon: Truck,
-      isActive: true,
-      items: [
-      ],
-    },
+   {
+  title: "Shipment Requests",
+  url: "/shipment-request",
+  icon: ClipboardList,
+  isActive: true,
+
+  permissions: [
+    "shipment_requests.view",
+    "shipment_requests.create",
+    "shipment_requests.update",
+    "shipment_requests.review",
+    "shipment_requests.receive",
+    "shipment_requests.cancel",
+  ],
+
+  items: []
+},
+   {
+  title: "Shipments",
+  url: "/shipments",
+  icon: Truck,
+  isActive: true,
+
+  permissions: [
+    "shipments.view",
+    "shipments.create",
+    "shipments.update_status",
+    "shipments.cancel",
+  ],
+
+  items: []
+},
 
 
    
 
     {
       label: "Customer",
+      permissions: [
+    "customers.view",
+    "customers.create",
+    "customers.update",
+    "customers.delete",
+  ],
     },
+
+
     {
-      title: "Customers",
-      url: "/customers-list",
-      icon: Users,
-      isActive: true,
-      items: [
-        // {
-        //   title: "Users List",
-        //   url: "/users-list",
-        //   circleColor: "bg-primary",
-        // },
-        // {
-        //   title: "Users Grid",
-        //   url: "/users-grid",
-        //   circleColor: "bg-yellow-500",
-        // },
-        // {
-        //   title: "View Profile",
-        //   url: "/view-profile",
-        //   circleColor: "bg-red-600",
-        // },
-      ],
-    },
+  title: "Customers",
+  url: "/customers-list",
+  icon: Users,
+  isActive: true,
+
+  permissions: [
+    "customers.view",
+    "customers.create",
+    "customers.update",
+    "customers.delete",
+  ],
+
+  items: []
+},
     {
       label: "Teams",
+      permissions: [
+    "teams.view",
+    "teams.create",
+    "teams.update",
+    "teams.delete",
+    "permission.view",
+  ],
     },
     {
       title: "Teams",
       url: "/teams-list",
       icon: ShieldCheck,
       isActive: true,
+       permissions: [
+    "teams.view",
+    "teams.create",
+    "teams.update",
+    "teams.delete",
+    "permission.view",
+  ],
       items: [
         {
           title: "Team",
           url: "/teams-list",
+          
           circleColor: "bg-primary",
         },
         {
@@ -123,217 +176,33 @@ export const data = {
    
      {
       label: "Payments",
+       permissions: [
+    "payments.view",
+    "payments.initiate",
+    "payments.verify",
+    "payments.refund",
+  ],
     },
-    {
-      title: "Payments",
-      url: "/payment-lists",
-      icon: CreditCard,
-      isActive: true,
-      items: [
-      ],
-    },
-    // {
-    //   title: "Email",
-    //   url: "/email",
-    //   icon: Mail,
-    // },
-    // {
-    //   title: "Chat",
-    //   url: "/chat",
-    //   icon: MessageCircleMore,
-    // },
-    // {
-    //   title: "Calendar",
-    //   url: "/calendar",
-    //   icon: CalendarDays,
-    // },
-    // {
-    //   label: "UI Elements",
-    // },
-    // {
-    //   title: "Components",
-    //   url: "#",
-    //   icon: Component,
-    //   isActive: true,
-    //   items: [
-    //     {
-    //       title: "Typography",
-    //       url: "/typography",
-    //       circleColor: "bg-primary",
-    //     },
-    //     {
-    //       title: "Colors",
-    //       url: "/colors",
-    //       circleColor: "bg-yellow-500",
-    //     },
-    //     {
-    //       title: "Buttons",
-    //       url: "/buttons",
-    //       circleColor: "bg-green-600",
-    //     },
-    //     {
-    //       title: "Dropdown",
-    //       url: "/dropdown",
-    //       circleColor: "bg-purple-600",
-    //     },
-    //     {
-    //       title: "Alert",
-    //       url: "/alert",
-    //       circleColor: "bg-yellow-500",
-    //     },
-    //     {
-    //       title: "Card",
-    //       url: "/card",
-    //       circleColor: "bg-red-600",
-    //     },
-    //     {
-    //       title: "Avatar",
-    //       url: "/avatar",
-    //       circleColor: "bg-green-600",
-    //     },
-    //     {
-    //       title: "Progress Bar",
-    //       url: "/progress-bar",
-    //       circleColor: "bg-primary",
-    //     },
-    //     {
-    //       title: "Tab & Accordion",
-    //       url: "/tab-accordion",
-    //       circleColor: "bg-yellow-500",
-    //     },
-    //     {
-    //       title: "Pagination",
-    //       url: "/pagination",
-    //       circleColor: "bg-red-600",
-    //     },
-    //     {
-    //       title: "Badges",
-    //       url: "/badges",
-    //       circleColor: "bg-primary",
-    //     },
-    //     {
-    //       title: "Tooltip & Popover",
-    //       url: "/tooltip",
-    //       circleColor: "bg-slate-900",
-    //     },
-    //     {
-    //       title: "Star Ratings",
-    //       url: "/star-rating",
-    //       circleColor: "bg-purple-600",
-    //     },
-    //     {
-    //       title: "Tags",
-    //       url: "/tags",
-    //       circleColor: "bg-primary",
-    //     },
-    //     {
-    //       title: "List",
-    //       url: "/list",
-    //       circleColor: "bg-red-600",
-    //     },
-    //     {
-    //       title: "Radio",
-    //       url: "/radio",
-    //       circleColor: "bg-orange-600",
-    //     },
-    //     {
-    //       title: "Switch",
-    //       url: "/switch",
-    //       circleColor: "bg-green-600",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Forms",
-    //   url: "#",
-    //   icon: StickyNote,
-    //   isActive: true,
-    //   items: [
-    //     {
-    //       title: "Input Forms",
-    //       url: "/input-forms",
-    //       circleColor: "bg-primary",
-    //     },
-    //     {
-    //       title: "Input Layout",
-    //       url: "/input-layout",
-    //       circleColor: "bg-yellow-500",
-    //     },
-    //     {
-    //       title: "Form Validation",
-    //       url: "/form-validation",
-    //       circleColor: "bg-green-600",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Chart",
-    //   url: "#",
-    //   icon: ChartPie,
-    //   isActive: true,
-    //   items: [
-    //     {
-    //       title: "Line Chart",
-    //       url: "/line-chart",
-    //       circleColor: "bg-orange-600",
-    //     },
-    //     {
-    //       title: "Column Chart",
-    //       url: "/column-chart",
-    //       circleColor: "bg-yellow-500",
-    //     },
-    //     {
-    //       title: "Pie Chart",
-    //       url: "/pie-chart",
-    //       circleColor: "bg-green-600",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Widgets",
-    //   url: "/widgets",
-    //   icon: Boxes,
-    // },
-    // {
-    //   title: "Table",
-    //   url: "#",
-    //   icon: Server,
-    //   isActive: true,
-    //   items: [
-    //     {
-    //       title: "Basic Table",
-    //       url: "/basic-table",
-    //       circleColor: "bg-orange-600",
-    //     },
-    //   ],
-    // },
+   {
+  title: "Payments",
+  url: "/payment-lists",
+  icon: CreditCard,
+  isActive: true,
+
+  permissions: [
+    "payments.view",
+    "payments.initiate",
+    "payments.verify",
+    "payments.refund",
+  ],
+
+  items: []
+},
     
     {
       label: "Setting",
     },
-    // {
-    //   title: "Authentication",
-    //   url: "#",
-    //   icon: ShieldCheck,
-    //   isActive: true,
-    //   items: [
-    //     {
-    //       title: "Sign In",
-    //       url: "/auth/login",
-    //       circleColor: "bg-primary",
-    //     },
-    //     {
-    //       title: "Sign Up",
-    //       url: "/auth/register",
-    //       circleColor: "bg-yellow-500",
-    //     },
-    //     {
-    //       title: "Forgot Password",
-    //       url: "/auth/forgot-password",
-    //       circleColor: "bg-cyan-500",
-    //     },
-    //   ],
-    // },
+   
     {
       title: "Setting",
       url: "#",

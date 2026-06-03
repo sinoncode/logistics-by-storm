@@ -1,23 +1,28 @@
+import type { ReactNode } from "react";
+import { useAuthStore } from "@/store/authStore";
+import { createPermissionChecker } from "@/lib/permissions";
+
 interface Props {
   permission: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const CanAccess = ({
   permission,
   children,
 }: Props) => {
-  const user = JSON.parse(
-    localStorage.getItem("user") || "{}"
+  const user = useAuthStore(
+    (state) => state.user
   );
 
-  const permissions = user?.permissions || [];
+  const checker =
+    createPermissionChecker(user);
 
-  if (!permissions.includes(permission)) {
+  if (!checker.can(permission)) {
     return null;
   }
 
-  return children;
+  return <>{children}</>;
 };
 
 export default CanAccess;

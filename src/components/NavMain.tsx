@@ -17,16 +17,24 @@ import { cn } from "@/lib/utils";
 import { ChevronRight, type LucideIcon } from "lucide-react";
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { useAuthStore } from "@/store/authStore";
+import { hasMenuAccess } from "@/lib/menuPermissions";
 
 interface SidebarItem {
-  title?: string;
+ title?: string;
   url?: string;
   icon?: LucideIcon;
+
+  permissions?: string[];
+
   items?: {
     title: string;
     url?: string;
     circleColor: string;
+
+    permissions?: string[];
   }[];
+
   label?: string;
 }
 
@@ -51,10 +59,19 @@ export function NavMain({ items }: { items: SidebarItem[] }) {
     );
   };
 
+  const user = useAuthStore((state) => state.user);
+
+const permissions = user?.permissions || [];
+const filteredItems = items.filter((item) => {
+  return hasMenuAccess(
+    permissions,
+    item.permissions
+  );
+});
   return (
     <SidebarGroup className="flex flex-col w-full px-4 py-3">
       <SidebarMenu>
-        {items.map((item) => {
+       {filteredItems.map((item) => {
           // Dropdown with subitems
           if (item.items && item.items.length > 0 && item.title) {
             const isActiveDropdown = isDropdownActive(item);
