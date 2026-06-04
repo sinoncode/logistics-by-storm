@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { useParams } from "react-router-dom";
-
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Card,
   CardContent,
@@ -81,6 +81,126 @@ const DetailItem = ({
   </div>
 );
 
+
+const PaymentDetailsSkeleton = () => {
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <Card className="overflow-hidden border-0 shadow-sm">
+        <div className="p-6 space-y-4">
+          <Skeleton className="h-8 w-32 rounded-full" />
+
+          <Skeleton className="h-10 w-72" />
+
+          <Skeleton className="h-5 w-48" />
+
+          <Skeleton className="h-12 w-40" />
+        </div>
+      </Card>
+
+      {/* Payment Info */}
+      <Card>
+        <CardHeader>
+          <Skeleton className="h-7 w-52" />
+        </CardHeader>
+
+        <Separator />
+
+        <CardContent className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div
+                key={i}
+                className="rounded-2xl border p-4 space-y-3"
+              >
+                <Skeleton className="h-10 w-10 rounded-xl" />
+                <Skeleton className="h-4 w-24" />
+                <Skeleton className="h-5 w-full" />
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Shipment Details */}
+      <Card>
+        <CardHeader>
+          <Skeleton className="h-7 w-52" />
+        </CardHeader>
+
+        <Separator />
+
+        <CardContent className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div
+                key={i}
+                className="rounded-2xl border p-4 space-y-3"
+              >
+                <Skeleton className="h-10 w-10 rounded-xl" />
+                <Skeleton className="h-4 w-24" />
+                <Skeleton className="h-5 w-full" />
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Shipment Items */}
+      <Card>
+        <CardHeader>
+          <Skeleton className="h-7 w-40" />
+        </CardHeader>
+
+        <Separator />
+
+        <CardContent className="p-6 space-y-4">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div
+              key={i}
+              className="rounded-2xl border p-4 flex justify-between items-center"
+            >
+              <div className="space-y-2">
+                <Skeleton className="h-5 w-48" />
+                <Skeleton className="h-4 w-32" />
+              </div>
+
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-16" />
+                <Skeleton className="h-5 w-20" />
+              </div>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+
+      {/* Customer Details */}
+      <Card>
+        <CardHeader>
+          <Skeleton className="h-7 w-48" />
+        </CardHeader>
+
+        <Separator />
+
+        <CardContent className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div
+                key={i}
+                className="rounded-2xl border p-4 space-y-3"
+              >
+                <Skeleton className="h-10 w-10 rounded-xl" />
+                <Skeleton className="h-4 w-24" />
+                <Skeleton className="h-5 w-full" />
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
 const PaymentDetails = () => {
 
   const { id } = useParams();
@@ -108,11 +228,9 @@ const PaymentDetails = () => {
 
       <LazyWrapper>
 
-        {loading ? (
-          <div className="flex items-center justify-center py-40">
-            Loading payment details...
-          </div>
-        ) : payment ? (
+      {loading ? (
+  <PaymentDetailsSkeleton />
+) : payment ? (
 
           <div className="space-y-6">
 

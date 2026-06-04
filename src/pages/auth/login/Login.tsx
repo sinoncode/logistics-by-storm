@@ -63,24 +63,14 @@ const Login = () => {
 
       const response = await loginUser(data);
 
-      const responseData = response.data;
+      const responseData = response;
 
-      // Store in Zustand
-      setAuth(
-        responseData.access_token,
-        responseData.user
-      );
+      if (!responseData?.access_token) {
+        throw new Error("Login response did not include an access token.");
+      }
 
-      // Optional localStorage backup
-      localStorage.setItem(
-        "access_token",
-        responseData.access_token
-      );
-
-      localStorage.setItem(
-        "user",
-        JSON.stringify(responseData.user)
-      );
+      // Store in Zustand and localStorage
+      setAuth(responseData.access_token, responseData.user);
 
       toast.success("Login successful");
 

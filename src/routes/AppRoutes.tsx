@@ -45,6 +45,8 @@ import Typography from './../pages/components-pages/typography/Typography';
 import GuestRoutes from "./GuestRoutes";
 import ProtectedRoutes from "./ProtectedRoutes";
 import CustomerDetails from "../pages/customer/CustomerDetails";
+import ProtectedPermissionRoute from "@/components/rbac/ProtectedPermissionRoute";
+import Unauthorized from "@/pages/Unauthorized";
 // import ShipmentRequestList from "../pages/shipments-request/ShipmentRequestList"
 
 const Podcast = lazy(() => import("@/pages/dashboards/podcast/Podcast"));
@@ -118,9 +120,26 @@ export const router = createBrowserRouter([
           // {
           //   path: "add-team-member", element: <AddMember />
           // },
-          {
-            path: "teams-list", element: <Teams />
-          },
+        {
+  path: "teams-list",
+  element: (
+    <ProtectedPermissionRoute
+      permissions={[
+        "teams.view",
+        "teams.create",
+        "teams.update",
+        "teams.delete",
+      ]}
+    >
+      <Teams />
+    </ProtectedPermissionRoute>
+  ),
+},
+
+{
+  path: "/unauthorized",
+  element: <Unauthorized />,
+},
           // {
           //   path: "ai", element: <AiDashboard />
           // },
@@ -249,7 +268,18 @@ export const router = createBrowserRouter([
           },
           {
   path: "customers-list",
-  element: <CustomersList />
+  element: (
+    <ProtectedPermissionRoute
+      permissions={[
+        "customers.view",
+        "customers.create",
+        "customers.update",
+        "customers.delete",
+      ]}
+    >
+      <CustomersList />
+    </ProtectedPermissionRoute>
+  ),
 },
 {
   path: "customers-grid",
@@ -290,9 +320,21 @@ export const router = createBrowserRouter([
           {
             path: "/shipments-detail/:id", element: <ShipmentDetail />
           },
-           {
-            path: "payment-lists", element: <PaymentsList /> 
-          },
+          {
+  path: "payment-lists",
+  element: (
+    <ProtectedPermissionRoute
+      permissions={[
+        "payments.view",
+        "payments.initiate",
+        "payments.refund",
+        "payments.verify",
+      ]}
+    >
+      <PaymentsList />
+    </ProtectedPermissionRoute>
+  ),
+},
           {
             path: "/payment-details/:id", element: <PaymentDetails />
           },
