@@ -23,7 +23,14 @@ export const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
-getAnalytics(app);
+
+if (typeof window !== "undefined") {
+  try {
+    getAnalytics(app);
+  } catch (error) {
+    console.error(error);
+  }
+}
 export const db = getFirestore(app);
 
 export const auth = getAuth(app);
