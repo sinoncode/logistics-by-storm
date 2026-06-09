@@ -356,5 +356,5 @@ export const router = createBrowserRouter([
     errorElement: <RouteErrorBoundary />,
   },
 ], {
-  basename: "/admin",
+  basename: "/",
 });
