@@ -8,11 +8,7 @@ export const loginUser = async (data: {
   email: string;
   password: string;
 }) => {
+  const response = await API.post("/auth/login", data);
 
-  const response = await API.post(
-    "/auth/login",
-    data
-  );
-
-  return response.data;
+  return response.data?.data || response.data;
 };

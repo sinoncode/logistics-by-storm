@@ -205,26 +205,26 @@ export const data = {
    
     {
       title: "Setting",
-      url: "#",
+      url: "/company",
       icon: Settings,
       isActive: true,
-      items: [
-        {
-          title: "Company",
-          url: "/company",
-          circleColor: "bg-primary",
-        },
-        {
-          title: "Notification",
-          url: "/settings-notification",
-          circleColor: "bg-yellow-500",
-        },
-        {
-          title: "Notification Alert",
-          url: "/notification-alert",
-          circleColor: "bg-yellow-500",
-        },
-      ],
+      // items: [
+      //   {
+      //     title: "Company",
+      //     url: "/company",
+      //     circleColor: "bg-primary",
+      //   },
+      //   {
+      //     title: "Notification",
+      //     url: "/settings-notification",
+      //     circleColor: "bg-yellow-500",
+      //   },
+      //   {
+      //     title: "Notification Alert",
+      //     url: "/notification-alert",
+      //     circleColor: "bg-yellow-500",
+      //   },
+      // ],
     },
   ],
 };

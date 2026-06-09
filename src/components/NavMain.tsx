@@ -41,6 +41,7 @@ interface SidebarItem {
 export function NavMain({ items }: { items: SidebarItem[] }) {
   const location = useLocation();
   const pathname = location.pathname;
+  const normalizedPathname = pathname.startsWith("/admin") ? pathname.slice(6) || "/" : pathname;
 
   // State: which dropdown is open
   const [openGroup, setOpenGroup] = useState<string | null>(null);
@@ -55,7 +56,7 @@ export function NavMain({ items }: { items: SidebarItem[] }) {
   const isDropdownActive = (item: SidebarItem) => {
     if (!item.items) return false;
     return item.items.some(
-      (sub) => sub.url && (pathname === sub.url || pathname.startsWith(sub.url))
+      (sub) => sub.url && (normalizedPathname === sub.url || normalizedPathname.startsWith(sub.url))
     );
   };
 
@@ -110,8 +111,8 @@ const filteredItems = items.filter((item) => {
                         {item.items.map((subItem) => {
                           if (!subItem.url) return null;
                           const isSubActive =
-                            pathname === subItem.url ||
-                            pathname.startsWith(subItem.url);
+                            normalizedPathname === subItem.url ||
+                            normalizedPathname.startsWith(subItem.url);
 
                           return (
                             <SidebarMenuSubItem key={subItem.title}>
@@ -160,7 +161,7 @@ const filteredItems = items.filter((item) => {
           // Top-level single page
           if (item.url && item.title) {
             const isMenuActive =
-              pathname === item.url || pathname.startsWith(item.url);
+              normalizedPathname === item.url || normalizedPathname.startsWith(item.url);
 
             return (
               <SidebarMenuItem key={item.title}>

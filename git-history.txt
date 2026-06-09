@@ -1,0 +1,1446 @@
+==================================================
+Commit: f107bce9d3999776ee9db0850243a9f02e2e3508
+Author: sinoncode
+Date: Thu Jun 4 16:12:49 2026
+Message: All routes are protected and clean also sidebar and other parts also dynamic
+
+src/components/rbac/ProtectedPermissionRoute.tsx
+src/pages/Unauthorized.tsx
+src/pages/auth/login/Login.tsx
+src/pages/payments/payments-details/PaymentsDetails.tsx
+src/routes/AppRoutes.tsx
+src/routes/GuestRoutes.tsx
+src/routes/ProtectedRoutes.tsx
+
+==================================================
+Commit: 16ed56bfe72b52a5519227e195b4e6137aeb4061
+Author: sinoncode
+Date: Wed Jun 3 19:00:34 2026
+Message: Making dynamic of complete sidebar with complete authentication
+
+project-overview.txt
+src/components/NavMain.tsx
+src/components/rbac/CanAccess.tsx
+src/data/SidebarData.ts
+src/layouts/Header.tsx
+src/lib/menuPermissions.ts
+src/pages/shipments-request/ShipmentListView.tsx
+
+==================================================
+Commit: 52930d557b9ef678ab8bd2ec6f76e28cc03846c1
+Author: sinoncode
+Date: Tue Jun 2 18:44:31 2026
+Message: ss
+
+src/pages/packages/search-package/SearchPackage.tsx
+
+==================================================
+Commit: 75a9d337c19eda241ae40e6e93159ce705a5ff08
+Author: sinoncode
+Date: Tue Jun 2 18:43:44 2026
+Message: ss
+
+src/pages/packages/search-package/SearchPackage.tsx
+src/pages/packages/unregistered-package/UnregisteredPackage.tsx
+
+==================================================
+Commit: 771dc5342e6536ab3319bad2aff3e8cd84f4b1c4
+Author: sinoncode
+Date: Tue Jun 2 18:40:49 2026
+Message: Shipment search final layout and correction
+
+src/pages/packages/search-package/SearchPackage.tsx
+src/services/search-package.service.ts
+
+==================================================
+Commit: 704f6d9d380f4d80729f93f86b45447791247034
+Author: sinoncode
+Date: Tue Jun 2 17:19:52 2026
+Message: Correction
+
+src/components/shipment/ShipmentCalculationModal.tsx
+src/data/SidebarData.ts
+src/pages/customer/view-profile/components/EditProfileTabContent.tsx
+src/pages/packages/unregistered-package/UnregisteredPackage.tsx
+src/pages/shipments-request/ShipmentListView.tsx
+src/pages/shipments/ShipmentDetail.tsx
+src/types/shipment.ts
+
+==================================================
+Commit: e7c93e7257926cfe1df50495b2525f1676f796d2
+Author: sinoncode
+Date: Mon Jun 1 19:24:20 2026
+Message: Applying Skeleton screeen for all pages and screens also made page for Search Package and Unregistered Package. Made complete dynamic that data will comes through API and it will be very clean and clear
+
+package-lock.json
+package.json
+src/components/tables/UsersListTable.tsx
+src/components/tables/payments/column.tsx
+src/components/tables/users/data-tables.tsx
+src/components/teams/TeamsTable.tsx
+src/components/ui/form.tsx
+src/data/SidebarData.ts
+src/pages/customer/CustomerDetails.tsx
+src/pages/customer/CustomerDetailsSkeleton.tsx
+src/pages/customer/CustomersList.tsx
+src/pages/packages/search-package/SearchPackage.tsx
+src/pages/packages/unregistered-package/UnregisteredPackage.tsx
+src/pages/payments/payments-list/PaymentList.tsx
+src/pages/shipments-request/ShipmentListTable.tsx
+src/pages/shipments-request/ShipmentListView.tsx
+src/pages/shipments/ShipmentDetail.tsx
+src/pages/shipments/ShipmentList.tsx
+src/routes/AppRoutes.tsx
+src/services/search-package.service.ts
+src/types/search-package.ts
+
+==================================================
+Commit: 20bebaad722ded456809cd394d4eb9eff388417c
+Author: sinoncode
+Date: Fri May 29 19:49:52 2026
+Message: shipment changed
+
+src/pages/shipments-request/ShipmentListView.tsx
+
+==================================================
+Commit: 69e4a13e2820da7187e2f68c8528a39349e5a6f2
+Author: sinoncode
+Date: Fri May 29 18:41:46 2026
+Message: ss
+
+src/pages/auth/member-create-password/CreatePassword.tsx
+src/store/shipmentTrackStore.ts
+
+==================================================
+Commit: 904b57c6fd050419a4a6cebb5631bb9059eba76e
+Author: sinoncode
+Date: Fri May 29 17:07:27 2026
+Message: ss
+
+src/routes/AppRoutes.tsx
+
+==================================================
+Commit: 37c560af698f20183c2189c82d93d151b35e1039
+Author: sinoncode
+Date: Fri May 29 15:19:42 2026
+Message: ss
+
+src/pages/auth/member-create-password/CreatePassword.tsx
+
+==================================================
+Commit: 267a7f8f4e0c843e5679ec51670617455a1fdafd
+Author: sinoncode
+Date: Fri May 29 15:17:02 2026
+Message: Create Password page for members to be created
+
+src/assets/images/auth/create-password-image.png
+src/pages/auth/member-create-password/CreatePassword.tsx
+src/routes/AppRoutes.tsx
+
+==================================================
+Commit: 818b72119e98ee3716c5c92741a5edbc34ba4a60
+Author: sinoncode
+Date: Fri May 29 13:32:06 2026
+Message: Ui changes
+
+src/components/shipment/ShipmentCalculationModal.tsx
+src/components/tables/teams/columns.tsx
+src/components/teams/AddMemberForm.tsx
+src/components/teams/AddMemberModal.tsx
+src/components/ui/dialog.tsx
+
+==================================================
+Commit: c8559c035c88987f8c9b031a3eb6bae2a374c400
+Author: sinoncode
+Date: Thu May 28 20:11:39 2026
+Message: Header changes
+
+src/layouts/Header.tsx
+
+==================================================
+Commit: 3f0d1aa92568142ad75abe9450c371d035dd7be2
+Author: sinoncode
+Date: Thu May 28 20:02:55 2026
+Message: Completing teams section to show and add members dynamically, also completed some major bug fixes for UI
+
+src/components/tables/LastTransactionTable.tsx
+src/components/tables/TodoListRecentTable.tsx
+src/components/tables/teams/columns.tsx
+src/components/teams/AddMemberForm.tsx
+src/components/teams/AddMemberModal.tsx
+src/components/teams/MemberForm.tsx
+src/components/teams/TeamsTable.tsx
+src/pages/shipments-request/ShipmentListView.tsx
+src/pages/teams/TeamMemberView.tsx
+src/pages/teams/Teams.tsx
+src/pages/teams/add-member/AddMember(useles).tsx
+src/pages/teams/add-member/AddMember.tsx
+src/pages/teams/add-member/Formsffsdf.css
+src/store/teamStore.ts
+
+==================================================
+Commit: f046e9b06f5e0c9c9572f93f0deb8fd66a0d57f1
+Author: sinoncode
+Date: Wed May 27 20:45:57 2026
+Message: Complete UI fixing of listing pages and profile pages also corrected the complete overall UI fixing and completed Payments section with validation
+
+src/assets/images/user-grid/logistics-by-storm-user-profile-background.png
+src/assets/images/user-grid/logistics-by-storm-user-profile-image.png
+src/components/charts/BarChartYear.tsx
+src/components/charts/ShipmentLineChart.tsx
+src/components/shared/ProfileDropdown.tsx
+src/components/tables/TodoListRecentTable.tsx
+src/components/tables/payments/column.tsx
+src/components/tables/shipments-request/columns.tsx
+src/components/tables/shipments/columns.tsx
+src/components/tables/users/column.tsx
+src/components/tables/users/data-tables.tsx
+src/data/SidebarData.ts
+src/pages/customer/CustomersList.tsx
+src/pages/customer/view-profile/ViewProfile.tsx
+src/pages/customer/view-profile/components/AvatarUpload.tsx
+src/pages/customer/view-profile/components/ChangePasswordTabContent.tsx
+src/pages/customer/view-profile/components/EditProfileTabContent.tsx
+src/pages/customer/view-profile/components/ViewProfileSidebar.tsx
+src/pages/dashboards/crm/components/EarningStatisticsCard.tsx
+src/pages/dashboards/crm/components/ShipmentAnalyticsCard.tsx
+src/pages/payments/payments-list/PaymentList.tsx
+src/pages/shipments/Shipments.tsx
+src/services/shipment-track.service.ts
+src/store/paymentsList.ts
+src/store/profileStore.ts
+src/store/revenueChartStore.ts
+src/store/updateProfileStore.ts
+
+==================================================
+Commit: 0a06c5c3269cecead5238e02f2448fe814dcc927
+Author: sinoncode
+Date: Tue May 26 19:50:29 2026
+Message: CHecked all the dashboard components made it complete dynamic with help of API
+
+src/components/charts/BarChartYear.tsx
+src/components/charts/ShipmentLineChart.tsx
+src/components/charts/SmallAreaChart.tsx
+src/components/shared/CustomSelect.tsx
+src/components/tables/LastTransactionTable.tsx
+src/components/tables/TodoListRecentTable.tsx
+src/pages/dashboards/crm/Crm.tsx
+src/pages/dashboards/crm/components/EarningStatisticsCard.tsx
+src/pages/dashboards/crm/components/LastTransactionCard.tsx
+src/pages/dashboards/crm/components/RevenueGrowthCard.tsx
+src/pages/dashboards/crm/components/ShipmentAnalyticsCard.tsx
+src/pages/dashboards/crm/components/StatsCard.tsx
+src/pages/dashboards/crm/components/TodoListRecentCard.tsx
+src/store/dashboardStore.ts
+src/store/revenueChartStore.ts
+src/store/shipmentChartStore.ts
+
+==================================================
+Commit: 9cd96fee8d51336f4e761f29beacee5d7f113a12
+Author: sinoncode
+Date: Tue May 26 14:48:31 2026
+Message: Payments Detail Page complete design and details also I have fetched extra data through shipment details so a clear vission of payment is visible to it. Using 2 diffrrent API
+
+src/pages/payments/payments-details/PaymentsDetails.tsx
+src/routes/AppRoutes.tsx
+src/store/paymentDetailsStore.ts
+
+==================================================
+Commit: cf4c3744527790516284881f1c5020a8a2284f56
+Author: sinoncode
+Date: Mon May 25 19:32:43 2026
+Message: Payments List makeing of Customer Payments lists
+
+src/components/tables/payments/column.tsx
+src/data/SidebarData.ts
+src/pages/payments/payments-details/PaymentsDetails.tsx
+src/pages/payments/payments-list/PaymentList.tsx
+src/routes/AppRoutes.tsx
+src/store/paymentsList.ts
+
+==================================================
+Commit: e4f62435b5107dcc6053967d846f8c2cd73f3f0d
+Author: sinoncode
+Date: Mon May 25 14:58:52 2026
+Message: Shipmement Tracking corrected now the truck is moving with animation and can change the status dynamically
+
+src/pages/shipments/ShipmentDetail.tsx
+src/services/shipment-track.service.ts
+src/store/shipmentTrackStore.ts
+src/types/shipments-track.ts
+
+==================================================
+Commit: b5bab7f8d2f244dd56fbd74754c68d57067c891c
+Author: sinoncode
+Date: Fri May 22 19:31:29 2026
+Message: Shipment List with details Page completed
+
+src/components/tables/shipments-request/tracking-columns.tsx
+src/hooks/use-shipment-details.ts
+src/pages/shipments/ShipmentDetail.tsx
+src/routes/AppRoutes.tsx
+src/schema/shipment.schema.ts
+src/services/shipment-track.service.ts
+src/store/shipmentTrackStore.ts
+src/types/shipments-track.ts
+
+==================================================
+Commit: 4ac84f4911451649ace4b5f3072bf2117c73ef17
+Author: sinoncode
+Date: Thu May 21 20:23:28 2026
+Message: Shipment Request Calculator Advancement and Standby Modal Working, Shipment Lists are getting better while making this now it's also dynamic clean
+
+src/components/shipment/ShipmentCalculationModal.tsx
+src/components/shipment/ShipmentStandbyModal.tsx
+src/components/tables/shipments/columns.tsx
+src/pages/shipments-request/ShipmentListView.tsx
+src/pages/shipments/ShipmentList.tsx
+src/services/shipment-track.service.ts
+src/services/shipment.service.ts
+src/types/shipments-track.ts
+
+==================================================
+Commit: 8df7d549f1e2ced708b0803dc34ea2a2c5c83808
+Author: sinoncode
+Date: Wed May 20 20:32:59 2026
+Message: Minor changes of Icon
+
+src/pages/TeamsPermissions.tsx
+
+==================================================
+Commit: a9e9b7aa2621cf2efdd8b44581aaea3999164f96
+Author: sinoncode
+Date: Wed May 20 20:26:59 2026
+Message: Admin's role is visible but can't be edited inthis dashboard
+
+src/pages/TeamsPermissions.tsx
+src/store/rbacStore.ts
+
+==================================================
+Commit: 44bbd86a5e7e8ff4615cb42b603f59c867d391fb
+Author: sinoncode
+Date: Wed May 20 20:10:22 2026
+Message: ss
+
+index.html
+
+==================================================
+Commit: e7a5cb88db5a227217938c5418dbe02aaf907e74
+Author: sinoncode
+Date: Wed May 20 19:55:22 2026
+Message: Roles and permission correction after API routes changes
+
+src/components/tables/shipments-request/columns.tsx
+src/components/tables/users/column.tsx
+src/services/permission.service.ts
+src/services/rbac.service.ts
+src/services/role.service.ts
+
+==================================================
+Commit: c406e8682a15916aa6d0c34ef7e19ea7d422a58a
+Author: sinoncode
+Date: Wed May 20 19:07:56 2026
+Message: Forgot password page design correction
+
+src/assets/images/auth/forgot-pass-img.png
+src/pages/auth/forgot-password/ForgotPassword.tsx
+
+==================================================
+Commit: 50c03b6309f5ef2dcd876d2eea1533d4bc74c8cd
+Author: sinoncode
+Date: Wed May 20 18:06:04 2026
+Message: Login Page Few Edits
+
+src/pages/auth/login/Login.tsx
+
+==================================================
+Commit: 0a01e35c07bdc24163ed59c391aceeb80b1383f8
+Author: sinoncode
+Date: Wed May 20 17:45:04 2026
+Message: Shipments Module with all feature
+
+src/components/shipment/ShipmentCalculationModal.tsx
+src/pages/dashboards/crm/Crm.tsx
+src/pages/dashboards/crm/components/LastTransactionCard.tsx
+src/pages/dashboards/crm/components/StatsCard.tsx
+src/pages/dashboards/crm/components/TodoListRecentCard.tsx
+src/pages/shipments-request/ShipmentListView.tsx
+src/routes/AppRoutes.tsx
+src/services/shipment.service.ts
+src/types/shipment.ts
+
+==================================================
+Commit: d7ea45f2a902cc978d8ae77fda8013f124f38d78
+Author: sinoncode
+Date: Tue May 19 21:00:28 2026
+Message: Customers, SHipments complete features using best UI made with ShadeCn and Tailwind and Dynamically created using API
+
+.env
+.env.development
+package-lock.json
+package.json
+src/components/data-table/columns/users-columns.tsx
+src/components/data-table/data-table-pagination.tsx
+src/components/data-table/data-table-toolbar.tsx
+src/components/data-table/data-table.tsx
+src/components/tables/UsersListTable.tsx
+src/components/tables/shipments-request/columns.tsx
+src/components/tables/users/column.tsx
+src/components/tables/users/data-tables.tsx
+src/components/ui/table.tsx
+src/data/SidebarData.ts
+src/data/users.ts
+src/pages/customer/CustomerDetails.tsx
+src/pages/customer/CustomersList.tsx
+src/pages/shipments-request/ShipmentListTable.tsx
+src/pages/shipments-request/ShipmentListView.tsx
+src/pages/shipments-request/ShipmentRequestList.tsx
+src/pages/shipments-request/shipmentlistexample.tsx
+src/pages/shipments/ShipmentDetail.tsx
+src/pages/shipments/ShipmentList.tsx
+src/routes/AppRoutes.tsx
+src/services/shipment.service.ts
+src/store/customerDetailsStore.ts
+src/store/customerStore.ts
+src/store/shipmentDetailsStore.ts
+src/store/shipmentStore.ts
+
+==================================================
+Commit: 0fe293023e951e578bd665ce3ca4a5b66fc8cf6f
+Author: Sumit Pal
+Date: Mon May 18 12:14:48 2026
+Message: Merge pull request #2 from sinoncode/rohan-frontend
+
+package-lock.json
+src/data/SidebarData.ts
+src/pages/shipments/ShipmentDetail.tsx
+src/pages/shipments/ShipmentList.tsx
+src/pages/shipments/Shipments.tsx
+src/routes/AppRoutes.tsx
+
+==================================================
+Commit: cb3b3b3560a6ff0916fd801dd9888551cbec8085
+Author: sinoncode
+Date: Mon May 18 12:12:23 2026
+Message: ss
+
+src/components/tables/UsersListTable.tsx
+
+==================================================
+Commit: 97ec7721be6eceb973cd8babe58dc3c40b364449
+Author: sinoncode
+Date: Fri May 15 20:55:50 2026
+Message: temporary build fix
+
+package.json
+tsconfig.json
+
+==================================================
+Commit: cb32c7be6e4411bd0dd730b4220dd167eb6b4c79
+Author: sinoncode
+Date: Fri May 15 20:45:59 2026
+Message: Dashboard configuration according to Logistics needs
+
+src/pages/dashboards/crm/Crm.tsx
+src/pages/dashboards/crm/components/StatsCard.tsx
+src/pages/shipments-request/ShipmentListView.tsx
+src/routes/AppRoutes.tsx
+
+==================================================
+Commit: 442442ed4cfad19e71595eb0134207aba3e817c8
+Author: sinoncode
+Date: Thu May 14 20:15:09 2026
+Message: Shipment Page complete design with all the feilds started making it dynamic
+
+src/pages/customer/CustomerDetails.tsx
+src/pages/shipments-request/ShipmentListView.tsx
+
+==================================================
+Commit: f0101c3d6895d828cdc800b6f87d75c9bf06ca4c
+Author: sinoncode
+Date: Wed May 13 18:28:59 2026
+Message: RBAC screen finalize and complition code with clean architecture
+
+RBAC_DOCUMENTATION.md
+index.html
+package-lock.json
+package.json
+project-overview.txt
+src/components/rbac/PermissionTable.tsx
+src/hooks/usePermissions.ts
+src/lib/permissions.ts
+src/pages/TeamsPermissions.tsx
+src/pages/customer/CustomersList.tsx
+src/services/rbac.service.ts
+src/store/rbacStore.ts
+tsconfig.app.json
+
+==================================================
+Commit: f17fc7c01d733aef9e4288286652b05e75c8804d
+Author: sinoncode
+Date: Mon May 11 20:19:26 2026
+Message: Completed Auth Api implementations and integrating RBAC Api's to make more dynamic
+
+package-lock.json
+package.json
+project-overview.txt
+src/components/rbac/CanAccess.tsx
+src/components/rbac/PermissionTable.tsx
+src/components/rbac/RoleList.tsx
+src/components/shared/ProfileDropdown.tsx
+src/hooks/usePermissions.ts
+src/layouts/Header.tsx
+src/pages/TeamsPermissions.tsx
+src/pages/auth/login/Login.tsx
+src/pages/customer/CustomerDetails.tsx
+src/pages/roles/RolesList.tsx
+src/pages/teams/add-member/AddMember.tsx
+src/routes/AppRoutes.tsx
+src/routes/GuestRoutes.tsx
+src/routes/ProtectedRoutes.tsx
+src/services/api.ts
+src/services/auth.service.ts
+src/services/permission.service.ts
+src/services/rbac.service.ts
+src/services/role.service.ts
+src/store/authStore.ts
+src/types/permission.types.ts
+src/types/rbac.ts
+
+==================================================
+Commit: 21dcf4e59416f6d7f05f26449b4a164426646916
+Author: sinoncode
+Date: Mon May 11 12:13:01 2026
+Message: Resolved merge conflicts
+
+==================================================
+Commit: 64a60c91a31071b838b8b762f405a47171766d1b
+Author: sinoncode
+Date: Mon May 11 12:03:05 2026
+Message: ss
+
+project-overview.txt
+
+==================================================
+Commit: 1c49522e129a2653f0f023e4c3f6a5660046593d
+Author: sinoncode
+Date: Fri May 8 20:05:15 2026
+Message: ss
+
+.env
+.env.development
+.env.production
+src/components/tables/UsersListTable.tsx
+src/config/env.ts
+src/data/SidebarData.ts
+src/layouts/Header.tsx
+src/lib/axios.ts
+src/pages/auth/login/Login.tsx
+src/pages/customer/CustomerDetails.tsx
+src/pages/customer/CustomersList.tsx
+src/pages/customer/customer-grid/CustomersGrid.tsx
+src/pages/customer/customer-grid/UsersGridCard.tsx
+src/pages/customer/view-profile/ViewProfile.tsx
+src/pages/customer/view-profile/components/AvatarUpload.tsx
+src/pages/customer/view-profile/components/ChangePasswordTabContent.tsx
+src/pages/customer/view-profile/components/EditProfileTabContent.tsx
+src/pages/customer/view-profile/components/NotificationPasswordTabContent.tsx
+src/pages/customer/view-profile/components/ViewProfileSidebar.tsx
+src/pages/customer/view-profile/components/actions/handleProfileUpdate.ts
+src/pages/teams/TeamMemberView.tsx
+src/routes/AppRoutes.tsx
+src/services/auth.service.ts
+
+==================================================
+Commit: 30b4c82bd92c8fd338727d6027819a30b0f3588f
+Author: Rohan-Kamat
+Date: Fri May 8 20:03:30 2026
+Message: Add Shipment Request
+
+package-lock.json
+src/data/SidebarData.ts
+src/pages/shipments-request/ShipmentListTable.tsx
+src/pages/shipments-request/ShipmentListView.tsx
+src/pages/shipments-request/ShipmentRequestList.tsx
+src/routes/AppRoutes.tsx
+
+==================================================
+Commit: ed78bd69f3909c1357f2ddd32f785edf19430b87
+Author: Rohan-Kamat
+Date: Fri May 8 14:24:53 2026
+Message: Resolved merged conflicts
+
+src/components/teams/AddMemberModal.tsx
+
+==================================================
+Commit: 57d96cceddab492590def7c79227fac77c2c6afb
+Author: sinoncode
+Date: Thu May 7 20:29:30 2026
+Message: ss
+
+src/components/rbac/DeleteRoleDialog.tsx
+src/components/rbac/PermissionTable.tsx
+src/components/rbac/RoleModal.tsx
+src/hooks/useLocalStorage.ts
+src/pages/TeamsPermissions.tsx
+src/pages/teams/TeamMemberView.tsx
+src/pages/teams/Teams.tsx
+
+==================================================
+Commit: 055d730d482191a30b115c022a70999be558c13c
+Author: sinoncode
+Date: Tue May 5 20:00:32 2026
+Message: ss
+
+src/components/teams/TeamsTable.tsx
+src/data/SidebarData.ts
+src/pages/teams/TeamMemberView.tsx
+src/pages/teams/Teams.tsx
+src/routes/AppRoutes.tsx
+
+==================================================
+Commit: 74fc05a9b9c5eff6a7bbd6a23973f47a110a14dd
+Author: sinoncode
+Date: Tue May 5 18:20:37 2026
+Message: ss
+
+package-lock.json
+package.json
+project-overview.txt
+src/App.tsx
+src/components/rbac/RoleModal.tsx
+src/components/teams/AddMemberModal.tsx
+src/pages/TeamsPermissions.tsx
+src/pages/auth/register/Register.tsx
+src/pages/teams/Teams.tsx
+src/pages/teams/add-member/AddMember.tsx
+src/pages/teams/add-member/Form.css
+
+==================================================
+Commit: 8723664e110b5ee1736d97c5af3dd1d3ebfe04d7
+Author: sinoncode
+Date: Wed Apr 29 14:40:21 2026
+Message: ss
+
+src/components/teams/AddMemberModal.tsx
+src/components/teams/MemberForm.tsx
+src/components/teams/TeamsTable.tsx
+src/components/users/AddUserModal.tsx
+src/components/users/UserForm.tsx
+src/hooks/useLocalStorage.ts
+src/hooks/useUsers.ts
+src/layouts/Footer.tsx
+src/lib/formValidation.ts
+src/pages/teams/Teams.tsx
+
+==================================================
+Commit: 902392118ba622f549b3246a56319f39745170dc
+Author: sinoncode
+Date: Wed Apr 29 12:43:01 2026
+Message: ss
+
+src/components/rbac/DeleteRoleDialog.tsx
+src/components/rbac/PermissionTable.tsx
+src/components/rbac/RoleList.tsx
+src/components/rbac/RoleModal.tsx
+src/components/rbac/ToggleSwitch.tsx
+src/components/shared/ProfileDropdown.tsx
+src/components/tables/UsersListTable.tsx
+src/components/ui/alert-dialog.tsx
+src/components/ui/form.tsx
+src/components/ui/scroll-area.tsx
+src/data/SidebarData.ts
+src/layouts/Header.tsx
+src/pages/TeamsPermissions.tsx
+src/pages/users/UsersList.tsx
+src/routes/AppRoutes.tsx
+src/types/rbac.ts
+
+==================================================
+Commit: ca952a0d02186a95410a954a3adadce51bd9dfc5
+Author: Rohan-Kamat
+Date: Tue Apr 28 13:02:30 2026
+Message: Modified UserListTable data, In sidebarData add teams info, Created members page inside page section, Removed add new user button in UsersList section, In AppRoutes add path for team-member & team-list
+
+src/components/tables/UsersListTable.tsx
+src/data/SidebarData.ts
+src/pages/teams/Teams.tsx
+src/pages/teams/add-member/AddMember.tsx
+src/pages/teams/add-member/Form.css
+src/pages/users/UsersList.tsx
+src/routes/AppRoutes.tsx
+
+==================================================
+Commit: 3b1ed44bc3d21935de69bffcb86283b405c84a84
+Author: sinoncode
+Date: Wed Apr 29 12:08:38 2026
+Message: ss
+
+src/assets/images/ChatGPT Image Apr 29, 2026, 11_54_49 AM.png
+src/pages/dashboards/crm/Crm.tsx
+
+==================================================
+Commit: ad1bd5257180af3de3916f3ec73303ea38b589a0
+Author: Rohan-Kamat
+Date: Fri Apr 24 12:53:01 2026
+Message: Remove social option from login page, Structured Sidebar of dashboard page
+
+package-lock.json
+src/components/AppSidebar.tsx
+src/components/shared/ThemeLogo.tsx
+src/data/SidebarData.ts
+src/pages/auth/login/Login.tsx
+src/routes/AppRoutes.tsx
+
+==================================================
+Commit: 05a902307ac167809755230776c7761172439f48
+Author: sinoncode
+Date: Fri Apr 10 19:44:06 2026
+Message: ss
+
+src/assets/images/auth/auth-img.png
+src/assets/images/auth/sdfsfsdf.png
+
+==================================================
+Commit: 58e663b6e53fba980a225b037cc3facee0c136ac
+Author: sinoncode
+Date: Fri Apr 10 19:13:35 2026
+Message: ss
+
+src/data/SidebarData.ts
+
+==================================================
+Commit: f9a7423a74e1ea3cec183f2fbaf740f84bc64e11
+Author: sinoncode
+Date: Fri Apr 10 19:10:47 2026
+Message: ss
+
+src/index.css
+
+==================================================
+Commit: 596eb9f3e50514fde3da703ebe78e47f000ee60d
+Author: sinoncode
+Date: Fri Apr 10 18:55:00 2026
+Message: Intializing Project Logistics By Storm
+
+.gitignore
+README.md
+bash.exe.stackdump
+components.json
+eslint.config.js
+index.html
+package-lock.json
+package.json
+src/App.tsx
+src/assets/images/arrow-down.png
+src/assets/images/asset/asset-img1.png
+src/assets/images/asset/asset-img2.png
+src/assets/images/asset/asset-img3.png
+src/assets/images/asset/asset-img4.png
+src/assets/images/asset/asset-img5.png
+src/assets/images/auth/auth-img.png
+src/assets/images/auth/envelop-icon.png
+src/assets/images/auth/forgot-pass-img.png
+src/assets/images/avatar/avatar-group1.png
+src/assets/images/avatar/avatar-group2.png
+src/assets/images/avatar/avatar-group3.png
+src/assets/images/avatar/avatar-group4.png
+src/assets/images/avatar/avatar-group5.png
+src/assets/images/avatar/avatar-group6.png
+src/assets/images/avatar/avatar-shape1.png
+src/assets/images/avatar/avatar-shape2.png
+src/assets/images/avatar/avatar-shape3.png
+src/assets/images/avatar/avatar1.png
+src/assets/images/avatar/avatar2.png
+src/assets/images/avatar/status-avatar.png
+src/assets/images/blog/blog-details.png
+src/assets/images/blog/blog1.png
+src/assets/images/blog/blog2.png
+src/assets/images/blog/blog3.png
+src/assets/images/blog/blog4.png
+src/assets/images/blog/blog5.png
+src/assets/images/blog/blog6.png
+src/assets/images/blog/blog7.png
+src/assets/images/card-component/card-img1.png
+src/assets/images/card-component/card-img2.png
+src/assets/images/card-component/card-img3.png
+src/assets/images/card-component/card-img4.png
+src/assets/images/card-component/card-overlay-img1.png
+src/assets/images/card-component/card-overlay-img2.png
+src/assets/images/card-component/card-overlay-img3.png
+src/assets/images/card-component/horizontal-card-img1.png
+src/assets/images/card-component/horizontal-card-img2.png
+src/assets/images/card-component/horizontal-card-img3.png
+src/assets/images/card-component/horizontal-card-img4.png
+src/assets/images/card/card-bg.png
+src/assets/images/card/card-logo.png
+src/assets/images/card/payment-icon.png
+src/assets/images/carousel/carousel-img1.png
+src/assets/images/carousel/carousel-img2.png
+src/assets/images/carousel/carousel-img3.png
+src/assets/images/carousel/carousel-img4.png
+src/assets/images/carousel/mutiple-carousel-img1.png
+src/assets/images/carousel/mutiple-carousel-img2.png
+src/assets/images/carousel/mutiple-carousel-img3.png
+src/assets/images/carousel/mutiple-carousel-img4.png
+src/assets/images/chat/1.png
+src/assets/images/chat/10.png
+src/assets/images/chat/11.png
+src/assets/images/chat/2.png
+src/assets/images/chat/3.png
+src/assets/images/chat/4.png
+src/assets/images/chat/5.png
+src/assets/images/chat/6.png
+src/assets/images/chat/7.png
+src/assets/images/chat/8.png
+src/assets/images/chat/9.png
+src/assets/images/chat/chat-main.png
+src/assets/images/chat/empty-img.png
+src/assets/images/chatgpt/empty-message-icon1.png
+src/assets/images/chatgpt/empty-message-icon2.png
+src/assets/images/chatgpt/image-generator1.png
+src/assets/images/chatgpt/image-generator2.png
+src/assets/images/chatgpt/image-generator3.png
+src/assets/images/chatgpt/image-generator4.png
+src/assets/images/chatgpt/image-generator5.png
+src/assets/images/coming-soon/coming-soon.png
+src/assets/images/coming-soon/maintenance.png
+src/assets/images/crypto/bitcoin.png
+src/assets/images/crypto/crypto-img1.png
+src/assets/images/crypto/crypto-img2.png
+src/assets/images/crypto/crypto-img3.png
+src/assets/images/crypto/crypto-img4.png
+src/assets/images/crypto/crypto-img5.png
+src/assets/images/crypto/crypto-img6.png
+src/assets/images/crypto/paypal.png
+src/assets/images/crypto/wallet-icon1.png
+src/assets/images/crypto/wallet-icon2.png
+src/assets/images/crypto/wallet-icon3.png
+src/assets/images/crypto/wallet-icon4.png
+src/assets/images/currency/crypto-img1.png
+src/assets/images/currency/crypto-img2.png
+src/assets/images/currency/crypto-img3.png
+src/assets/images/currency/crypto-img4.png
+src/assets/images/currency/crypto-img5.png
+src/assets/images/envelope.svg
+src/assets/images/error-img.png
+src/assets/images/error/400-img.png
+src/assets/images/error/403-img.png
+src/assets/images/error/404-img.png
+src/assets/images/error/500-img.png
+src/assets/images/error/503-img1.png
+src/assets/images/error/503-img2.png
+src/assets/images/faq-img.png
+src/assets/images/favicon.png
+src/assets/images/flags/flag-tag.png
+src/assets/images/flags/flag1.png
+src/assets/images/flags/flag2.png
+src/assets/images/flags/flag3.png
+src/assets/images/flags/flag4.png
+src/assets/images/flags/flag5.png
+src/assets/images/flags/flag6.png
+src/assets/images/flags/flag7.png
+src/assets/images/flags/flag8.png
+src/assets/images/flags/flag9.png
+src/assets/images/forbidden/forbidden-img.png
+src/assets/images/gallery/gallery-img1.png
+src/assets/images/gallery/gallery-img10.png
+src/assets/images/gallery/gallery-img11.png
+src/assets/images/gallery/gallery-img12.png
+src/assets/images/gallery/gallery-img2.png
+src/assets/images/gallery/gallery-img3.png
+src/assets/images/gallery/gallery-img4.png
+src/assets/images/gallery/gallery-img5.png
+src/assets/images/gallery/gallery-img6.png
+src/assets/images/gallery/gallery-img7.png
+src/assets/images/gallery/gallery-img8.png
+src/assets/images/gallery/gallery-img9.png
+src/assets/images/gif/success-img1.gif
+src/assets/images/gif/success-img2.gif
+src/assets/images/gif/success-img3.gif
+src/assets/images/home-eight/doctor-img1.png
+src/assets/images/home-eight/doctor-img2.png
+src/assets/images/home-eight/doctor-img3.png
+src/assets/images/home-eight/doctor-img4.png
+src/assets/images/home-eight/doctor-img5.png
+src/assets/images/home-eight/doctor-img6.png
+src/assets/images/home-eight/icon-pdf.png
+src/assets/images/home-eight/icon-text.png
+src/assets/images/home-eight/treatment-icon1.png
+src/assets/images/home-eight/treatment-icon2.png
+src/assets/images/home-eight/treatment-icon3.png
+src/assets/images/home-eight/treatment-icon4.png
+src/assets/images/home-eight/treatment-icon5.png
+src/assets/images/home-eight/treatment-icon6.png
+src/assets/images/home-eleven/bg/bg-orange-gradient.png
+src/assets/images/home-eleven/bg/radial-bg1.png
+src/assets/images/home-eleven/bg/radial-bg2.png
+src/assets/images/home-eleven/bg/radial-bg3.png
+src/assets/images/home-eleven/icons/earn-cat-icon1.svg
+src/assets/images/home-eleven/icons/earn-cat-icon2.svg
+src/assets/images/home-eleven/icons/earn-cat-icon3.svg
+src/assets/images/home-eleven/icons/earn-cat-icon4.svg
+src/assets/images/home-eleven/icons/home-eleven-icon1.svg
+src/assets/images/home-eleven/icons/home-eleven-icon2.svg
+src/assets/images/home-eleven/icons/home-eleven-icon3.svg
+src/assets/images/home-eleven/icons/home-eleven-icon4.svg
+src/assets/images/home-eleven/officer-img1.png
+src/assets/images/home-eleven/officer-img2.png
+src/assets/images/home-eleven/officer-img3.png
+src/assets/images/home-eleven/officer-img4.png
+src/assets/images/home-eleven/officer-img5.png
+src/assets/images/home-fourteen/podcast-img1.png
+src/assets/images/home-fourteen/podcast-img2.png
+src/assets/images/home-fourteen/podcast-img3.png
+src/assets/images/home-fourteen/podcast-img4.png
+src/assets/images/home-fourteen/trending-img1.png
+src/assets/images/home-fourteen/trending-img2.png
+src/assets/images/home-fourteen/trending-img3.png
+src/assets/images/home-fourteen/trending-img4.png
+src/assets/images/home-fourteen/trending-img5.png
+src/assets/images/home-nine/payment1.png
+src/assets/images/home-nine/payment2.png
+src/assets/images/home-nine/payment3.png
+src/assets/images/home-nine/payment4.png
+src/assets/images/home-nine/socials1.png
+src/assets/images/home-nine/socials2.png
+src/assets/images/home-nine/socials3.png
+src/assets/images/home-nine/socials4.png
+src/assets/images/home-nine/socials5.png
+src/assets/images/home-nine/source-icon1.png
+src/assets/images/home-nine/source-icon2.png
+src/assets/images/home-nine/source-icon3.png
+src/assets/images/home-nine/source-icon4.png
+src/assets/images/home-nine/ticket1.png
+src/assets/images/home-nine/ticket2.png
+src/assets/images/home-nine/ticket3.png
+src/assets/images/home-nine/trail-bg.png
+src/assets/images/home-six/category-icon1.png
+src/assets/images/home-six/category-icon2.png
+src/assets/images/home-six/category-icon3.png
+src/assets/images/home-six/category-icon4.png
+src/assets/images/home-six/category-icon5.png
+src/assets/images/home-six/category-icon6.png
+src/assets/images/home-six/student-img1.png
+src/assets/images/home-six/student-img2.png
+src/assets/images/home-six/student-img3.png
+src/assets/images/home-six/student-img4.png
+src/assets/images/home-six/student-img5.png
+src/assets/images/home-six/student-img6.png
+src/assets/images/home-sixteen/icon/dollar-bag.png
+src/assets/images/home-sixteen/icon/phone-icon1.png
+src/assets/images/home-sixteen/icon/phone-icon2.png
+src/assets/images/home-sixteen/icon/phone-icon3.png
+src/assets/images/home-twelve/icons/booking-card-big-icon1.png
+src/assets/images/home-twelve/icons/booking-card-big-icon2.png
+src/assets/images/home-twelve/icons/booking-card-big-icon3.png
+src/assets/images/home-twelve/icons/booking-card-big-icon4.png
+src/assets/images/home-twelve/icons/booking-card-icon1.png
+src/assets/images/home-twelve/icons/booking-card-icon2.png
+src/assets/images/home-twelve/icons/booking-card-icon3.png
+src/assets/images/home-twelve/icons/booking-card-icon4.png
+src/assets/images/home-twelve/icons/home.png
+src/assets/images/home-twelve/icons/spen-icon1.png
+src/assets/images/home-twelve/icons/spen-icon2.png
+src/assets/images/home-twelve/icons/spen-icon3.png
+src/assets/images/home-twelve/icons/spen-icon4.png
+src/assets/images/home-twelve/transaction-img1.png
+src/assets/images/home-twelve/transaction-img2.png
+src/assets/images/home-twelve/transaction-img3.png
+src/assets/images/home-twelve/transaction-img4.png
+src/assets/images/home-twelve/transaction-img5.png
+src/assets/images/home-twelve/travel-img1.png
+src/assets/images/home-twelve/travel-img2.png
+src/assets/images/home-twelve/travel-img3.png
+src/assets/images/home-twelve/travel-img4.png
+src/assets/images/home-twelve/travel-img5.png
+src/assets/images/homeThirteen/icon/task-summary-icon1.svg
+src/assets/images/homeThirteen/icon/task-summary-icon2.svg
+src/assets/images/homeThirteen/icon/task-summary-icon3.svg
+src/assets/images/homeThirteen/icon/task-summary-icon4.svg
+src/assets/images/homeThirteen/icon/time-icon.svg
+src/assets/images/homeThirteen/podcaster-img1.png
+src/assets/images/homeThirteen/podcaster-img2.png
+src/assets/images/homeThirteen/podcaster-img3.png
+src/assets/images/homeThirteen/podcaster-img4.png
+src/assets/images/homeThirteen/podcaster-img5.png
+src/assets/images/homeThirteen/shape/moon-shape-border.png
+src/assets/images/homeThirteen/todo-list-img1.png
+src/assets/images/homeThirteen/todo-list-img2.png
+src/assets/images/homeThirteen/todo-list-img3.png
+src/assets/images/homeThirteen/todo-list-img4.png
+src/assets/images/icons/facebook-icon.png
+src/assets/images/icons/github-icon.png
+src/assets/images/icons/google-icon.png
+src/assets/images/kanban/kanban-1.png
+src/assets/images/kanban/kanban-2.png
+src/assets/images/kanban/kanban-3.png
+src/assets/images/kanban/kanban-4.png
+src/assets/images/lang-flag.png
+src/assets/images/lists/list-img1.png
+src/assets/images/lists/list-img2.png
+src/assets/images/lists/list-img3.png
+src/assets/images/lists/list-img4.png
+src/assets/images/lists/list-img5.png
+src/assets/images/logo-icon.png
+src/assets/images/logo-light.png
+src/assets/images/logo.png
+src/assets/images/nft/bitcoin.png
+src/assets/images/nft/creator-img1.png
+src/assets/images/nft/creator-img2.png
+src/assets/images/nft/creator-img3.png
+src/assets/images/nft/creator-img4.png
+src/assets/images/nft/creator-img5.png
+src/assets/images/nft/featured-creator1.png
+src/assets/images/nft/featured-creator2.png
+src/assets/images/nft/nf-card-img.png
+src/assets/images/nft/nft-gradient-bg.png
+src/assets/images/nft/nft-img1.png
+src/assets/images/nft/nft-img2.png
+src/assets/images/nft/nft-img3.png
+src/assets/images/nft/nft-img4.png
+src/assets/images/nft/nft-items-img1.png
+src/assets/images/nft/nft-items-img2.png
+src/assets/images/nft/nft-items-img3.png
+src/assets/images/nft/nft-items-img4.png
+src/assets/images/nft/nft-items-img5.png
+src/assets/images/nft/nft-items-img6.png
+src/assets/images/nft/nft-items-img7.png
+src/assets/images/nft/nft-offer-img1.png
+src/assets/images/nft/nft-offer-img2.png
+src/assets/images/nft/nft-offer-img3.png
+src/assets/images/nft/nft-offer-img4.png
+src/assets/images/nft/nft-offer-img5.png
+src/assets/images/nft/nft-offer-img6.png
+src/assets/images/nft/nft-offer-img7.png
+src/assets/images/nft/nft-user-img1.png
+src/assets/images/nft/nft-user-img2.png
+src/assets/images/nft/nft-user-img3.png
+src/assets/images/nft/nft-user-img4.png
+src/assets/images/notice/board-img1.png
+src/assets/images/notice/board-img2.png
+src/assets/images/notice/board-img3.png
+src/assets/images/notification/profile-1.png
+src/assets/images/notification/profile-2.png
+src/assets/images/notification/profile-3.png
+src/assets/images/notification/profile-4.png
+src/assets/images/notification/profile-5.png
+src/assets/images/notification/profile-6.png
+src/assets/images/notification/profile-7.png
+src/assets/images/payment/payment-gateway1.png
+src/assets/images/payment/payment-gateway2.png
+src/assets/images/payment/payment1.png
+src/assets/images/payment/payment2.png
+src/assets/images/payment/payment3.png
+src/assets/images/payment/payment4.png
+src/assets/images/payment/upload-image.png
+src/assets/images/pricing/price-icon1.png
+src/assets/images/pricing/price-icon2.png
+src/assets/images/pricing/price-icon3.png
+src/assets/images/pricing/price-icon4.png
+src/assets/images/pricing/price-icon5.png
+src/assets/images/pricing/pricing-shape.png
+src/assets/images/product/product-img1.png
+src/assets/images/product/product-img2.png
+src/assets/images/product/product-img3.png
+src/assets/images/product/product-img4.png
+src/assets/images/product/product-img5.png
+src/assets/images/rgerhrey.png
+src/assets/images/sdfsdfsd.png
+src/assets/images/segestew.png
+src/assets/images/tabs/tabs-image1.png
+src/assets/images/tabs/tabs-image2.png
+src/assets/images/times.png
+src/assets/images/user-grid/user-grid-bg1.png
+src/assets/images/user-grid/user-grid-bg10.png
+src/assets/images/user-grid/user-grid-bg11.png
+src/assets/images/user-grid/user-grid-bg12.png
+src/assets/images/user-grid/user-grid-bg2.png
+src/assets/images/user-grid/user-grid-bg3.png
+src/assets/images/user-grid/user-grid-bg4.png
+src/assets/images/user-grid/user-grid-bg5.png
+src/assets/images/user-grid/user-grid-bg6.png
+src/assets/images/user-grid/user-grid-bg7.png
+src/assets/images/user-grid/user-grid-bg8.png
+src/assets/images/user-grid/user-grid-bg9.png
+src/assets/images/user-grid/user-grid-img1.png
+src/assets/images/user-grid/user-grid-img10.png
+src/assets/images/user-grid/user-grid-img11.png
+src/assets/images/user-grid/user-grid-img12.png
+src/assets/images/user-grid/user-grid-img13.png
+src/assets/images/user-grid/user-grid-img14.png
+src/assets/images/user-grid/user-grid-img2.png
+src/assets/images/user-grid/user-grid-img3.png
+src/assets/images/user-grid/user-grid-img4.png
+src/assets/images/user-grid/user-grid-img5.png
+src/assets/images/user-grid/user-grid-img6.png
+src/assets/images/user-grid/user-grid-img7.png
+src/assets/images/user-grid/user-grid-img8.png
+src/assets/images/user-grid/user-grid-img9.png
+src/assets/images/user-list/user-list1.png
+src/assets/images/user-list/user-list10.png
+src/assets/images/user-list/user-list2.png
+src/assets/images/user-list/user-list3.png
+src/assets/images/user-list/user-list4.png
+src/assets/images/user-list/user-list5.png
+src/assets/images/user-list/user-list6.png
+src/assets/images/user-list/user-list7.png
+src/assets/images/user-list/user-list8.png
+src/assets/images/user-list/user-list9.png
+src/assets/images/user.png
+src/assets/images/users/user1.png
+src/assets/images/users/user2.png
+src/assets/images/users/user3.png
+src/assets/images/users/user4.png
+src/assets/images/users/user5.png
+src/assets/images/users/user6.png
+src/assets/images/videos/video-img1.png
+src/assets/images/videos/video-img2.png
+src/assets/images/videos/video-img3.png
+src/assets/images/videos/video-img4.png
+src/assets/images/wow-dash-favicon.png
+src/assets/world-map/world-map.png
+src/components/AppSidebar.tsx
+src/components/LazyWrapper.tsx
+src/components/ModeToggle.tsx
+src/components/NavMain.tsx
+src/components/charts/AreaChartBigChart.tsx
+src/components/charts/AreaChartWave.tsx
+src/components/charts/AreaSharpChart.tsx
+src/components/charts/AreaWithoutLineChart.tsx
+src/components/charts/BarChartYear.tsx
+src/components/charts/BarLightChart.tsx
+src/components/charts/CandlestickChart.tsx
+src/components/charts/DonutFiveSeriesChart.tsx
+src/components/charts/DonutFourSeriesChart.tsx
+src/components/charts/DonutHalfChart.tsx
+src/components/charts/DonutSixSeriesChart.tsx
+src/components/charts/DonutThreeSeriesChart.tsx
+src/components/charts/DonutTwoSeriesChart.tsx
+src/components/charts/DoubleBarChart.tsx
+src/components/charts/DoubleBarChartSevenSeries.tsx
+src/components/charts/DoubleLineChart.tsx
+src/components/charts/FourColorBarChart.tsx
+src/components/charts/GradientChart.tsx
+src/components/charts/LineChart.tsx
+src/components/charts/LineChartAnimation.tsx
+src/components/charts/LineChartLabel.tsx
+src/components/charts/LineChartOneSeries.tsx
+src/components/charts/MultipleSeriesChart.tsx
+src/components/charts/PieChart.tsx
+src/components/charts/RadarChart.tsx
+src/components/charts/RadialBarChart.tsx
+src/components/charts/RadialHalfChart.tsx
+src/components/charts/RevenueStatisticAreaChart.tsx
+src/components/charts/SalesStaticChart.tsx
+src/components/charts/SingleBarChart.tsx
+src/components/charts/SmallAreaChart.tsx
+src/components/charts/SmallAreaChartTwo.tsx
+src/components/charts/SteplineChart.tsx
+src/components/charts/ThreeBarChart.tsx
+src/components/charts/TripleBarChart.tsx
+src/components/charts/UpdownBarChart.tsx
+src/components/charts/ZoomableChart.tsx
+src/components/shared/BuyBalanceContent.tsx
+src/components/shared/CommonLink.tsx
+src/components/shared/CountryList.tsx
+src/components/shared/CustomSelect.tsx
+src/components/shared/DatePicker.tsx
+src/components/shared/DefaultCardComponent.tsx
+src/components/shared/LanguageSelect.tsx
+src/components/shared/MasterCardSlider.tsx
+src/components/shared/MessageDropdown.tsx
+src/components/shared/NoticeBoardList.tsx
+src/components/shared/NotificationDropdown.tsx
+src/components/shared/ProfileDropdown.tsx
+src/components/shared/SearchBox.tsx
+src/components/shared/SellBalanceContent.tsx
+src/components/shared/ThemeLogo.tsx
+src/components/shared/TopCustomerList.tsx
+src/components/shared/TransactionList.tsx
+src/components/shared/WorldMap.tsx
+src/components/slider/ExclusiveTravelPackagesSlider.tsx
+src/components/slider/OfficeSlider.tsx
+src/components/tables/BorderedColorTable.tsx
+src/components/tables/BorderedTable.tsx
+src/components/tables/CoursesTable.tsx
+src/components/tables/DefaultTable.tsx
+src/components/tables/InventoryRecentTransactionsTable.tsx
+src/components/tables/LastTransactionTable.tsx
+src/components/tables/LatestAppointmentsTable.tsx
+src/components/tables/LatestInvestmentsTable.tsx
+src/components/tables/LatestRegisteredTable.tsx
+src/components/tables/LatestSubscribeTable.tsx
+src/components/tables/MyOrderTable.tsx
+src/components/tables/PaymentHistoryTable.tsx
+src/components/tables/PerformanceAgentsTable.tsx
+src/components/tables/ProjectStatusTable.tsx
+src/components/tables/RecentActivityTable.tsx
+src/components/tables/RecentBidTable.tsx
+src/components/tables/RecentLeadsTable.tsx
+src/components/tables/RecentOrdersTable.tsx
+src/components/tables/RecentPurposePlanTable.tsx
+src/components/tables/RecentTransactionTable.tsx
+src/components/tables/StockReportTable.tsx
+src/components/tables/ToDoListTable.tsx
+src/components/tables/TodoListRecentTable.tsx
+src/components/tables/TopSellingProductTable.tsx
+src/components/tables/TransactionHistoryTable.tsx
+src/components/tables/UsersListTable.tsx
+src/components/theme-provider.tsx
+src/components/ui/badge.tsx
+src/components/ui/breadcrumb.tsx
+src/components/ui/button.tsx
+src/components/ui/calendar.tsx
+src/components/ui/card.tsx
+src/components/ui/carousel.tsx
+src/components/ui/checkbox.tsx
+src/components/ui/collapsible.tsx
+src/components/ui/command.tsx
+src/components/ui/dialog.tsx
+src/components/ui/dropdown-menu.tsx
+src/components/ui/field.tsx
+src/components/ui/input-group.tsx
+src/components/ui/input.tsx
+src/components/ui/label.tsx
+src/components/ui/popover.tsx
+src/components/ui/radio-group.tsx
+src/components/ui/select.tsx
+src/components/ui/separator.tsx
+src/components/ui/sheet.tsx
+src/components/ui/sidebar.tsx
+src/components/ui/skeleton.tsx
+src/components/ui/sonner.tsx
+src/components/ui/switch.tsx
+src/components/ui/table.tsx
+src/components/ui/tabs.tsx
+src/components/ui/textarea.tsx
+src/components/ui/tooltip.tsx
+src/context/EmailSidebarContext.tsx
+src/context/LoadingContext.tsx
+src/context/isSubmittingContext.tsx
+src/data/SidebarData.ts
+src/error/404.tsx
+src/error/ComponentErrorBoundary.tsx
+src/error/RouteErrorBoundary.tsx
+src/firebase.ts
+src/hooks/use-mobile.ts
+src/index.css
+src/layouts/Breadcrumb.tsx
+src/layouts/Footer.tsx
+src/layouts/Header.tsx
+src/layouts/MainLayout.tsx
+src/layouts/SidebarLayout.tsx
+src/lib/utils.ts
+src/lib/zod.ts
+src/loading/LoadingSkeleton.tsx
+src/loading/PageLoader.tsx
+src/main.tsx
+src/pages/auth/components/SocialLogin.tsx
+src/pages/auth/forgot-password/ForgotPassword.tsx
+src/pages/auth/login/Login.tsx
+src/pages/auth/register/Register.tsx
+src/pages/basic-table/BasicTable.tsx
+src/pages/calendar/Calendar.tsx
+src/pages/calendar/components/AddEvent.tsx
+src/pages/calendar/components/BasicFullCalendar.tsx
+src/pages/calendar/components/CalendarSidebar.tsx
+src/pages/calendar/components/EditEvent.tsx
+src/pages/calendar/components/ViewEvent.tsx
+src/pages/chart/PieChartPage.tsx
+src/pages/chart/PieFourChart.tsx
+src/pages/chart/circle-chart/SemiCircleGauge.tsx
+src/pages/chart/column-chart/ColumnChartPage.tsx
+src/pages/chart/line-chart/HorizontalBarChart.tsx
+src/pages/chart/line-chart/LineChartPage.tsx
+src/pages/chart/line-chart/SingleLineChart.tsx
+src/pages/chat/Chat.tsx
+src/pages/chat/components/ChatBox.tsx
+src/pages/components-pages/alert/Alert.tsx
+src/pages/components-pages/avatar/Avatart.tsx
+src/pages/components-pages/badges/Badges.tsx
+src/pages/components-pages/buttons/Buttons.tsx
+src/pages/components-pages/card/CardPage.tsx
+src/pages/components-pages/colors/Colors.tsx
+src/pages/components-pages/dropdown/Dropdown.tsx
+src/pages/components-pages/list/List.tsx
+src/pages/components-pages/pagination/Pagination.tsx
+src/pages/components-pages/progress-bar/ProgressBar.tsx
+src/pages/components-pages/radio/Radio.tsx
+src/pages/components-pages/star-ratings/StarRatings.tsx
+src/pages/components-pages/switch/SwitchPage.tsx
+src/pages/components-pages/tab-accordion/TabAccordion.tsx
+src/pages/components-pages/tags/Tags.tsx
+src/pages/components-pages/tooltip-popover/TooltipPopover.tsx
+src/pages/components-pages/typography/Typography.tsx
+src/pages/dashboards/analytics/Analytics.tsx
+src/pages/dashboards/analytics/components/AverageDailySalesCard.tsx
+src/pages/dashboards/analytics/components/MonthlyCampaignStateCard.tsx
+src/pages/dashboards/analytics/components/RecentActivityCard.tsx
+src/pages/dashboards/analytics/components/RevenueStatisticCard.tsx
+src/pages/dashboards/analytics/components/SalesByCountriesCard.tsx
+src/pages/dashboards/analytics/components/SourceVisitorsCard.tsx
+src/pages/dashboards/analytics/components/StatCards.tsx
+src/pages/dashboards/analytics/components/SupportTrackerCard.tsx
+src/pages/dashboards/analytics/components/TransactionsCard.tsx
+src/pages/dashboards/analytics/components/UpgradePlanCard.tsx
+src/pages/dashboards/booking/Booking.tsx
+src/pages/dashboards/booking/components/AvailableRoom.tsx
+src/pages/dashboards/booking/components/BookingCountriesStatus.tsx
+src/pages/dashboards/booking/components/CheckInOut.tsx
+src/pages/dashboards/booking/components/EarningStatisticCard.tsx
+src/pages/dashboards/booking/components/ExclusiveTravelPackages.tsx
+src/pages/dashboards/booking/components/RadialProgress.tsx
+src/pages/dashboards/booking/components/RadialProgressSmall.tsx
+src/pages/dashboards/booking/components/SpendOverview.tsx
+src/pages/dashboards/booking/components/StatisticsCards.tsx
+src/pages/dashboards/crm/Crm.tsx
+src/pages/dashboards/crm/components/CampaignCard.tsx
+src/pages/dashboards/crm/components/ClientPaymentStatusCard.tsx
+src/pages/dashboards/crm/components/CountriesStatusCard.tsx
+src/pages/dashboards/crm/components/CustomerOverviewCard.tsx
+src/pages/dashboards/crm/components/EarningStatisticsCard.tsx
+src/pages/dashboards/crm/components/LastTransactionCard.tsx
+src/pages/dashboards/crm/components/RevenueGrowthCard.tsx
+src/pages/dashboards/crm/components/StatsCard.tsx
+src/pages/dashboards/crm/components/TodoListRecentCard.tsx
+src/pages/dashboards/cryptocurrency/Cryptocurrency.tsx
+src/pages/dashboards/cryptocurrency/components/CoinAnalyticsCard.tsx
+src/pages/dashboards/cryptocurrency/components/MarketInfoCard.tsx
+src/pages/dashboards/cryptocurrency/components/MasterCard.tsx
+src/pages/dashboards/cryptocurrency/components/MyOrderCard.tsx
+src/pages/dashboards/cryptocurrency/components/RecentTransactionCard.tsx
+src/pages/dashboards/cryptocurrency/components/StatsCard.tsx
+src/pages/dashboards/cryptocurrency/components/TotalBalanceCard.tsx
+src/pages/dashboards/cryptocurrency/components/UsersActivateCard.tsx
+src/pages/dashboards/dashboard/AiDashboard.tsx
+src/pages/dashboards/dashboard/components/GenerateContentCard.tsx
+src/pages/dashboards/dashboard/components/SalesStatisticCard.tsx
+src/pages/dashboards/dashboard/components/StatCard.tsx
+src/pages/dashboards/dashboard/components/TabsWithTableCard.tsx
+src/pages/dashboards/dashboard/components/TopCountriesCard.tsx
+src/pages/dashboards/dashboard/components/TopPerformerCard.tsx
+src/pages/dashboards/dashboard/components/TotalSubscriberCard.tsx
+src/pages/dashboards/dashboard/components/UserOverviewCard.tsx
+src/pages/dashboards/ecommerce/Ecommerce.tsx
+src/pages/dashboards/ecommerce/components/CustomersStatisticsCard.tsx
+src/pages/dashboards/ecommerce/components/DailySalesCard.tsx
+src/pages/dashboards/ecommerce/components/DistributionMapsCard.tsx
+src/pages/dashboards/ecommerce/components/RecentOrdersCard.tsx
+src/pages/dashboards/ecommerce/components/RevenueReportCard.tsx
+src/pages/dashboards/ecommerce/components/StatsCard.tsx
+src/pages/dashboards/ecommerce/components/StockReportCard.tsx
+src/pages/dashboards/ecommerce/components/TopCustomersCard.tsx
+src/pages/dashboards/ecommerce/components/TopSellingProductCard.tsx
+src/pages/dashboards/ecommerce/components/TransactionsCard.tsx
+src/pages/dashboards/finance/Finance.tsx
+src/pages/dashboards/finance/components/BalanceStatistic.tsx
+src/pages/dashboards/finance/components/EarningCategories.tsx
+src/pages/dashboards/finance/components/ExpenseStatisticsCard.tsx
+src/pages/dashboards/finance/components/InvestmentCard.tsx
+src/pages/dashboards/finance/components/MonthlyExpenseBreakdown.tsx
+src/pages/dashboards/finance/components/PaymentHistory.tsx
+src/pages/dashboards/finance/components/QuickTransfer.tsx
+src/pages/dashboards/finance/components/StatisticsCard.tsx
+src/pages/dashboards/finance/components/TransactionHistoryCard.tsx
+src/pages/dashboards/help/Help.tsx
+src/pages/dashboards/help/components/PendingSolvedTicketsCard.tsx
+src/pages/dashboards/help/components/PerformanceAgentsCard.tsx
+src/pages/dashboards/help/components/ResponseTimeCard.tsx
+src/pages/dashboards/help/components/TaskSummaryCard.tsx
+src/pages/dashboards/help/components/TicketStatusCard.tsx
+src/pages/dashboards/help/components/TodoListCard.tsx
+src/pages/dashboards/help/components/TopPodcasterCard.tsx
+src/pages/dashboards/inventory/Inventory.tsx
+src/pages/dashboards/inventory/components/IncomeExpenseCard.tsx
+src/pages/dashboards/inventory/components/OverallReportCard.tsx
+src/pages/dashboards/inventory/components/PurchaseSalesCard.tsx
+src/pages/dashboards/inventory/components/RecentTransactionsCard.tsx
+src/pages/dashboards/inventory/components/StateCards.tsx
+src/pages/dashboards/inventory/components/TopCustomerCard.tsx
+src/pages/dashboards/inventory/components/TopSuppliersCard.tsx
+src/pages/dashboards/inventory/components/UsersCard.tsx
+src/pages/dashboards/investment/Investment.tsx
+src/pages/dashboards/investment/components/LatestInvestmentsCard.tsx
+src/pages/dashboards/investment/components/MostLocationCard.tsx
+src/pages/dashboards/investment/components/MyPortfolioCard.tsx
+src/pages/dashboards/investment/components/NoticeBoardCard.tsx
+src/pages/dashboards/investment/components/ProjectStatusCard.tsx
+src/pages/dashboards/investment/components/RevenueStatisticsCard.tsx
+src/pages/dashboards/investment/components/StaticCard.tsx
+src/pages/dashboards/investment/components/StatsCard.tsx
+src/pages/dashboards/investment/components/TotalTransactionsCard.tsx
+src/pages/dashboards/lms/Lms.tsx
+src/pages/dashboards/lms/components/CourseActivityCard.tsx
+src/pages/dashboards/lms/components/CoursesCard.tsx
+src/pages/dashboards/lms/components/StatsCard.tsx
+src/pages/dashboards/lms/components/StudentProgressCard.tsx
+src/pages/dashboards/lms/components/TopCategoriesCard.tsx
+src/pages/dashboards/lms/components/TopInstructorsCard.tsx
+src/pages/dashboards/lms/components/TrafficSourceCard.tsx
+src/pages/dashboards/lms/components/WidgetsAverageChart.tsx
+src/pages/dashboards/medical/Medical.tsx
+src/pages/dashboards/medical/components/AvailableTreatmentsCard.tsx
+src/pages/dashboards/medical/components/DoctorListCard.tsx
+src/pages/dashboards/medical/components/EarningStatisticCard.tsx
+src/pages/dashboards/medical/components/HealthReportsDocumentCard.tsx
+src/pages/dashboards/medical/components/LatestAppointmentsCard.tsx
+src/pages/dashboards/medical/components/PatientVisitedDepartment.tsx
+src/pages/dashboards/medical/components/PatientVisitedGender.tsx
+src/pages/dashboards/medical/components/StatCards.tsx
+src/pages/dashboards/medical/components/TotalIncomeCard.tsx
+src/pages/dashboards/nft/Nft.tsx
+src/pages/dashboards/nft/components/EthPriceCard.tsx
+src/pages/dashboards/nft/components/FeaturedCreatorsCard.tsx
+src/pages/dashboards/nft/components/NftPromoBanner.tsx
+src/pages/dashboards/nft/components/RecentBidCard.tsx
+src/pages/dashboards/nft/components/StatisticsCard.tsx
+src/pages/dashboards/nft/components/TopCreatorsCard.tsx
+src/pages/dashboards/nft/components/TrendingBidWidgets.tsx
+src/pages/dashboards/nft/components/TrendingNftCard.tsx
+src/pages/dashboards/nft/components/TrendingNftWidgets.tsx
+src/pages/dashboards/podcast/Podcast.tsx
+src/pages/dashboards/podcast/components/AudienceStatsCard.tsx
+src/pages/dashboards/podcast/components/PodcastEarningsOverviewCard.tsx
+src/pages/dashboards/podcast/components/PodcastTopCategoriesCard.tsx
+src/pages/dashboards/podcast/components/RecentPurposePlanCard.tsx
+src/pages/dashboards/podcast/components/RecentlyPlayedCard.tsx
+src/pages/dashboards/podcast/components/TopPodcasterCard.tsx
+src/pages/dashboards/podcast/components/TotalPodcasts.tsx
+src/pages/dashboards/podcast/components/TotalUsers.tsx
+src/pages/dashboards/podcast/components/TrendingEpisodesCard.tsx
+src/pages/emails/components/EmailHeader.tsx
+src/pages/emails/components/EmailList.tsx
+src/pages/emails/components/EmailSidebar.tsx
+src/pages/emails/components/EmailSidebarOverlay.tsx
+src/pages/emails/components/EmailSidebarToggleButton.tsx
+src/pages/emails/email-details/EmailDetails.tsx
+src/pages/emails/email/Email.tsx
+src/pages/forms/form-validation/FormValidation.tsx
+src/pages/forms/form-validation/ValidateForm.tsx
+src/pages/forms/form-validation/actions.ts
+src/pages/forms/input-forms/InputForms.tsx
+src/pages/forms/input-layout/InputLayout.tsx
+src/pages/setting/company/Company.tsx
+src/pages/setting/notification-alert/NotificationAlert.tsx
+src/pages/setting/settings-notification/ClientFirebaseWrapper.tsx
+src/pages/setting/settings-notification/SettingsNotification.tsx
+src/pages/users/UsersList.tsx
+src/pages/users/users-grid/UsersGrid.tsx
+src/pages/users/users-grid/UsersGridCard.tsx
+src/pages/users/view-profile/ViewProfile.tsx
+src/pages/users/view-profile/components/AvatarUpload.tsx
+src/pages/users/view-profile/components/ChangePasswordTabContent.tsx
+src/pages/users/view-profile/components/EditProfileTabContent.tsx
+src/pages/users/view-profile/components/NotificationPasswordTabContent.tsx
+src/pages/users/view-profile/components/ViewProfileSidebar.tsx
+src/pages/users/view-profile/components/actions/handleProfileUpdate.ts
+src/pages/widgets/Widgets.tsx
+src/routes/AppRoutes.tsx
+src/routes/GuestRoutes.tsx
+src/routes/ProtectedRoutes.tsx
+tsconfig.app.json
+tsconfig.json
+tsconfig.node.json
+vercel.json
+vite.config.ts

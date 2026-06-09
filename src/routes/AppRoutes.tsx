@@ -312,13 +312,13 @@ export const router = createBrowserRouter([
             path: "shipment-request", element: <ShipmentRequestList />
           },
           {
-            path: "/shipment-request-detail/:id", element: <ShipmentListView />
+            path: "shipment-requests/:id", element: <ShipmentListView />
           },
           {
             path: "shipments", element: <Shipments /> 
           },
           {
-            path: "/shipments-detail/:id", element: <ShipmentDetail />
+            path: "shipments-detail/:id", element: <ShipmentDetail />
           },
           {
   path: "payment-lists",
@@ -336,13 +336,13 @@ export const router = createBrowserRouter([
   ),
 },
           {
-            path: "/payment-details/:id", element: <PaymentDetails />
+            path: "payment-details/:id", element: <PaymentDetails />
           },
           {
-            path: "/search-package", element: <SearchPackage />
+            path: "search-package", element: <SearchPackage />
           },
           {
-            path: "/unregistered-package", element: <UnregisteredPackage />
+            path: "unregistered-package", element: <UnregisteredPackage />
           },
             
         ],
@@ -355,4 +355,6 @@ export const router = createBrowserRouter([
     element: <NotFound />,
     errorElement: <RouteErrorBoundary />,
   },
-]);
+], {
+  basename: "/admin",
+});

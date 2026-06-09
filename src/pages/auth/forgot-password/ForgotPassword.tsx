@@ -3,10 +3,12 @@ import ThemeLogo from "@/components/shared/ThemeLogo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useIsSubmitting } from "@/context/isSubmittingContext";
-import { sendPasswordReset } from "@/firebase";
+import axios from "axios";
 import { Loader2, Mail } from 'lucide-react';
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+// import { forgotPassword } from "@/services/auth.service";
+
 
 import {
     Field,
@@ -36,22 +38,32 @@ const ForgotPassword = () => {
     });
 
 
-    const handleResetPassword = async (data: z.infer<typeof formSchema>) => {
-        setIsSubmitting(true);
+//  const handleResetPassword = async (
+//   data: z.infer<typeof formSchema>
+// ) => {
+//   try {
+//     setIsSubmitting(true);
 
-        const result = await sendPasswordReset(data.email);
+//     const response =
+//       await forgotPassword(data.email);
 
-        if (result.success) {
-            toast.success("Email sent! Please check your email inbox or spam.");
-            navigate('/auth/login')
-        } else {
-            toast.error(result.message);
-        }
+//     toast.success(
+//       response?.message ||
+//         "Password reset email sent successfully."
+//     );
 
-        setIsSubmitting(false);
-        form.reset();
-    };
+//     form.reset();
 
+//     navigate("/auth/login");
+//   } catch (error: any) {
+//     toast.error(
+//       error?.response?.data?.message ||
+//         "Failed to send reset email."
+//     );
+//   } finally {
+//     setIsSubmitting(false);
+//   }
+// };
     return (
         <section className="bg-white dark:bg-slate-900 lg:flex flex-wrap min-h-[100vh]">
             <div className="lg:w-1/2 lg:block hidden">

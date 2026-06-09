@@ -136,7 +136,7 @@ export const columns: ColumnDef<ShipmentRequest>[] = [
             className="rounded-4xl bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-300"
             onClick={() =>
               navigate(
-                `/shipment-request-detail/${row.original.id}`
+                `/shipment-requests/${row.original.id}`
               )
             }
           >

@@ -112,18 +112,22 @@ export const useRBACStore = create<RBACState>()(
           if (!selectedRole && roles.length > 0) {
             set({ selectedRole: roles[0] });
           }
-const isAdminRole = selectedRole?.slug === "admin";
+// const isAdminRole = selectedRole?.slug === "admin";
           return roles;
         } catch (error: any) {
-          const errorMessage = error?.response?.data?.message || error.message || 'Failed to fetch roles';
-          set({
-            rolesError: errorMessage,
-            isLoadingRoles: false,
-            roles: [],
-            rolesError: errorMessage
-          });
-          throw error;
-        }
+  const errorMessage =
+    error?.response?.data?.message ||
+    error.message ||
+    "Failed to fetch roles";
+
+  set({
+    isLoadingRoles: false,
+    roles: [],
+    rolesError: errorMessage,
+  });
+
+  throw error;
+}
       },
 
       /**
@@ -150,15 +154,19 @@ const isAdminRole = selectedRole?.slug === "admin";
 
           return permissions;
         } catch (error: any) {
-          const errorMessage = error?.response?.data?.message || error.message || 'Failed to fetch permissions';
-          set({
-            permissionsError: errorMessage,
-            isLoadingPermissions: false,
-            permissions: [],
-            permissionsError: errorMessage
-          });
-          throw error;
-        }
+  const errorMessage =
+    error?.response?.data?.message ||
+    error.message ||
+    "Failed to fetch permissions";
+
+  set({
+    isLoadingPermissions: false,
+    permissions: [],
+    permissionsError: errorMessage,
+  });
+
+  throw error;
+}
       },
 
       /**

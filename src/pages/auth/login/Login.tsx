@@ -62,29 +62,40 @@ const Login = () => {
       setIsLoading(true);
 
       const response = await loginUser(data);
-
       const responseData = response;
 
-      if (!responseData?.access_token) {
-        throw new Error("Login response did not include an access token.");
+      const accessToken =
+        responseData?.access_token ||
+        responseData?.token ||
+        responseData?.data?.access_token ||
+        responseData?.data?.token;
+
+      const user =
+        responseData?.user ||
+        responseData?.data?.user ||
+        responseData?.data ||
+        null;
+
+      if (!accessToken) {
+        throw new Error(
+          "Login response did not include an access token."
+        );
       }
 
       // Store in Zustand and localStorage
-      setAuth(responseData.access_token, responseData.user);
+      setAuth(accessToken, user);
 
       toast.success("Login successful");
 
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
 
     } catch (error: any) {
-
       toast.error(
         error?.response?.data?.message ||
+        error?.message ||
         "Login failed"
       );
-
     } finally {
-
       setIsSubmitting(false);
       setIsLoading(false);
     }

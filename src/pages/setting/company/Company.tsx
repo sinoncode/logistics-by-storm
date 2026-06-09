@@ -1,110 +1,313 @@
+import { useEffect, useState } from "react";
+
 import LazyWrapper from "@/components/LazyWrapper";
+import Breadcrumb from "@/layouts/Breadcrumb";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-import Breadcrumb from "@/layouts/Breadcrumb";
+  createSetting,
+  getSettings,
+} from "@/services/settings.services";
+
+import { toast } from "react-toastify";
 
 const Company = () => {
-    return (
-        <>
-            <Breadcrumb title="Company" text="Company" />
+  const [selectedLogo, setSelectedLogo] =
+    useState<File | null>(null);
 
-            <LazyWrapper>
-                <div>
-                    <div className="card h-full rounded-lg border-0 p-6">
-                        <div className="card-body p-0">
-                            <form>
-                                <div className="grid md:grid-cols-2 gap-x-5">
-                                    <div className="mb-5">
-                                        <Label htmlFor="name" className="text-sm font-semibold mb-2 block text-neutral-900 dark:text-white">Full Name <span className="text-red-600">*</span></Label>
-                                        <Input type="text" className="border border-neutral-300 px-5 dark:border-slate-500 focus:border-primary dark:focus:border-primary focus-visible:border-primary h-12 rounded-lg !shadow-none !ring-0" id="name" name="name" placeholder="Enter Full Name" />
-                                    </div>
-                                    <div className="mb-5">
-                                        <Label htmlFor="email" className="text-sm font-semibold mb-2 block text-neutral-900 dark:text-white">Email <span className="text-red-600">*</span></Label>
-                                        <Input type="email" className="border border-neutral-300 px-5 dark:border-slate-500 focus:border-primary dark:focus:border-primary focus-visible:border-primary h-12 rounded-lg !shadow-none !ring-0" id="email" name="email" placeholder="Enter email address" />
-                                    </div>
-                                    <div className="mb-5">
-                                        <Label htmlFor="number" className="text-sm font-semibold mb-2 block text-neutral-900 dark:text-white">Phone Number</Label>
-                                        <Input type="tel" className="border border-neutral-300 px-5 dark:border-slate-500 focus:border-primary dark:focus:border-primary focus-visible:border-primary h-12 rounded-lg !shadow-none !ring-0" id="number" name="number" placeholder="Enter phone number" />
-                                    </div>
-                                    <div className="mb-5">
-                                        <Label htmlFor="website" className="text-sm font-semibold mb-2 block text-neutral-900 dark:text-white"> Website</Label>
-                                        <Input type="url" className="border border-neutral-300 px-5 dark:border-slate-500 focus:border-primary dark:focus:border-primary focus-visible:border-primary h-12 rounded-lg !shadow-none !ring-0" id="website" name="website" placeholder="Website URL" />
-                                    </div>
-                                    <div className="mb-5">
-                                        <Label htmlFor="country" className="text-sm font-semibold mb-2 block text-neutral-900 dark:text-white">Country <span className="text-red-600">*</span> </Label>
-                                        <Select>
-                                            <SelectTrigger id='country' className="border border-neutral-300 px-5 dark:border-slate-500 focus:border-primary dark:focus:border-primary focus-visible:border-primary h-12 !rounded-lg !shadow-none !ring-0 !h-[48px] !w-full">
-                                                <SelectValue placeholder="Enter Language" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="USA">USA</SelectItem>
-                                                <SelectItem value="Bangladesh">Bangladesh</SelectItem>
-                                                <SelectItem value="Pakistan">Pakistan</SelectItem>
-                                                <SelectItem value="India">India</SelectItem>
-                                                <SelectItem value="Canada">Canada</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-                                    <div className="mb-5">
-                                        <Label htmlFor="city" className="text-sm font-semibold mb-2 block text-neutral-900 dark:text-white">City <span className="text-red-600">*</span> </Label>
-                                        <Select>
-                                            <SelectTrigger id='city' className="border border-neutral-300 px-5 dark:border-slate-500 focus:border-primary dark:focus:border-primary focus-visible:border-primary h-12 !rounded-lg !shadow-none !ring-0 !h-[48px] !w-full">
-                                                <SelectValue placeholder="Select City" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="Washington">Washington</SelectItem>
-                                                <SelectItem value="Dhaka">Dhaka</SelectItem>
-                                                <SelectItem value="Lahor">Lahor</SelectItem>
-                                                <SelectItem value="Panjab">Panjab</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-                                    <div className="mb-5">
-                                        <Label htmlFor="state" className="text-sm font-semibold mb-2 block text-neutral-900 dark:text-white">State <span className="text-red-600">*</span> </Label>
-                                        <Select>
-                                            <SelectTrigger id='state' className="border border-neutral-300 px-5 dark:border-slate-500 focus:border-primary dark:focus:border-primary focus-visible:border-primary h-12 !rounded-lg !shadow-none !ring-0 !h-[48px] !w-full">
-                                                <SelectValue placeholder="Select State" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="Washington">Washington</SelectItem>
-                                                <SelectItem value="Dhaka">Dhaka</SelectItem>
-                                                <SelectItem value="Lahor">Lahor</SelectItem>
-                                                <SelectItem value="Panjab">Panjab</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-                                    <div className="mb-5">
-                                        <Label htmlFor="zip" className="text-sm font-semibold mb-2 block text-neutral-900 dark:text-white"> Zip Code <span className="text-red-600">*</span></Label>
-                                        <Input type="text" className="border border-neutral-300 px-5 dark:border-slate-500 focus:border-primary dark:focus:border-primary focus-visible:border-primary h-12 rounded-lg !shadow-none !ring-0" id="zip" name="zip" placeholder="Zip Code" />
-                                    </div>
-                                    <div className="mb-5 col-span-2">
-                                        <Label htmlFor="address" className="text-sm font-semibold mb-2 block text-neutral-900 dark:text-white"> Address <span className="text-red-600">*</span></Label>
-                                        <Input type="text" className="border border-neutral-300 px-5 dark:border-slate-500 focus:border-primary dark:focus:border-primary focus-visible:border-primary h-12 rounded-lg !shadow-none !ring-0" id="address" name="address" placeholder="Enter Your Address" />
-                                    </div>
-                                    <div className="col-span-2 flex items-center justify-center gap-3 mt-6">
-                                        <Button type="reset" className="h-[48px] border border-red-600 bg-transparent hover:bg-red-600/20 dark:hover:bg-red-600/20 text-red-600 text-base px-14 py-[11px] rounded-lg">
-                                            Reset
-                                        </Button>
-                                        <Button type="submit" className="h-[48px] text-base px-14 py-3 rounded-lg">
-                                            Save Changes
-                                        </Button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+  const [loading, setLoading] =
+    useState(false);
+
+  const [logoUrl, setLogoUrl] =
+    useState("");
+
+  const [inputKey, setInputKey] =
+    useState(Date.now());
+
+  useEffect(() => {
+    loadSettings();
+  }, []);
+
+  const loadSettings = async () => {
+    try {
+      const response =
+        await getSettings();
+
+      const settings =
+        response?.data || response;
+
+      const companyLogo =
+        settings?.find(
+          (item: any) =>
+            item.key === "company_logo"
+        );
+
+      if (companyLogo?.value) {
+        setLogoUrl(
+          companyLogo.value
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleLogoChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file =
+      e.target.files?.[0];
+
+    if (!file) return;
+
+    setSelectedLogo(file);
+  };
+
+  const handleUploadLogo = async (
+    e: React.FormEvent
+  ) => {
+    e.preventDefault();
+
+    if (!selectedLogo) {
+      toast.error(
+        "Please select a logo"
+      );
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const formData =
+        new FormData();
+
+      formData.append(
+        "key",
+        "company_logo"
+      );
+
+      formData.append(
+        "type",
+        "image"
+      );
+
+      formData.append(
+        "file",
+        selectedLogo
+      );
+
+      await createSetting(
+        formData
+      );
+
+      toast.success(
+        "Logo uploaded successfully"
+      );
+
+      setSelectedLogo(null);
+
+      setInputKey(Date.now());
+
+      await loadSettings();
+    } catch (error: any) {
+      toast.error(
+        error?.response?.data
+          ?.message ||
+          "Failed to upload logo"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <Breadcrumb
+        title="Settings"
+        text="Settings"
+      />
+
+      <LazyWrapper>
+        <div>
+          <div className="card h-full rounded-xl border-0 p-6">
+            <div className="card-body p-0">
+
+              <form
+                onSubmit={
+                  handleUploadLogo
+                }
+              >
+                <div className="max-w-md mx-auto">
+
+                  <div className="flex flex-col items-center">
+
+                    <Label className="text-base font-semibold mb-5">
+                      Company Logo
+                    </Label>
+
+                    <div className="relative">
+
+                      <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-primary/20 bg-slate-100 dark:bg-slate-800 shadow-xl">
+
+                        {selectedLogo ||
+                        logoUrl ? (
+                          <img
+                            src={
+                              selectedLogo
+                                ? URL.createObjectURL(
+                                    selectedLogo
+                                  )
+                                : logoUrl
+                            }
+                            alt="Company Logo"
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex flex-col items-center justify-center text-muted-foreground">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="w-10 h-10 mb-2"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={1.5}
+                                d="M3 7l9-4 9 4v10l-9 4-9-4V7z"
+                              />
+                            </svg>
+
+                            <span className="text-sm">
+                              No Logo
+                            </span>
+                          </div>
+                        )}
+                      </div>
+
+                      <label
+                        htmlFor="logo-upload"
+                        className="
+                          absolute
+                          bottom-2
+                          right-2
+                          w-12
+                          h-12
+                          rounded-full
+                          bg-primary
+                          text-white
+                          flex
+                          items-center
+                          justify-center
+                          cursor-pointer
+                          shadow-lg
+                          transition-all
+                          hover:scale-105
+                        "
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="w-5 h-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 4v10m0 0l-4-4m4 4l4-4M4 20h16"
+                          />
+                        </svg>
+                      </label>
+
+                      <Input
+                        key={inputKey}
+                        id="logo-upload"
+                        type="file"
+                        accept="image/*"
+                        onChange={
+                          handleLogoChange
+                        }
+                        className="hidden"
+                      />
                     </div>
+
+                    {selectedLogo && (
+                      <div className="mt-4 text-center">
+                        <p className="text-sm font-medium text-green-600">
+                          ✓{" "}
+                          {
+                            selectedLogo.name
+                          }
+                        </p>
+                      </div>
+                    )}
+
+                    <p className="text-sm text-muted-foreground text-center mt-4">
+                      Click the upload icon to
+                      select or replace your
+                      company logo.
+                    </p>
+
+                    <Button
+                      type="submit"
+                      disabled={loading}
+                      className="
+                        mt-6
+                        h-12
+                        w-full
+                        md:w-[260px]
+                        rounded-xl
+                        font-medium
+                      "
+                    >
+                      {loading ? (
+                        <>
+                          <svg
+                            className="animate-spin mr-2 h-4 w-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            />
+
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                            />
+                          </svg>
+
+                          Uploading...
+                        </>
+                      ) : (
+                        "Upload Logo"
+                      )}
+                    </Button>
+
+                  </div>
+
                 </div>
-            </LazyWrapper>
-        </>
-    );
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </LazyWrapper>
+    </>
+  );
 };
 
 export default Company;

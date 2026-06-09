@@ -11,18 +11,18 @@ import {
 } from "firebase/auth";
 import { doc, getDoc, getFirestore, serverTimestamp, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
-const firebaseConfig = {
-  apiKey: "AIzaSyAtHFBZc1OoowEwTOJJWuxkXoGN78C8czQ",
-  authDomain: "wowdash-6e530.firebaseapp.com",
-  projectId: "wowdash-6e530",
-  storageBucket: "wowdash-6e530.firebasestorage.app",
-  messagingSenderId: "191428046448",
-  appId: "1:191428046448:web:8c1d04b6432bfae3334eb5",
-  measurementId: "G-LE1CWEN369",
+export const firebaseConfig = {
+  apiKey: "AIzaSyAOxjGjWgS4_Logb3p5VH1sV4FsjLgKtCE",
+  authDomain: "logisticsystem-7389c.firebaseapp.com",
+  projectId: "logisticsystem-7389c",
+  storageBucket: "logisticsystem-7389c.firebasestorage.app",
+  messagingSenderId: "374504476829",
+  appId: "1:374504476829:web:9b7b9eadc6dfe457b7c474",
+  measurementId: "G-L3J1XS0S9F",
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 getAnalytics(app);
 export const db = getFirestore(app);
 

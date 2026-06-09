@@ -29,7 +29,7 @@ const EmailSidebar = () => {
                             </Link>
                         </li>
                         <li className="mb-1.5">
-                            <a href="/email" className="hover:bg-blue-50 dark:hover:bg-slate-700 group hover:text-neutral-900 px-2.5 py-2.5 w-full rounded-lg text-neutral-600 dark:text-white flex items-center">
+                            <Link to="/email" className="hover:bg-blue-50 dark:hover:bg-slate-700 group hover:text-neutral-900 px-2.5 py-2.5 w-full rounded-lg text-neutral-600 dark:text-white flex items-center">
                                 <span className="flex items-center gap-2.5 justify-between w-full">
                                     <span className="flex items-center gap-2.5">
                                         <span className="icon text-2xl line-height-1 flex group-hover:text-primary dark:group-hover:text-white">
@@ -39,7 +39,7 @@ const EmailSidebar = () => {
                                     </span>
                                     <span className="font-medium">250</span>
                                 </span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="mb-1.5">
                             <Link to="/email" className="hover:bg-blue-50 dark:hover:bg-slate-700 group hover:text-neutral-900 px-2.5 py-2.5 w-full rounded-lg text-neutral-600 dark:text-white flex items-center">
