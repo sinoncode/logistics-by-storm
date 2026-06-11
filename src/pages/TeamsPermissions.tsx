@@ -64,9 +64,15 @@ const TeamsPermissions = () => {
   const canUpdateRoles = can("roles.update");
   const canDeleteRoles = can("roles.delete");
 
-  const isAdminRole =
-  selectedRole?.slug === "admin" ||
-  selectedRole?.name?.toLowerCase() === "admin";
+const PROTECTED_ROLES = [
+  "admin",
+  "customer",
+];
+
+const isProtectedRole =
+  PROTECTED_ROLES.includes(
+    selectedRole?.name?.toLowerCase() || ""
+  );
   // ============================================
   // EFFECTS
   // ============================================
@@ -125,7 +131,7 @@ const TeamsPermissions = () => {
   if (
     !selectedRole ||
     !canUpdateRoles ||
-    isAdminRole
+    isProtectedRole
   )
     return;
 
@@ -152,7 +158,7 @@ const TeamsPermissions = () => {
   if (
     !selectedRole ||
     !canUpdateRoles ||
-    isAdminRole
+    isProtectedRole
   )
     return;
 
@@ -192,12 +198,12 @@ const TeamsPermissions = () => {
   );
 
   if (
-    role?.slug === "admin" ||
-    role?.name?.toLowerCase() ===
-      "admin"
-  ) {
+  ["admin", "customer"].includes(
+    role?.name?.toLowerCase() || ""
+  )
+) {
     toast.error(
-      "Admin role cannot be deleted."
+      "This role cannot be deleted."
     );
 
     return;
@@ -258,7 +264,7 @@ const TeamsPermissions = () => {
       />
 
       <LazyWrapper>
-        <div className="space-y-6 p-4 md:p-6">
+        <div className="space-y-6 p-4 md:p-6 mt-16">
 
           {/* HEADER */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -343,7 +349,7 @@ const TeamsPermissions = () => {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
 
               {/* SIDEBAR - ROLE LIST */}
-              <div className="lg:col-span-1">
+              <div className="lg:col-span-1 min-h-0">
                 {canViewRoles ? (
                   <RoleList
                     roles={roles}
@@ -371,7 +377,7 @@ const TeamsPermissions = () => {
               <div className="lg:col-span-3 space-y-4">
                 {canViewRoles && selectedRole ? (
                   <>
-  {isAdminRole && (
+  {isProtectedRole && (
     <div className="rounded-2xl flex align-center border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
       <TriangleAlert className="h-6 w-6 text-yellow" /> This is a protected system role.
       Permissions can be viewed but
@@ -382,7 +388,7 @@ const TeamsPermissions = () => {
                       role={effectiveRole}
                       availablePermissions={availablePermissions}
                       canEdit={
-  canUpdateRoles && !isAdminRole
+  canUpdateRoles && !isProtectedRole
 }
                       onPermissionChange={handlePermissionChange}
                     />
@@ -393,7 +399,7 @@ const TeamsPermissions = () => {
                         disabled={
   isSaving ||
   !isDirty ||
-  isAdminRole
+  isProtectedRole
 }
                         className="w-full"
                       >

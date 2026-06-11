@@ -58,7 +58,7 @@ export const RoleList = ({
   );
 
   return (
-    <Card className="border shadow-sm h-full">
+    <Card className="border shadow-sm overflow-hidden">
       <CardHeader className="border-b pb-4">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
@@ -92,7 +92,7 @@ export const RoleList = ({
         </div>
       </CardHeader>
 
-      <CardContent className="p-0 flex flex-col h-full">
+      <CardContent className="p-0 flex flex-col">
         {/* SEARCH */}
         <div className="p-4 pb-0">
           <div className="relative">
@@ -129,7 +129,7 @@ export const RoleList = ({
             )}
           </div>
         ) : (
-          <ScrollArea className="flex-1 mt-4">
+          <ScrollArea className="h-[500px]">
             <div className="px-4 pb-4 space-y-3">
               {filteredRoles.map((role) => {
                 const totalPermissions =

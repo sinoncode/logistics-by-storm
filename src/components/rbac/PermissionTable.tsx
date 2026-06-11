@@ -132,154 +132,90 @@ export const PermissionTable = ({
       </CardHeader>
 
       <CardContent className="pt-6">
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-  <TableRow className="bg-muted/50 hover:bg-muted/50">
-
-    <TableHead className="w-[240px] font-semibold">
-      Module
-    </TableHead>
-
-    <TableHead className="text-center font-semibold">
-      View
-    </TableHead>
-
-    <TableHead className="text-center font-semibold">
-      Create
-    </TableHead>
-
-    <TableHead className="text-center font-semibold">
-      Update
-    </TableHead>
-
-    <TableHead className="text-center font-semibold">
-      Delete
-    </TableHead>
-
-  </TableRow>
-</TableHeader>
-
-           <TableBody>
-
+       <div className="space-y-4">
   {moduleEntries.map(([module, permissions]) => {
+    const selectedCount =
+      permissions.filter(hasPermission).length;
 
-    const permissionMap = {
-      view: permissions.find((p) =>
-        p.endsWith(".view")
-      ),
-
-      create: permissions.find((p) =>
-        p.endsWith(".create")
-      ),
-
-      update: permissions.find((p) =>
-        p.endsWith(".update")
-      ),
-
-      delete: permissions.find((p) =>
-        p.endsWith(".delete")
-      ),
-    };
+    const allSelected =
+      selectedCount === permissions.length;
 
     return (
-      <TableRow
+      <Card
         key={module}
-        className="hover:bg-muted/30 transition-colors"
+        className="border shadow-none"
       >
+        <CardContent className="p-5">
 
-        {/* MODULE */}
-        <TableCell className="font-medium py-5">
-          {formatModuleLabel(module)}
-        </TableCell>
+          {/* Module Header */}
+          <div className="flex items-center justify-between mb-4">
 
-        {/* VIEW */}
-        <TableCell className="text-center">
-          {permissionMap.view ? (
-            <Checkbox
-              checked={hasPermission(
-                permissionMap.view
-              )}
-              disabled={!canEdit}
-              onCheckedChange={(checked) =>
-                onPermissionChange(
-                  permissionMap.view!,
-                  checked === true
-                )
-              }
-            />
-          ) : (
-            "-"
-          )}
-        </TableCell>
+            <div>
+              <h3 className="font-semibold text-xl">
+                {formatModuleLabel(module)}
+              </h3>
 
-        {/* CREATE */}
-        <TableCell className="text-center">
-          {permissionMap.create ? (
-            <Checkbox
-              checked={hasPermission(
-                permissionMap.create
-              )}
-              disabled={!canEdit}
-              onCheckedChange={(checked) =>
-                onPermissionChange(
-                  permissionMap.create!,
-                  checked === true
-                )
-              }
-            />
-          ) : (
-            "-"
-          )}
-        </TableCell>
+              <p className="text-sm text-muted-foreground">
+                {selectedCount} of {permissions.length}
+                {" "}permissions selected
+              </p>
+            </div>
 
-        {/* UPDATE */}
-        <TableCell className="text-center">
-          {permissionMap.update ? (
-            <Checkbox
-              checked={hasPermission(
-                permissionMap.update
-              )}
-              disabled={!canEdit}
-              onCheckedChange={(checked) =>
-                onPermissionChange(
-                  permissionMap.update!,
-                  checked === true
-                )
-              }
-            />
-          ) : (
-            "-"
-          )}
-        </TableCell>
+            <div className="flex items-center gap-2">
 
-        {/* DELETE */}
-        <TableCell className="text-center">
-          {permissionMap.delete ? (
-            <Checkbox
-              checked={hasPermission(
-                permissionMap.delete
-              )}
-              disabled={!canEdit}
-              onCheckedChange={(checked) =>
-                onPermissionChange(
-                  permissionMap.delete!,
-                  checked === true
-                )
-              }
-            />
-          ) : (
-            "-"
-          )}
-        </TableCell>
+              <Checkbox
+                checked={allSelected}
+                disabled={!canEdit}
+                onCheckedChange={() =>
+                  handleSelectAll(permissions)
+                } className="border border-green-500"
+              />
 
-      </TableRow>
+              <span className="text-sm">
+                Select All
+              </span>
+            </div>
+          </div>
+
+          {/* Permissions */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            {permissions.map((permission) => (
+              <label
+                key={permission}
+                className={`
+                  flex items-center w-fit gap-2
+                  rounded-md border px-5 py-2
+                  cursor-pointer transition-colors
+                  ${
+                    hasPermission(permission)
+                      ? "bg-primary/5 border-primary/20"
+                      : ""
+                  }
+                `}
+              >
+                <Checkbox
+                  checked={hasPermission(permission)}
+                  disabled={!canEdit}
+                  onCheckedChange={(checked) =>
+                    onPermissionChange(
+                      permission,
+                      checked === true
+                    )
+                  } className="border border-green-500"
+                />
+
+                <span className="text-sm">
+                  {formatLabel(permission)}
+                </span>
+              </label>
+            ))}
+          </div>
+
+        </CardContent>
+      </Card>
     );
   })}
-
-</TableBody>
-          </Table>
-        </div>
+</div>
 
         {/* SUMMARY */}
         <div className="mt-6 pt-6 border-t">

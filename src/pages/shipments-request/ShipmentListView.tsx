@@ -252,7 +252,7 @@ export default function ShipmentRequestPage() {
 
 if (loading) {
   return (
-    <div className="min-h-screen space-y-6 bg-slate-50 p-4 dark:bg-slate-950 md:p-6">
+    <div className="space-y-4 bg-slate-50 p-3 dark:bg-slate-950 sm:p-4 lg:p-6">
 
       {/* HEADER */}
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -484,7 +484,7 @@ if (loading) {
   // ======================================================
 
   return (
-    <div className="min-h-screen space-y-6 bg-slate-50 p-4 dark:bg-slate-950 md:p-6">
+    <div className="space-y-6 bg-slate-50 p-4 dark:bg-slate-950 md:p-6">
       {/* HEADER */}
 
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -524,7 +524,7 @@ if (loading) {
 
       {/* CONTENT */}
 
-      <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-12 xl:gap-6">
         {/* LEFT */}
 
         <div className="space-y-6 xl:col-span-2">
