@@ -1304,7 +1304,7 @@ if (loading) {
                   </div>
                 </div>
 
-                <Badge className="rounded-full border border-white/20 bg-white/10 px-4 py-1 text-white backdrop-blur">
+                <Badge className="rounded-full mt-10 border border-white/20 bg-white/10 px-4 py-1 text-white backdrop-blur">
                   {document?.mime_type ===
                   "application/pdf"
                     ? "Document"
