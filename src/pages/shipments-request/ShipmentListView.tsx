@@ -270,7 +270,7 @@ if (loading) {
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
 
         {/* LEFT SECTION */}
-        <div className="space-y-6 xl:col-span-2">
+        <div className="space-y-6 xl:col-span-8 2xl:col-span-9">
 
           {/* SHIPMENT INFO */}
           <Card className="overflow-hidden rounded-[28px]">
@@ -489,7 +489,7 @@ if (loading) {
 
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
             Shipment Request Details
           </h1>
 
@@ -500,7 +500,7 @@ if (loading) {
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
           <Button
             variant="outline"
              onClick={() => setStandbyOpen(true)}
@@ -514,7 +514,7 @@ if (loading) {
             onClick={() =>
               setCalculatorOpen(true)
             }
-            className="h-12 rounded-2xl px-6"
+            className="h-12 rounded-2xl px-6 w-full sm:w-auto"
           >
             <Calculator className="mr-2 h-5 w-5" />
             Shipment Calculation
@@ -524,10 +524,10 @@ if (loading) {
 
       {/* CONTENT */}
 
-      <div className="grid grid-cols-1 gap-4 xl:grid-cols-12 xl:gap-6">
+     <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 lg:gap-6">
         {/* LEFT */}
 
-        <div className="space-y-6 xl:col-span-2">
+        <div className="space-y-6 xl:col-span-8 2xl:col-span-9">
           {/* SHIPMENT INFO */}
 
           <Card className="overflow-hidden rounded-[28px] border-0 bg-white shadow-sm dark:bg-slate-950">
@@ -679,9 +679,9 @@ if (loading) {
           </Card>
 {/* ROUTE SECTION */}
     <div className="rounded-[28px] border bg-white dark:bg-slate-950 p-6">
-      <div className="block md:block lg:flex items-center justify-between gap-20">
+      <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between items-center justify-between gap-20">
         {/* ORIGIN */}
-        <div className="flex-1 min-w-[240px]">
+        <div className="flex-1 min-w-0">
           <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">
             Origin
           </p>
@@ -713,7 +713,7 @@ if (loading) {
         </div>
 
         {/* CENTER */}
-        <div className="hidden lg:flex items-center justify-center px-4">
+        <div className="hidden xl:flex items-center justify-center px-4">
           <div className="relative w-40 h-[2px] bg-border">
             <div className="absolute left-0 -top-[6px] w-3 h-3 rounded-full bg-primary"></div>
 
@@ -724,7 +724,7 @@ if (loading) {
         </div>
 
         {/* DESTINATION */}
-        <div className="flex-1 min-w-[240px] lg:text-right">
+        <div className="flex-1 min-w-0 lg:text-right">
           <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">
             Destination
           </p>
@@ -843,14 +843,14 @@ if (loading) {
             </h3>
           </div>
 
-          <div className="rounded-2xl border bg-white dark:bg-slate-950 p-5 flex items-center justify-between gap-4">
+          <div className="rounded-2xl border bg-white dark:bg-slate-950 p-5 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
                 <FileImage className="w-6 h-6 text-primary" />
               </div>
 
               <div>
-                <h4 className="font-semibold text-lg">
+                <h4 className="font-semibold text-sm sm:text-base break-all">
                   {document?.original_name
                     ? document.original_name.length >
                       15
@@ -992,7 +992,8 @@ if (loading) {
 
         {/* RIGHT */}
 
-        <div>
+   <div className="xl:col-span-4 2xl:col-span-3">
+  <div className="xl:sticky xl:top-24">
           {/* <Card className="rounded-3xl border bg-white shadow-sm dark:bg-slate-950">
             <CardHeader>
               <CardTitle>
@@ -1072,7 +1073,7 @@ if (loading) {
           </Card> */}
 
           
-<div className="space-y-6">
+<div className="space-y-6 w-full">
   {calculationResult?.items?.map(
     (item: any, index: number) => (
       <Card
@@ -1253,7 +1254,7 @@ if (loading) {
             Final Shipment Price
           </span>
 
-          <span className="text-3xl font-bold">
+          <span className="text-2xl sm:text-3xl font-bold break-all text-right">
             $
             {calculationResult?.finalPrice ||
               0}
@@ -1265,7 +1266,7 @@ if (loading) {
   </Card>
 </div>
           
-        </div>
+        </div></div>
       </div>
 
       {/* DOCUMENT MODAL */}
