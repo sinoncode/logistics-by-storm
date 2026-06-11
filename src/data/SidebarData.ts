@@ -19,8 +19,8 @@ export const data = {
       url: "/dashboard",
       icon: House,
       isActive: true,
-      items: [
-       
+      permission: [
+        "dashboard.view",
       ],
     },
 

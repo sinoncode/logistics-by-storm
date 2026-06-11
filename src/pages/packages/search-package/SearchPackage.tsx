@@ -94,9 +94,9 @@ console.log(response);
   response?.data || []
 );
     } catch (error) {
-      toast.error(
-        "Failed to fetch shipment requests"
-      );
+      // toast.error(
+      //   "Failed to fetch shipment requests"
+      // );
     } finally {
       setLoading(false);
     }

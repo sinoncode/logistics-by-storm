@@ -46,6 +46,9 @@ const NotificationDropdown = () => {
           )}
         >
           <Bell className="h-[5.2rem] w-[5.2rem]" />
+          <span className="sm:w-5 sm:h-5 w-1 h-1 text-sm absolute top-3 ms-8 bg-primary dark:bg-slate-800 text-white font-bold flex justify-center items-center rounded-full">
+                {notifications.length}
+              </span>
         </Button>
       </DropdownMenuTrigger>
 

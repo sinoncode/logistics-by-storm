@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+import { Upload } from "lucide-react";
+
 import {
   createSetting,
   getSettings,
@@ -209,20 +211,7 @@ const Company = () => {
                           hover:scale-105
                         "
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="w-5 h-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M12 4v10m0 0l-4-4m4 4l4-4M4 20h16"
-                          />
-                        </svg>
+                       <Upload />
                       </label>
 
                       <Input

@@ -988,7 +988,7 @@ if (error) {
                     >
                       {/* CHECKPOINT DOT */}
                       <div
-                        className={`relative h-6 w-6 sm:h-8 sm:w-8 mb-7 rounded-full border-[3px] sm:border-[4px] transition-all duration-700 z-10 ${
+                        className={`relative h-6 w-6 sm:h-8 sm:w-8 mb-7 rounded-full border-[3px] sm:border-[4px] transition-all duration-700 ${
                           completed
                             ? "bg-primary  border-primary shadow-lg shadow-primary/50 scale-110"
                             : "bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700"

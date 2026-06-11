@@ -115,7 +115,11 @@ export const router = createBrowserRouter([
             element: <Navigate to="/dashboard" replace />,
           },
           {
-            path: "dashboard", element: <Crm />
+            path: "dashboard", element:  <ProtectedPermissionRoute
+      permissions={[
+        "dashboard.view"
+      ]}
+    ><Crm /></ProtectedPermissionRoute>
           },
           // {
           //   path: "add-team-member", element: <AddMember />
