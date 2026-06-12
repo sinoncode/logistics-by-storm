@@ -1,6 +1,7 @@
 import SmallAreaChart from "@/components/charts/SmallAreaChart";
 import { Card, CardContent } from "@/components/ui/card";
 import type { LucideIcon } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   BarChart3,
   DollarSign,
@@ -172,9 +173,35 @@ const StatsCard = () => {
 },
   ];
 
-  if (loading) {
-    return <div className="py-10 text-center">Loading dashboard...</div>;
-  }
+ if (loading) {
+  return (
+    <>
+      {Array.from({ length: 5 }).map((_, index) => (
+        <Card
+          key={index}
+          className="card !px-4 !py-5 shadow-none rounded-lg !border border-gray-200 dark:border-neutral-600 h-full"
+        >
+          <CardContent className="p-0">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-3">
+                <Skeleton className="w-[44px] h-[44px] rounded-full" />
+
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-24" />
+                  <Skeleton className="h-6 w-16" />
+                </div>
+              </div>
+
+              <Skeleton className="h-[42px] w-[80px] rounded-md" />
+            </div>
+
+            <Skeleton className="h-4 w-32" />
+          </CardContent>
+        </Card>
+      ))}
+    </>
+  );
+}
 
   return (
     <>

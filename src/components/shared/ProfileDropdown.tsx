@@ -30,24 +30,18 @@ const ProfileDropdown = () => {
     : null;
 
   // Logout
-  const handleLogout = () => {
+ const handleLogout = () => {
+  setLoggingOut(true);
 
-    setLoggingOut(true);
+  setTimeout(() => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("user");
 
-    setTimeout(() => {
+    toast.success("You logged out successfully.");
 
-      // Remove auth data
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("user");
-
-      toast.success("You logged out successfully.");
-
-      navigate("/auth/login");
-
-      setLoggingOut(false);
-
-    }, 800);
-  };
+    window.location.href = "/auth/login";
+  }, 500);
+};
 
   return (
     <DropdownMenu>

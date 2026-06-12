@@ -271,24 +271,24 @@ const Login = () => {
             </Button>
 
             {/* DEMO BUTTON */}
-            {/* <Button
+            <Button
               className="font-semibold text-neutral-600 hover:text-neutral-600 dark:text-neutral-200 py-6 px-2 border border-neutral-600/50 rounded-xl text-sm flex items-center justify-center gap-3 hover:border-blue-400 hover:bg-primary/10 disabled:opacity-60 mt-4 w-full"
               variant="outline"
               type="button"
               onClick={() => {
                 form.setValue(
                   "email",
-                  "wowdash@gmail.com"
+                  "sumit.pal@networsys.com"
                 );
 
                 form.setValue(
                   "password",
-                  "123456"
+                  "12345678"
                 );
               }}
             >
               Use Demo Credentials
-            </Button> */}
+            </Button>
 
             {/* REGISTER */}
             {/* <div className="mt-8 text-center text-sm">

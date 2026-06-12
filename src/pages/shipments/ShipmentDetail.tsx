@@ -192,7 +192,10 @@ export const ShipmentTrackingSkeleton = () => {
 
         <CardContent className="p-6 space-y-6">
           {/* Info Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1
+md:grid-cols-2
+xl:grid-cols-4
+gap-5">
             {Array.from({ length: 4 }).map((_, i) => (
               <div
                 key={i}
@@ -393,15 +396,33 @@ const customerData = shipmentDetails?.user;
   // TRACKING LOGIC
   // ======================================================
 
+  const normalizedTrackingStatus = trackingStatus
+    ?.trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+
   const activeStepIndex = trackingSteps.findIndex(
-    (step) => step.id === trackingStatus
+    (step) => step.id === normalizedTrackingStatus
   );
 
-  const truckPosition = `${(activeStepIndex / (trackingSteps.length - 1)) * 100}%`;
+  const normalizedStepIndex =
+    activeStepIndex >= 0 ? activeStepIndex : 0;
+
+  const stepPositions = trackingSteps.map((_, index) =>
+    Number(((index / (trackingSteps.length - 1)) * 100).toFixed(2))
+  );
+
+  const truckPosition = `${stepPositions[normalizedStepIndex]}%`;
+
+  const isUnknownStatus = activeStepIndex === -1;
 
   // Determine which options should be selectable
   const isStepSelectable = (index: number) => {
-    // Only current step and next step are selectable
+    if (isUnknownStatus) {
+      return index === 0 || index === 1;
+    }
+
     return index === activeStepIndex || index === activeStepIndex + 1;
   };
 
@@ -681,42 +702,69 @@ if (error) {
 
         <CardContent className="p-4 sm:p-6 lg:p-8">
           {/* TRACKING VISUALIZATION */}
-          <div className="relative h-50 pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-10 lg:pb-14 overflow-x-auto">
+          <div className="
+relative
+min-h-[260px]
+sm:min-h-[320px]
+lg:min-h-[380px]
+pt-20
+sm:pt-24
+lg:pt-28
+pb-14
+overflow-x-hidden
+overflow-y-hidden
+">
             {/* BACKGROUND DECORATIVE GRADIENT */}
-            <div className="absolute h-50 inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent rounded-3xl" />
+            <div className="absolute h-50 inset-0 rounded-3xl" />
 
-            {/* MAIN TRACK LINE */}
-            <div className="relative h-3 sm:h-2 rounded-full bg-gradient-to-r from-slate-200 via-slate-200 to-slate-200 dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 shadow-inner">
-              {/* ACTIVE PROGRESS LINE */}
-              <div
-                key={`progress-${animationKey}`}
-                className="absolute left-0 top-0 w-[50%] h-full rounded-full bg-primary shadow-lg shadow-primary/50"
-                style={{
-                  width: truckPosition,
-                  animation: "expandWidth 3.5s cubic-bezier(0.2, 0, 0.2, 0.3) forwards",
-                }}
-              />
+            <div className="relative">
+              {/* MAIN TRACK LINE */}
+              <div className="
+relative
+h-2
+sm:h-3
+lg:h-4
+rounded-full
+bg-slate-200
+dark:bg-slate-800
+overflow-hidden
+">
+                {/* ACTIVE PROGRESS LINE */}
+                <div
+                  key={`progress-${animationKey}`}
+                  className="absolute left-0 top-0 w-[50%] h-full rounded-full bg-primary shadow-lg shadow-primary/50"
+                  style={{
+                    width: truckPosition,
+                    animation: "expandWidth 3.5s cubic-bezier(0.2, 0, 0.2, 0.3) forwards",
+                  }}
+                />
+              </div>
 
               {/* ANIMATED TRUCK */}
               <div
                 key={`truck-${animationKey}`}
-                className="absolute -top-12 sm:-top-16 transition-none"
+                className="absolute -top-12 sm:-top-16 left-0 w-80 z-20"
                 style={{
-                  left: truckPosition,
                   transform: "translateX(-50%)",
-                  animation: "moveTruck 3.5s cubic-bezier(0.2, 0, 0.2, 0.3) forwards",
+                  animation: "moveTruck 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards",
+                  left: truckPosition,
                 }}
               >
                 {/* TRUCK GLOW EFFECT */}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/40 via-blue-500/40 to-cyan-500/40 blur-2xl rounded-full scale-150 animate-pulse" />
+                <div className="absolute inset-0  rounded-full scale-150 animate-pulse" />
 
                 {/* TRUCK CONTAINER */}
                 <div className="relative">
                   {/* TRUCK BODY */}
-                 <svg
-      viewBox="0 0 850 380"
-      width="100"
-      height="90"
+                 <svg className="
+  w-16
+  h-14
+  sm:w-20
+  sm:h-16
+  lg:w-24
+  lg:h-20
+  "
+  viewBox="0 0 850 380"
       xmlns="http://www.w3.org/2000/svg">
       <defs>
         {/* Gradients for Truck Body */}
@@ -974,7 +1022,7 @@ if (error) {
               </div>
 
               {/* TRACKING STEPS */}
-              <div className="absolute mt-0 top-3 left-0 w-full -translate-y-1/2 flex justify-between px-0 overflow-x-hidden">
+              <div className="absolute inset-x-0 -top-5 flex justify-between px-0 overflow-visible z-30 pt-2 sm:pt-3">
                 {trackingSteps.map((step, index) => {
                   const completed = index <= activeStepIndex;
                   const active = index === activeStepIndex;
@@ -983,8 +1031,15 @@ if (error) {
                   return (
                     <div
                       key={step.id}
-                      className="relative flex flex-col items-center"
-                      style={{ width: `${100 / trackingSteps.length}%` }}
+                      className="
+relative
+flex
+flex-col
+items-center
+flex-1
+min-w-[60px]
+sm:min-w-[90px]
+"
                     >
                       {/* CHECKPOINT DOT */}
                       <div
@@ -1047,7 +1102,12 @@ if (error) {
             <StatusCard
               icon={<Truck className="w-4 h-4 sm:w-5 sm:h-5" />}
               label="Current Status"
-              value={trackingSteps[activeStepIndex]?.label || "In Transit"}
+              value={
+                trackingSteps[activeStepIndex]?.label ||
+                trackingStatus ||
+                shipmentData?.current_status ||
+                "Pending"
+              }
               gradient="from-primary/10 to-blue-500/10"
               iconBg="bg-primary/10"
               iconColor="text-primary"

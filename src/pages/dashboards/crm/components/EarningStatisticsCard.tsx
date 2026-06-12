@@ -9,6 +9,7 @@ import {
 import BarChartYear from "@/components/charts/BarChartYear";
 
 import CustomSelect from "@/components/shared/CustomSelect";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import {
   Card,
@@ -22,6 +23,58 @@ import { useRevenueChartStore }
   from "@/store/revenueChartStore";
 
   import { useMemo } from "react";
+
+  const RevenueStatisticsSkeleton = () => {
+  return (
+    <Card className="card h-full rounded-2xl border border-gray-200 dark:border-neutral-700 shadow-sm overflow-hidden">
+      <CardContent className="p-6">
+
+        {/* Header */}
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          <div>
+            <Skeleton className="h-7 w-56 mb-2" />
+            <Skeleton className="h-4 w-72" />
+          </div>
+
+          <Skeleton className="h-10 w-[140px] rounded-lg" />
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-7">
+
+          <div className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-4">
+            <div className="flex items-center gap-3">
+              <Skeleton className="w-12 h-12 rounded-xl" />
+
+              <div className="space-y-2 flex-1">
+                <Skeleton className="h-4 w-20" />
+                <Skeleton className="h-7 w-32" />
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-4">
+            <div className="flex items-center gap-3">
+              <Skeleton className="w-12 h-12 rounded-xl" />
+
+              <div className="space-y-2 flex-1">
+                <Skeleton className="h-4 w-24" />
+                <Skeleton className="h-7 w-40" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Chart */}
+        <div className="mt-8">
+          <Skeleton className="w-full h-[330px] rounded-2xl" />
+        </div>
+
+      </CardContent>
+    </Card>
+  );
+};
 
 const EarningStatisticsCard =
   () => {
@@ -192,16 +245,12 @@ const reportLabel =
        LOADING
     ===================================================== */
 
-    if (
-      dashboardLoading ||
-      revenueLoading
-    ) {
-      return (
-        <div className="py-10 text-center text-sm text-neutral-500">
-          Loading revenue statistics...
-        </div>
-      );
-    }
+   if (
+  dashboardLoading ||
+  revenueLoading
+) {
+  return <RevenueStatisticsSkeleton />;
+}
 
     return (
       <Card className="card h-full rounded-2xl border border-gray-200 dark:border-neutral-700 shadow-sm overflow-hidden">

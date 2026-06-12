@@ -38,32 +38,32 @@ const ForgotPassword = () => {
     });
 
 
-//  const handleResetPassword = async (
-//   data: z.infer<typeof formSchema>
-// ) => {
-//   try {
-//     setIsSubmitting(true);
+ const handleResetPassword = async (
+  data: z.infer<typeof formSchema>
+) => {
+  try {
+    setIsSubmitting(true);
 
-//     const response =
-//       await forgotPassword(data.email);
+    const response =
+      await forgotPassword(data.email);
 
-//     toast.success(
-//       response?.message ||
-//         "Password reset email sent successfully."
-//     );
+    toast.success(
+      response?.message ||
+        "Password reset email sent successfully."
+    );
 
-//     form.reset();
+    form.reset();
 
-//     navigate("/auth/login");
-//   } catch (error: any) {
-//     toast.error(
-//       error?.response?.data?.message ||
-//         "Failed to send reset email."
-//     );
-//   } finally {
-//     setIsSubmitting(false);
-//   }
-// };
+    navigate("/auth/login");
+  } catch (error: any) {
+    toast.error(
+      error?.response?.data?.message ||
+        "Failed to send reset email."
+    );
+  } finally {
+    setIsSubmitting(false);
+  }
+};
     return (
         <section className="bg-white dark:bg-slate-900 lg:flex flex-wrap min-h-[100vh]">
             <div className="lg:w-1/2 lg:block hidden">
