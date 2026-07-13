@@ -1,4 +1,107 @@
 ==================================================
+Commit: e7dbb82ba772b47ef6c8e869f59dbf7ba5fec85c
+Author: sinoncode
+Date: Fri Jun 12 13:14:31 2026
+Message: Solved the redirection issue, corrected the responsiveness issue of the page shipment details and adding skeleton page to the dashboard page
+
+src/components/shared/ProfileDropdown.tsx
+src/pages/auth/forgot-password/ForgotPassword.tsx
+src/pages/auth/login/Login.tsx
+src/pages/dashboards/crm/components/EarningStatisticsCard.tsx
+src/pages/dashboards/crm/components/StatsCard.tsx
+src/pages/shipments/ShipmentDetail.tsx
+
+==================================================
+Commit: 3edcc6ca331c8b44002c4c0631e3e76484138dd4
+Author: sinoncode
+Date: Thu Jun 11 19:20:55 2026
+Message: Badge fix in document modal of Shipment request
+
+src/pages/shipments-request/ShipmentListView.tsx
+
+==================================================
+Commit: 516ade84fe984799dccb85c7c4ac4e7cda2f6a29
+Author: sinoncode
+Date: Thu Jun 11 19:18:36 2026
+Message: Correction in responsiveness in Shipmentview page
+
+src/pages/shipments-request/ShipmentListView.tsx
+
+==================================================
+Commit: 703df6ebe9a43a26ef7ab24a11fa59ac66818d73
+Author: sinoncode
+Date: Thu Jun 11 18:15:43 2026
+Message: Major changes in RBAC design and other things to improve the UI of the project and the header correction because many components are overlapping
+
+README.md
+src/components/rbac/PermissionTable.tsx
+src/components/rbac/RoleList.tsx
+src/layouts/Header.tsx
+src/pages/TeamsPermissions.tsx
+src/pages/shipments-request/ShipmentListView.tsx
+
+==================================================
+Commit: 42d603cfbf22536ff3577e32cf656b6240fff259
+Author: sinoncode
+Date: Thu Jun 11 15:37:07 2026
+Message: Changes in many pages to improve the UI and current design state
+
+src/components/shared/NotificationDropdown.tsx
+src/data/SidebarData.ts
+src/pages/packages/search-package/SearchPackage.tsx
+src/pages/setting/company/Company.tsx
+src/pages/shipments/ShipmentDetail.tsx
+src/routes/AppRoutes.tsx
+
+==================================================
+Commit: 7dc4c01c57365261948572612791f1446b179b47
+Author: sinoncode
+Date: Tue Jun 9 16:16:21 2026
+Message: Route Issue resolved
+
+src/routes/AppRoutes.tsx
+
+==================================================
+Commit: 7b748f96ebc7de65d2691ea4edc600452423a6ad
+Author: sinoncode
+Date: Tue Jun 9 15:46:36 2026
+Message: ss
+
+src/firebase.ts
+vercel.json
+
+==================================================
+Commit: 197c47cdc1b2c63f0760126602cf56509424a823
+Author: sinoncode
+Date: Tue Jun 9 15:34:12 2026
+Message: Updating complete project with Perfect notifiaction and the perfect settings system also the overall project is tested and clean
+
+git-history.txt
+package-lock.json
+package.json
+public/firebase-messaging-sw.js
+src/components/NavMain.tsx
+src/components/NotificationInitializer.tsx
+src/components/shared/NotificationDropdown.tsx
+src/components/tables/shipments-request/columns.tsx
+src/data/SidebarData.ts
+src/firebase.ts
+src/hooks/useNotifications.ts
+src/layouts/MainLayout.tsx
+src/lib/firebase-messaging.ts
+src/pages/auth/forgot-password/ForgotPassword.tsx
+src/pages/auth/login/Login.tsx
+src/pages/emails/components/EmailSidebar.tsx
+src/pages/setting/company/Company.tsx
+src/routes/AppRoutes.tsx
+src/services/auth.service.ts
+src/services/notification.service.ts
+src/services/settings.services.ts
+src/store/notificationStore.ts
+src/store/rbacStore.ts
+src/types/notification.ts
+
+==================================================
 Commit: f107bce9d3999776ee9db0850243a9f02e2e3508
 Author: sinoncode
 Date: Thu Jun 4 16:12:49 2026

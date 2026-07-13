@@ -694,7 +694,9 @@ onCalculationComplete?.({
                           label="Declared Value"
                           value={
                             currentForm?.declared_value
-                          }
+                          } 
+                          readOnly
+                          
                           onChange={(value) =>
                             updateItemField(
                               index,
@@ -958,27 +960,19 @@ function FieldInput({
   value,
   onChange,
   icon,
+  readOnly = false,
 }: {
   label: string;
-
   value: number;
-
-  onChange: (
-    value: number
-  ) => void;
-
+  onChange: (value: number) => void;
   icon?: React.ReactNode;
+  readOnly?: boolean;
 }) {
-
   return (
     <div className="space-y-2">
-
-      <Label>
-        {label}
-      </Label>
+      <Label>{label}</Label>
 
       <div className="relative">
-
         {icon && (
           <div className="absolute left-4 top-4 text-muted-foreground">
             {icon}
@@ -988,18 +982,11 @@ function FieldInput({
         <Input
           type="number"
           value={value}
-          onChange={(e) =>
-            onChange(
-              Number(e.target.value)
-            )
-          }
-          className={`h-12 rounded-2xl ${
-            icon ? "pl-10" : ""
-          }`}
+          readOnly={readOnly}
+          onChange={(e) => onChange(Number(e.target.value))}
+          className={`h-12 rounded-2xl ${icon ? "pl-10" : ""}`}
         />
-
       </div>
-
     </div>
   );
 }
